@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10%  { transform: translate(-5%, -10%); }
+  30%  { transform: translate(7%, -25%); }
+  50%  { transform: translate(-15%, 10%); }
+  70%  { transform: translate(0%, 15%); }
+  90%  { transform: translate(-10%, 10%); }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
+
+:root {
+  --font-cormorant: 'Cormorant Garamond';
+  --font-dm-sans: 'DM Sans';
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto; /* Lenis handles smooth scroll */
+}
+
+/* Film grain overlay — tactile analog feel */
+body::before {
+  content: '';
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  z-index: 9000;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain 8s steps(10) infinite;
+}
+
+/* SplitText line wrapper — prevents overflow during reveal */
+.split-line-wrap {
+  overflow: hidden;
+  display: block;
+}
+
+body {
+  background-color: #FDFCFA;
+  color: #2F2018;
+  font-family: var(--font-dm-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: #C4704F;
+  color: #FDFCFA;
+}
+
+/* Thin scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #F7F2EC;
+}
+::-webkit-scrollbar-thumb {
+  background: #C9B99A;
+  border-radius: 2px;
+}
+
+@layer components {
+  .label-text {
+    @apply text-label font-sans font-medium tracking-[0.2em] uppercase text-stone;
+  }
+
+  .section-pad {
+    @apply py-24 md:py-32 lg:py-40;
+  }
+
+  .container-wide {
+    @apply max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-3 bg-bark text-off-white text-label tracking-[0.15em] uppercase py-4 px-8 hover:bg-terracotta transition-colors duration-300;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center gap-3 border border-bark text-bark text-label tracking-[0.15em] uppercase py-4 px-8 hover:bg-bark hover:text-off-white transition-colors duration-300;
+  }
+}

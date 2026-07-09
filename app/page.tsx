@@ -1,7 +1,10 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import AnimatedHeading from "@/components/AnimatedHeading";
 import AnimatedFadeIn from "@/components/AnimatedFadeIn";
+import FloatingLeaves from "@/components/FloatingLeaves";
+import AnimatedTree from "@/components/AnimatedTree";
 
 const featured = [
   {
@@ -10,7 +13,7 @@ const featured = [
     category: "Dining",
     material: "Reclaimed Oak",
     price: "£3,200",
-    color: "bg-[#8C7B6B]",
+    img: "https://images.unsplash.com/photo-1617806118233-18e1de247200?w=900&q=80&auto=format&fit=crop",
     size: "col-span-2",
   },
   {
@@ -19,7 +22,7 @@ const featured = [
     category: "Living",
     material: "Walnut & Linen",
     price: "£1,840",
-    color: "bg-[#A89B8C]",
+    img: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=700&q=80&auto=format&fit=crop",
     size: "col-span-1",
   },
   {
@@ -28,7 +31,7 @@ const featured = [
     category: "Lighting",
     material: "Hand-thrown Ceramic",
     price: "£680",
-    color: "bg-sand",
+    img: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=700&q=80&auto=format&fit=crop",
     size: "col-span-1",
   },
 ];
@@ -57,27 +60,43 @@ export default function HomePage() {
       {/* ── HERO ── */}
       <section className="relative min-h-screen bg-bark flex flex-col justify-end overflow-hidden">
         <div className="absolute inset-0">
-          <div className="absolute top-0 right-0 w-1/2 h-full bg-[#3A2A1E] opacity-60" />
           <div className="absolute bottom-0 left-0 w-64 h-64 md:w-96 md:h-96 bg-terracotta opacity-20 blur-3xl" />
         </div>
 
-        {/* Image placeholder */}
-        <div className="absolute top-0 right-0 w-full md:w-1/2 h-full bg-[#4A3728]">
-          <div className="w-full h-full bg-gradient-to-bl from-[#5C4436] via-[#3D2E22] to-[#2F2018] flex items-end justify-start p-8 md:p-16 relative overflow-hidden">
-            {/* Watermark numeral */}
-            <span className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
-              <span className="font-serif text-[45vw] md:text-[28vw] text-white/[0.04] font-light leading-none tracking-tighter">I</span>
-            </span>
-            {/* Subtle horizontal rules */}
-            <div className="absolute inset-0 flex flex-col justify-evenly pointer-events-none">
-              {[...Array(7)].map((_, i) => (
-                <div key={i} className="h-px w-full bg-white/[0.04]" />
-              ))}
-            </div>
-            <div className="relative space-y-2 z-10">
-              <div className="w-24 h-px bg-sand opacity-40" />
-              <p className="label-text text-sand/50">Silo Collection — 2026</p>
-            </div>
+        {/* Falling leaves — realistic autumn drift */}
+        <FloatingLeaves count={26} className="z-[2]" />
+
+        {/* Main tree — realistic silhouette, left, warm sand against dark bark */}
+        <AnimatedTree
+          className="absolute bottom-0 -left-14 md:-left-8 w-[360px] md:w-[560px] h-[600px] md:h-[820px] z-[1]"
+          color="text-[#C9B99A]"
+          opacity={0.32}
+        />
+        {/* Companion tree — smaller, further right, terracotta */}
+        <div className="absolute bottom-0 -right-16 md:-right-6 w-[240px] md:w-[380px] h-[440px] md:h-[620px] z-[1]">
+          <AnimatedTree color="text-[#C4704F]" opacity={0.22} />
+        </div>
+
+        {/* Hero image */}
+        <div className="absolute top-0 right-0 w-full md:w-1/2 h-full overflow-hidden">
+          <Image
+            src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1400&q=85&auto=format&fit=crop"
+            alt="Silo Collection interior"
+            fill
+            priority
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+          <div className="absolute inset-0 bg-bark/55" />
+          {/* Subtle horizontal rules */}
+          <div className="absolute inset-0 flex flex-col justify-evenly pointer-events-none">
+            {[...Array(7)].map((_, i) => (
+              <div key={i} className="h-px w-full bg-white/[0.04]" />
+            ))}
+          </div>
+          <div className="absolute bottom-8 md:bottom-16 left-8 md:left-16 z-10 space-y-2">
+            <div className="w-24 h-px bg-sand opacity-40" />
+            <p className="label-text text-sand/50">Silo Collection — 2026</p>
           </div>
         </div>
 
@@ -138,22 +157,50 @@ export default function HomePage() {
       </section>
 
       {/* ── MATERIALS STRIP ── */}
-      <section className="flex overflow-hidden h-[160px] md:h-[200px]">
+      <section className="flex overflow-hidden h-[220px] md:h-[300px]">
         {[
-          { name: "Reclaimed Oak",       color: "bg-[#7A6854]" },
-          { name: "Hand-Thrown Ceramic", color: "bg-[#C8A87A]" },
-          { name: "Quarried Stone",      color: "bg-[#8C8278]" },
-          { name: "Natural Linen",       color: "bg-[#C9B99A]" },
-          { name: "Solid Walnut",        color: "bg-[#5C3D2E]" },
+          {
+            name: "Reclaimed Oak",
+            img: "https://images.unsplash.com/photo-1617806118233-18e1de247200?w=500&q=80&auto=format&fit=crop",
+            overlay: "bg-[#5C3D2E]/60",
+          },
+          {
+            name: "Hand-Thrown Ceramic",
+            img: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=500&q=80&auto=format&fit=crop",
+            overlay: "bg-[#8C6A40]/55",
+          },
+          {
+            name: "Quarried Stone",
+            img: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=500&q=80&auto=format&fit=crop",
+            overlay: "bg-[#6B6059]/60",
+          },
+          {
+            name: "Natural Linen",
+            img: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=500&q=80&auto=format&fit=crop",
+            overlay: "bg-[#A89070]/50",
+          },
+          {
+            name: "Solid Walnut",
+            img: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=500&q=80&auto=format&fit=crop",
+            overlay: "bg-[#3D2B1F]/65",
+          },
         ].map((mat, i) => (
           <div
             key={i}
-            className={`${mat.color} flex-1 relative group flex items-end px-3 py-4 md:px-5 md:py-6 overflow-hidden`}
+            className="flex-1 relative group flex items-end px-3 py-5 md:px-5 md:py-7 overflow-hidden cursor-pointer"
           >
-            <p className="text-white/40 group-hover:text-white/80 transition-colors duration-500 font-sans text-[0.6rem] tracking-[0.22em] uppercase [writing-mode:vertical-rl] rotate-180">
+            <Image
+              src={mat.img}
+              alt={mat.name}
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-110"
+              sizes="20vw"
+            />
+            <div className={`absolute inset-0 ${mat.overlay} transition-opacity duration-500 group-hover:opacity-40`} />
+            <p className="relative z-10 text-white/50 group-hover:text-white/90 transition-colors duration-500 font-sans text-[0.6rem] tracking-[0.22em] uppercase [writing-mode:vertical-rl] rotate-180">
               {mat.name}
             </p>
-            <div className="absolute top-3 right-3 w-1 h-1 bg-white/20 group-hover:bg-white/50 transition-colors duration-500" />
+            <div className="absolute top-4 right-3 w-1.5 h-1.5 rounded-full bg-white/20 group-hover:bg-white/70 transition-colors duration-500" />
           </div>
         ))}
       </section>
@@ -181,21 +228,52 @@ export default function HomePage() {
             </AnimatedFadeIn>
           </div>
 
-          <div className="grid grid-cols-3 gap-4 md:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 border-t border-l border-sand/25">
             {featured.map((item, i) => (
-              <AnimatedFadeIn key={item.id} delay={i * 0.1} className={item.size}>
-                <div className="group relative cursor-pointer">
-                  <div className={`${item.color} aspect-[4/5] w-full overflow-hidden transition-transform duration-700 group-hover:scale-[1.03] ring-1 ring-transparent group-hover:ring-sand/40 transition-shadow`}>
-                    <div className="w-full h-full flex items-end p-6 md:p-8 bg-gradient-to-t from-black/40 to-transparent" />
+              <AnimatedFadeIn key={item.id} delay={i * 0.1}>
+                <article className="group cursor-pointer border-r border-b border-sand/25 p-6 md:p-8 flex flex-col h-full bg-cream hover:bg-off-white/60 transition-colors duration-500">
+                  {/* Editorial index */}
+                  <div className="flex items-center justify-between mb-6">
+                    <p className="label-text text-sand text-[0.65rem]">
+                      {String(i + 1).padStart(2, "0")} / {String(featured.length).padStart(2, "0")}
+                    </p>
+                    <span className="label-text text-terracotta text-[0.65rem]">
+                      · Featured
+                    </span>
                   </div>
-                  <div className="mt-4 pb-5 flex items-start justify-between border-b border-sand/20">
-                    <div>
-                      <p className="label-text text-stone mb-1">{item.category} · {item.material}</p>
-                      <h3 className="font-serif text-2xl text-bark">{item.name}</h3>
+
+                  {/* Image */}
+                  <div className="relative aspect-[4/5] w-full overflow-hidden ring-1 ring-transparent group-hover:ring-sand/50 transition-all duration-500">
+                    <Image
+                      src={item.img}
+                      alt={item.name}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+                    <div className="absolute inset-0 bg-bark/0 group-hover:bg-bark/15 transition-colors duration-500" />
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="bg-off-white text-bark p-3">
+                        <ArrowRight size={18} />
+                      </div>
                     </div>
-                    <p className="font-serif text-xl text-stone mt-1">{item.price}</p>
                   </div>
-                </div>
+
+                  {/* Meta */}
+                  <div className="pt-6 mt-auto flex items-end justify-between gap-4">
+                    <div className="min-w-0">
+                      <p className="label-text text-stone mb-2 truncate">
+                        {item.category} · {item.material}
+                      </p>
+                      <h3 className="font-serif text-xl md:text-2xl text-bark leading-tight">
+                        {item.name}
+                      </h3>
+                    </div>
+                    <p className="font-serif text-lg md:text-xl text-stone shrink-0">
+                      {item.price}
+                    </p>
+                  </div>
+                </article>
               </AnimatedFadeIn>
             ))}
           </div>
@@ -229,7 +307,33 @@ export default function HomePage() {
       </section>
 
       {/* ── STATEMENT BREAK ── */}
-      <section className="py-20 md:py-32 bg-linen border-y border-sand/40">
+      <section className="py-20 md:py-32 bg-linen border-y border-sand/40 relative overflow-hidden">
+        {/* Drifting leaves overlay */}
+        <FloatingLeaves count={10} color="text-terracotta" className="opacity-70" />
+
+        {/* Fern / leaf spray — right, now sways */}
+        <div
+          className="absolute right-0 top-0 h-full w-64 md:w-80 pointer-events-none opacity-[0.22] text-stone overflow-hidden"
+          style={{ animation: "branchSway 9s ease-in-out infinite", transformOrigin: "100% 100%" }}
+        >
+          <svg viewBox="0 0 280 500" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full">
+            <path d="M280 500 Q265 460 255 420 Q245 380 238 340 Q231 300 228 260 Q225 220 226 180 Q227 140 232 100 Q237 60 244 20" strokeWidth="1.2"/>
+            <path d="M238 340 Q210 322 184 308 Q158 294 136 276 Q114 258 98 236" strokeWidth="0.9"/>
+            <path d="M228 260 Q202 246 176 232 Q150 218 128 200 Q106 182 92 160" strokeWidth="0.9"/>
+            <path d="M226 180 Q202 168 178 156 Q154 144 134 128 Q114 112 104 90" strokeWidth="0.85"/>
+            <path d="M232 100 Q210 92 188 82 Q166 72 148 58 Q130 44 122 24" strokeWidth="0.8"/>
+            <path d="M98 236 Q84 218 76 198 Q68 178 68 156" strokeWidth="0.7"/>
+            <path d="M92 160 Q78 144 72 124 Q66 104 68 82" strokeWidth="0.7"/>
+            <path d="M104 90 Q90 74 86 54 Q82 34 86 12" strokeWidth="0.65"/>
+            <ellipse cx="68" cy="154" rx="9" ry="4" transform="rotate(35 68 154)" strokeWidth="0.6"/>
+            <ellipse cx="58" cy="164" rx="7" ry="3.5" transform="rotate(48 58 164)" strokeWidth="0.6"/>
+            <ellipse cx="68" cy="80" rx="9" ry="4" transform="rotate(32 68 80)" strokeWidth="0.6"/>
+            <ellipse cx="58" cy="88" rx="7" ry="3" transform="rotate(44 58 88)" strokeWidth="0.6"/>
+            <ellipse cx="86" cy="10" rx="8" ry="3.5" transform="rotate(28 86 10)" strokeWidth="0.6"/>
+            <ellipse cx="76" cy="18" rx="7" ry="3" transform="rotate(40 76 18)" strokeWidth="0.6"/>
+            <ellipse cx="122" cy="22" rx="8" ry="3.5" transform="rotate(22 122 22)" strokeWidth="0.6"/>
+          </svg>
+        </div>
         <div className="container-wide">
           <div className="max-w-3xl">
             <AnimatedFadeIn>
@@ -239,11 +343,11 @@ export default function HomePage() {
               </div>
             </AnimatedFadeIn>
             <div className="border-l-2 border-terracotta/40 pl-8 md:pl-12">
-            <AnimatedHeading as="blockquote" className="font-serif text-display-md text-bark [text-wrap:balance]">
-              "We don't chase trends.<br />
-              <span className="text-terracotta italic">We make things</span><br />
-              worth keeping."
-            </AnimatedHeading>
+              <AnimatedHeading as="blockquote" className="font-serif text-display-md text-bark [text-wrap:balance]">
+                "We don't chase trends.<br />
+                <span className="text-terracotta italic">We make things</span><br />
+                worth keeping."
+              </AnimatedHeading>
             </div>
           </div>
           <div className="mt-16 md:mt-24 flex justify-end">
@@ -264,11 +368,32 @@ export default function HomePage() {
       </section>
 
       {/* ── VALUES ── */}
-      <section className="section-pad bg-off-white">
+      <section className="section-pad bg-off-white relative overflow-hidden">
+        {/* Single large leaf — upper right, gentle sway */}
+        <div
+          className="absolute top-0 right-0 w-48 md:w-72 h-64 md:h-96 pointer-events-none opacity-[0.14] text-bark"
+          style={{ animation: "branchSway 10s ease-in-out infinite", transformOrigin: "100% 0%" }}
+        >
+          <svg viewBox="0 0 240 360" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full">
+            <path d="M220 0 Q180 40 160 80 Q140 120 130 165 Q120 210 122 255 Q124 300 130 345 Q132 352 134 360" strokeWidth="1.3"/>
+            <path d="M160 80 Q130 70 104 66 Q78 62 56 64 Q34 66 16 76" strokeWidth="0.9"/>
+            <path d="M130 165 Q104 162 80 164 Q56 166 36 174 Q16 182 4 196" strokeWidth="0.85"/>
+            <path d="M122 255 Q100 258 78 266 Q56 274 38 288 Q20 302 10 320" strokeWidth="0.8"/>
+            <path d="M160 80 Q186 68 208 52 Q230 36 238 12" strokeWidth="0.9"/>
+            <path d="M130 165 Q154 154 176 138 Q198 122 210 100" strokeWidth="0.85"/>
+          </svg>
+        </div>
         <div className="container-wide">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-8 items-center">
             <AnimatedFadeIn className="relative">
-              <div className="bg-[#7A6854] aspect-[3/4] w-full max-w-md relative">
+              <div className="aspect-[3/4] w-full max-w-md relative overflow-hidden">
+                <Image
+                  src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80&auto=format&fit=crop"
+                  alt="Studio"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 40vw"
+                />
                 <div className="absolute inset-4 border border-white/10 pointer-events-none" />
               </div>
               <div className="absolute inset-0 max-w-md border border-sand/25 translate-x-4 translate-y-4 pointer-events-none -z-10" />
@@ -315,7 +440,45 @@ export default function HomePage() {
       </section>
 
       {/* ── CTA CLOSER ── */}
-      <section className="section-pad bg-bark">
+      <section className="section-pad bg-bark relative overflow-hidden">
+        {/* Drifting leaves — dark background makes them glow */}
+        <FloatingLeaves count={14} color="text-terracotta" className="opacity-60" />
+
+        {/* Botanical corner — bottom right, sways */}
+        <div
+          className="absolute bottom-0 right-0 w-56 md:w-80 h-64 md:h-96 pointer-events-none opacity-[0.18] text-sand overflow-hidden"
+          style={{ animation: "branchSway 11s ease-in-out infinite", transformOrigin: "100% 100%" }}
+        >
+          <svg viewBox="0 0 280 320" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full">
+            <path d="M280 320 Q260 295 248 270 Q236 245 228 218 Q220 191 218 164 Q216 137 220 110 Q224 83 232 56 Q240 29 248 4" strokeWidth="1.3"/>
+            <path d="M228 218 Q200 202 174 190 Q148 178 126 160 Q104 142 90 118" strokeWidth="0.9"/>
+            <path d="M218 164 Q192 152 168 140 Q144 128 124 112 Q104 96 94 74" strokeWidth="0.85"/>
+            <path d="M220 110 Q196 100 174 90 Q152 80 134 64 Q116 48 110 26" strokeWidth="0.8"/>
+            <path d="M90 118 Q74 100 66 80 Q58 60 60 38" strokeWidth="0.7"/>
+            <path d="M94 74 Q78 58 72 38 Q66 18 68 -2" strokeWidth="0.65"/>
+            <ellipse cx="60" cy="36" rx="9" ry="4" transform="rotate(40 60 36)" strokeWidth="0.6"/>
+            <ellipse cx="50" cy="44" rx="7" ry="3.5" transform="rotate(52 50 44)" strokeWidth="0.6"/>
+            <ellipse cx="68" cy="-4" rx="8" ry="3.5" transform="rotate(35 68 -4)" strokeWidth="0.6"/>
+            <ellipse cx="110" cy="24" rx="8" ry="3.5" transform="rotate(28 110 24)" strokeWidth="0.6"/>
+            <ellipse cx="100" cy="32" rx="7" ry="3" transform="rotate(40 100 32)" strokeWidth="0.6"/>
+            <ellipse cx="248" cy="2" rx="8" ry="3.5" transform="rotate(18 248 2)" strokeWidth="0.6"/>
+          </svg>
+        </div>
+        {/* Botanical corner — top left, sways */}
+        <div
+          className="absolute top-0 left-0 w-44 md:w-60 h-48 md:h-72 pointer-events-none opacity-[0.16] text-sand overflow-hidden rotate-180"
+          style={{ animation: "branchSway 13s ease-in-out infinite reverse", transformOrigin: "0% 100%" }}
+        >
+          <svg viewBox="0 0 240 280" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full">
+            <path d="M120 280 Q118 250 122 220 Q126 190 132 162 Q138 134 146 108 Q154 82 162 58 Q170 34 176 10" strokeWidth="1.2"/>
+            <path d="M132 162 Q158 150 182 138 Q206 126 224 108" strokeWidth="0.85"/>
+            <path d="M146 108 Q168 98 190 86 Q212 74 228 56" strokeWidth="0.8"/>
+            <path d="M122 220 Q100 208 80 192 Q60 176 46 155" strokeWidth="0.8"/>
+            <path d="M224 106 Q234 88 234 70" strokeWidth="0.65"/>
+            <ellipse cx="234" cy="68" rx="8" ry="3.5" transform="rotate(-35 234 68)" strokeWidth="0.6"/>
+            <ellipse cx="228" cy="54" rx="7" ry="3" transform="rotate(-45 228 54)" strokeWidth="0.6"/>
+          </svg>
+        </div>
         <div className="container-wide text-center">
           <AnimatedFadeIn>
             <div className="flex items-center justify-center gap-6 mb-8">

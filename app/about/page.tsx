@@ -1,10 +1,49 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 const team = [
-  { name: "Anya Kovac", role: "Founder & Lead Designer", years: "12 years" },
-  { name: "Matteo Ferri", role: "Head Woodworker", years: "20 years" },
-  { name: "Clara Ashby", role: "Ceramics & Objects", years: "8 years" },
+  {
+    name: "Anya Kovac",
+    role: "Founder & Lead Designer",
+    years: "12 years",
+    img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&q=80&auto=format&fit=crop&crop=face",
+  },
+  {
+    name: "Matteo Ferri",
+    role: "Head Woodworker",
+    years: "20 years",
+    img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80&auto=format&fit=crop&crop=face",
+  },
+  {
+    name: "Clara Ashby",
+    role: "Ceramics & Objects",
+    years: "8 years",
+    img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&q=80&auto=format&fit=crop&crop=face",
+  },
+];
+
+const materials = [
+  {
+    name: "Reclaimed Oak",
+    note: "Sourced from UK demolition yards",
+    img: "https://images.unsplash.com/photo-1541123437800-1bb1317badc2?w=600&q=80&auto=format&fit=crop",
+  },
+  {
+    name: "Stoneware",
+    note: "Thrown in our Bermondsey studio",
+    img: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&q=80&auto=format&fit=crop",
+  },
+  {
+    name: "Natural Stone",
+    note: "Travertine, limestone, slate",
+    img: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&q=80&auto=format&fit=crop&crop=entropy",
+  },
+  {
+    name: "Linen & Wool",
+    note: "Undyed, from UK mills",
+    img: "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=600&q=80&auto=format&fit=crop",
+  },
 ];
 
 const timeline = [
@@ -32,17 +71,25 @@ export default function AboutPage() {
             </div>
             <div className="pb-8 md:pb-16">
               <p className="text-white/50 text-lg font-light leading-relaxed max-w-sm">
-                We're a small studio of eight people who believe that how something is made matters as much as how it looks. We've held that view for twelve years. We have no plans to change it.
+                We&apos;re a small studio of eight people who believe that how something is made matters as much as how it looks. We&apos;ve held that view for twelve years. We have no plans to change it.
               </p>
             </div>
           </div>
 
-          {/* Full-bleed image placeholder */}
+          {/* Full-bleed hero image */}
           <div className="mt-16 -mx-6 md:-mx-12 lg:-mx-20">
-            <div className="bg-[#4A3728] h-[50vh] md:h-[70vh] relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-bark/80 to-transparent" />
+            <div className="h-[50vh] md:h-[70vh] relative overflow-hidden">
+              <Image
+                src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1600&q=85&auto=format&fit=crop"
+                alt="Bermondsey Studio"
+                fill
+                priority
+                className="object-cover"
+                sizes="100vw"
+              />
+              <div className="absolute inset-0 bg-bark/40" />
               <div className="absolute bottom-8 left-6 md:left-12 lg:left-20">
-                <p className="label-text text-sand/40">Bermondsey Studio, London · 2026</p>
+                <p className="label-text text-sand/60">Bermondsey Studio, London · 2026</p>
               </div>
             </div>
           </div>
@@ -71,7 +118,7 @@ export default function AboutPage() {
                 We still work by hand. We use reclaimed timber from demolition yards across the UK, stone sourced from quarries we visit ourselves, and ceramics thrown in our own Bermondsey studio. Every piece is made to order. Nothing is mass-produced. We know who made each thing we send into the world.
               </p>
               <p>
-                The studio has grown slowly, deliberately. We're eight people now. We turn down work when we'd have to compromise to take it. We have a backlog of six months because we won't hire to speed up. We think that's right.
+                The studio has grown slowly, deliberately. We&apos;re eight people now. We turn down work when we&apos;d have to compromise to take it. We have a backlog of six months because we won&apos;t hire to speed up. We think that&apos;s right.
               </p>
               <p className="font-serif text-2xl text-bark italic">
                 "Fast furniture is a contradiction. The things worth having take time."
@@ -84,16 +131,22 @@ export default function AboutPage() {
       {/* ── MATERIALS ── */}
       <section className="section-pad bg-linen">
         <div className="container-wide">
-          <p className="label-text text-stone mb-12">What we work with</p>
+          <div className="flex items-center gap-4 mb-12">
+            <div className="w-5 h-px bg-stone/40" />
+            <p className="label-text text-stone">What we work with</p>
+          </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-            {[
-              { name: "Reclaimed Oak", note: "Sourced from UK demolition yards", color: "bg-[#8C7B6B]" },
-              { name: "Stoneware", note: "Thrown in our Bermondsey studio", color: "bg-[#B8A898]" },
-              { name: "Natural Stone", note: "Travertine, limestone, slate", color: "bg-[#9E9086]" },
-              { name: "Linen & Wool", note: "Undyed, from UK mills", color: "bg-sand" },
-            ].map((mat) => (
+            {materials.map((mat) => (
               <div key={mat.name}>
-                <div className={`${mat.color} aspect-square mb-5`} />
+                <div className="aspect-square mb-5 relative overflow-hidden">
+                  <Image
+                    src={mat.img}
+                    alt={mat.name}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                  />
+                </div>
                 <h3 className="font-serif text-2xl text-bark mb-1">{mat.name}</h3>
                 <p className="label-text text-stone">{mat.note}</p>
               </div>
@@ -118,9 +171,7 @@ export default function AboutPage() {
               {timeline.map((item, i) => (
                 <div
                   key={item.year}
-                  className={`flex gap-8 py-8 ${
-                    i < timeline.length - 1 ? "border-b border-linen" : ""
-                  }`}
+                  className={`flex gap-8 py-8 ${i < timeline.length - 1 ? "border-b border-linen" : ""}`}
                 >
                   <p className="font-serif text-2xl text-stone shrink-0 w-16">{item.year}</p>
                   <p className="text-bark font-light leading-relaxed">{item.event}</p>
@@ -134,13 +185,23 @@ export default function AboutPage() {
       {/* ── TEAM ── */}
       <section className="section-pad bg-cream">
         <div className="container-wide">
-          <p className="label-text text-stone mb-12">The people behind it</p>
+          <div className="flex items-center gap-4 mb-12">
+            <div className="w-5 h-px bg-stone/40" />
+            <p className="label-text text-stone">The people behind it</p>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {team.map((person) => (
               <div key={person.name}>
-                <div className="bg-[#8C7B6B] aspect-[3/4] mb-6 relative overflow-hidden">
+                <div className="aspect-[3/4] mb-6 relative overflow-hidden ring-1 ring-sand/20">
+                  <Image
+                    src={person.img}
+                    alt={person.name}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
                   <div className="absolute bottom-4 right-4">
-                    <span className="label-text text-off-white/60">{person.years}</span>
+                    <span className="label-text text-off-white/80 bg-bark/50 px-2 py-1 backdrop-blur-sm">{person.years}</span>
                   </div>
                 </div>
                 <h3 className="font-serif text-2xl text-bark">{person.name}</h3>
@@ -155,7 +216,7 @@ export default function AboutPage() {
       <section className="py-24 bg-terracotta">
         <div className="container-wide flex flex-col md:flex-row items-center justify-between gap-8">
           <h2 className="font-serif text-4xl md:text-5xl text-off-white max-w-md [text-wrap:balance]">
-            Come and see how it's made.
+            Come and see how it&apos;s made.
           </h2>
           <div className="flex flex-col gap-4">
             <Link href="/contact" className="btn-primary bg-bark border-0">

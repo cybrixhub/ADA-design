@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
@@ -10,56 +11,56 @@ const products = [
   {
     id: 1, name: "Silo Dining Table", category: "Dining",
     material: "Reclaimed White Oak", price: "£3,200",
-    color: "bg-[#8C7B6B]", size: "normal",
-    tag: "Made to order",
+    img: "https://images.unsplash.com/photo-1617806118233-18e1de247200?w=800&q=80&auto=format&fit=crop",
+    size: "normal", tag: "Made to order",
   },
   {
     id: 2, name: "Basin Lounge Chair", category: "Living",
     material: "Walnut & Undyed Linen", price: "£1,840",
-    color: "bg-[#9B8E7F]", size: "tall",
-    tag: "In stock",
+    img: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80&auto=format&fit=crop",
+    size: "tall", tag: "In stock",
   },
   {
     id: 3, name: "Vessel Floor Lamp", category: "Lighting",
     material: "Hand-thrown Stoneware", price: "£680",
-    color: "bg-sand", size: "normal",
-    tag: null,
+    img: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=800&q=80&auto=format&fit=crop",
+    size: "normal", tag: null,
   },
   {
     id: 4, name: "Holt Bed Frame", category: "Bedroom",
     material: "Blackened Oak", price: "£2,400",
-    color: "bg-[#5C4A3A]", size: "wide",
-    tag: "Made to order",
+    img: "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=800&q=80&auto=format&fit=crop",
+    size: "wide", tag: "Made to order",
   },
   {
     id: 5, name: "Cairn Bookshelf", category: "Living",
     material: "Solid Ash & Steel", price: "£1,960",
-    color: "bg-[#7A8C6E]", size: "tall",
-    tag: "In stock",
+    img: "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=800&q=80&auto=format&fit=crop",
+    size: "tall", tag: "In stock",
   },
   {
     id: 6, name: "Shallow Bowl", category: "Objects",
     material: "White Stoneware", price: "£95",
-    color: "bg-[#C9B99A]", size: "normal",
-    tag: null,
+    img: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80&auto=format&fit=crop",
+    size: "normal", tag: null,
   },
   {
     id: 7, name: "Dusk Side Table", category: "Living",
     material: "Travertine & Brass", price: "£740",
-    color: "bg-[#B8A898]", size: "normal",
-    tag: "Limited",
+    img: "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=800&q=80&auto=format&fit=crop",
+    size: "normal", tag: "Limited",
   },
   {
     id: 8, name: "Terra Pendant Light", category: "Lighting",
     material: "Raku-fired Ceramic", price: "£420",
-    color: "bg-terracotta/70", size: "normal",
-    tag: null,
+    img: "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=800&q=80&auto=format&fit=crop",
+    size: "normal", tag: null,
   },
   {
     id: 9, name: "Grove Coffee Table", category: "Living",
     material: "Reclaimed Elm", price: "£1,100",
-    color: "bg-[#6B5A4A]", size: "wide",
-    tag: "In stock",
+    img: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80&auto=format&fit=crop",
+    size: "wide", tag: "In stock",
   },
 ];
 
@@ -110,30 +111,34 @@ export default function CollectionsPage() {
       {/* ── PRODUCT GRID ── */}
       <section className="section-pad bg-off-white">
         <div className="container-wide">
-          <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 md:gap-8">
-            {filtered.map((product) => (
-              <div key={product.id} className="break-inside-avoid mb-6 md:mb-8 group cursor-pointer">
-                {/* Image */}
-                <div
-                  className={`${product.color} overflow-hidden ${
-                    product.size === "tall"
-                      ? "aspect-[3/4]"
-                      : product.size === "wide"
-                      ? "aspect-[4/3]"
-                      : "aspect-square"
-                  } relative ring-1 ring-transparent group-hover:ring-sand/50 transition-all duration-500`}
-                >
-                  {/* Hover overlay */}
-                  <div className="absolute inset-0 bg-bark/0 group-hover:bg-bark/20 transition-colors duration-500" />
-
-                  {/* Tag */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 border-t border-l border-sand/25">
+            {filtered.map((product, i) => (
+              <article
+                key={product.id}
+                className="group cursor-pointer border-r border-b border-sand/25 p-6 md:p-8 flex flex-col bg-off-white hover:bg-cream/40 transition-colors duration-500"
+              >
+                {/* Editorial index */}
+                <div className="flex items-center justify-between mb-6">
+                  <p className="label-text text-sand text-[0.65rem]">
+                    {String(i + 1).padStart(2, "0")} / {String(filtered.length).padStart(2, "0")}
+                  </p>
                   {product.tag && (
-                    <div className="absolute top-4 left-4">
-                      <span className="label-text text-off-white bg-bark/60 px-3 py-1.5 backdrop-blur-sm">
-                        {product.tag}
-                      </span>
-                    </div>
+                    <span className="label-text text-terracotta text-[0.65rem]">
+                      · {product.tag}
+                    </span>
                   )}
+                </div>
+
+                {/* Image — uniform portrait aspect */}
+                <div className="relative aspect-[4/5] w-full overflow-hidden ring-1 ring-transparent group-hover:ring-sand/50 transition-all duration-500">
+                  <Image
+                    src={product.img}
+                    alt={product.name}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
+                  <div className="absolute inset-0 bg-bark/0 group-hover:bg-bark/15 transition-colors duration-500" />
 
                   {/* Quick look arrow */}
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -143,19 +148,24 @@ export default function CollectionsPage() {
                   </div>
                 </div>
 
-                {/* Meta */}
-                <div className="pt-4 pb-5 flex items-start justify-between border-b border-sand/20">
-                  <div>
-                    <p className="label-text text-stone mb-1.5">{product.category} · {product.material}</p>
-                    <h3 className="font-serif text-xl md:text-2xl text-bark">{product.name}</h3>
+                {/* Meta — pushed to bottom for equal card heights */}
+                <div className="pt-6 mt-auto flex items-end justify-between gap-4">
+                  <div className="min-w-0">
+                    <p className="label-text text-stone mb-2 truncate">
+                      {product.category} · {product.material}
+                    </p>
+                    <h3 className="font-serif text-xl md:text-2xl text-bark leading-tight">
+                      {product.name}
+                    </h3>
                   </div>
-                  <p className="font-serif text-xl text-stone mt-1 shrink-0 ml-4">{product.price}</p>
+                  <p className="font-serif text-lg md:text-xl text-stone shrink-0">
+                    {product.price}
+                  </p>
                 </div>
-              </div>
+              </article>
             ))}
           </div>
 
-          {/* Empty state */}
           {filtered.length === 0 && (
             <div className="text-center py-24">
               <p className="font-serif text-3xl text-stone mb-4">Nothing here yet.</p>
@@ -173,7 +183,7 @@ export default function CollectionsPage() {
           <div>
             <p className="label-text text-sand/40 mb-4">Commission work</p>
             <h2 className="font-serif text-4xl md:text-5xl text-off-white">
-              Don't see what you need?
+              Don&apos;t see what you need?
             </h2>
           </div>
           <Link href="/contact" className="btn-primary shrink-0">

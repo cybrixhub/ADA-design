@@ -18,6 +18,38 @@
   90%  { transform: translate(-10%, 10%); }
 }
 
+@keyframes leafFall {
+  0% {
+    transform: translate3d(0, -20vh, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(var(--sway, 60px), 55vh, 0) rotate(180deg);
+  }
+  100% {
+    transform: translate3d(0, 130vh, 0) rotate(360deg);
+  }
+}
+
+@keyframes leafSpin {
+  0%, 100% { transform: rotate(-20deg); }
+  50%      { transform: rotate(35deg); }
+}
+
+@keyframes treeSway {
+  0%, 100% { transform: rotate(-1.2deg); }
+  50%      { transform: rotate(1.8deg); }
+}
+
+@keyframes leafShimmer {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50%      { opacity: 1;    transform: scale(1.15); }
+}
+
+@keyframes branchSway {
+  0%, 100% { transform: rotate(-0.8deg); }
+  50%      { transform: rotate(1.2deg); }
+}
+
 :root {
   --font-cormorant: 'Cormorant Garamond';
   --font-dm-sans: 'DM Sans';

@@ -85,7 +85,10 @@ export default function HomePage() {
         <div className="relative container-wide pb-20 md:pb-28 pt-32 md:pt-0 z-10">
           <div className="max-w-2xl">
             <AnimatedFadeIn delay={1.9}>
-              <p className="label-text text-sand/60 mb-8">Handcrafted Objects</p>
+              <div className="flex items-center gap-4 mb-8">
+                <div className="w-5 h-px bg-sand/30" />
+                <p className="label-text text-sand/60">Handcrafted Objects</p>
+              </div>
             </AnimatedFadeIn>
             <AnimatedHeading as="h1" delay={2.0} className="font-serif text-display-xl text-off-white mb-10 [text-wrap:balance]">
               Made for<br />
@@ -181,11 +184,11 @@ export default function HomePage() {
           <div className="grid grid-cols-3 gap-4 md:gap-6">
             {featured.map((item, i) => (
               <AnimatedFadeIn key={item.id} delay={i * 0.1} className={item.size}>
-                <div className="group relative overflow-hidden cursor-pointer">
-                  <div className={`${item.color} aspect-[4/5] w-full transition-transform duration-700 group-hover:scale-[1.03]`}>
+                <div className="group relative cursor-pointer">
+                  <div className={`${item.color} aspect-[4/5] w-full overflow-hidden transition-transform duration-700 group-hover:scale-[1.03] ring-1 ring-transparent group-hover:ring-sand/40 transition-shadow`}>
                     <div className="w-full h-full flex items-end p-6 md:p-8 bg-gradient-to-t from-black/40 to-transparent" />
                   </div>
-                  <div className="mt-4 flex items-start justify-between">
+                  <div className="mt-4 pb-5 flex items-start justify-between border-b border-sand/20">
                     <div>
                       <p className="label-text text-stone mb-1">{item.category} · {item.material}</p>
                       <h3 className="font-serif text-2xl text-bark">{item.name}</h3>
@@ -215,6 +218,7 @@ export default function HomePage() {
               { num: "03", title: "Made by hand for you",   body: "12–16 weeks. One piece, made once, for your specific space." },
             ].map((step) => (
               <div key={step.num} className="py-12 px-0 md:px-12 first:md:pl-0 last:md:pr-0">
+                <div className="w-8 h-px bg-sand/50 mb-5" />
                 <p className="label-text text-sand mb-6">{step.num}</p>
                 <h3 className="font-serif text-xl md:text-2xl text-bark mb-3">{step.title}</h3>
                 <p className="text-stone text-sm leading-relaxed font-light">{step.body}</p>
@@ -229,13 +233,18 @@ export default function HomePage() {
         <div className="container-wide">
           <div className="max-w-3xl">
             <AnimatedFadeIn>
-              <p className="label-text text-stone mb-8">What we believe</p>
+              <div className="flex items-center gap-4 mb-10">
+                <div className="w-5 h-px bg-stone/40" />
+                <p className="label-text text-stone">What we believe</p>
+              </div>
             </AnimatedFadeIn>
+            <div className="border-l-2 border-terracotta/40 pl-8 md:pl-12">
             <AnimatedHeading as="blockquote" className="font-serif text-display-md text-bark [text-wrap:balance]">
               "We don't chase trends.<br />
               <span className="text-terracotta italic">We make things</span><br />
               worth keeping."
             </AnimatedHeading>
+            </div>
           </div>
           <div className="mt-16 md:mt-24 flex justify-end">
             <div className="grid grid-cols-3 gap-6 md:gap-16 max-w-2xl text-right">
@@ -259,7 +268,10 @@ export default function HomePage() {
         <div className="container-wide">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-8 items-center">
             <AnimatedFadeIn className="relative">
-              <div className="bg-[#7A6854] aspect-[3/4] w-full max-w-md" />
+              <div className="bg-[#7A6854] aspect-[3/4] w-full max-w-md relative">
+                <div className="absolute inset-4 border border-white/10 pointer-events-none" />
+              </div>
+              <div className="absolute inset-0 max-w-md border border-sand/25 translate-x-4 translate-y-4 pointer-events-none -z-10" />
               <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-terracotta/20" />
               <div className="absolute top-8 -left-4">
                 <p className="label-text text-stone [writing-mode:vertical-rl] tracking-[0.3em]">
@@ -280,7 +292,7 @@ export default function HomePage() {
               <div className="space-y-10">
                 {values.map((v, i) => (
                   <AnimatedFadeIn key={v.num} delay={i * 0.1}>
-                    <div className="flex gap-8">
+                    <div className="flex gap-8 border-t border-sand/20 pt-8">
                       <p className="label-text text-sand pt-1 shrink-0">{v.num}</p>
                       <div>
                         <h3 className="font-serif text-2xl text-bark mb-2">{v.title}</h3>
@@ -306,7 +318,11 @@ export default function HomePage() {
       <section className="section-pad bg-bark">
         <div className="container-wide text-center">
           <AnimatedFadeIn>
-            <p className="label-text text-sand/40 mb-8">Commission a piece</p>
+            <div className="flex items-center justify-center gap-6 mb-8">
+              <div className="w-10 h-px bg-sand/20" />
+              <p className="label-text text-sand/40">Commission a piece</p>
+              <div className="w-10 h-px bg-sand/20" />
+            </div>
           </AnimatedFadeIn>
           <AnimatedHeading className="font-serif text-display-lg text-off-white mb-10 [text-wrap:balance]">
             Every home<br />

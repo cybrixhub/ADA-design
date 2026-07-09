@@ -94,10 +94,10 @@ export default function CollectionsPage() {
               <button
                 key={cat}
                 onClick={() => setActive(cat)}
-                className={`shrink-0 px-5 py-2 text-label tracking-[0.15em] uppercase transition-all duration-200 ${
+                className={`shrink-0 px-4 py-3 text-label tracking-[0.15em] uppercase transition-all duration-200 border-b-2 ${
                   active === cat
-                    ? "bg-bark text-off-white"
-                    : "text-stone hover:text-bark"
+                    ? "border-bark text-bark"
+                    : "border-transparent text-stone hover:text-bark hover:border-sand/50"
                 }`}
               >
                 {cat}
@@ -121,7 +121,7 @@ export default function CollectionsPage() {
                       : product.size === "wide"
                       ? "aspect-[4/3]"
                       : "aspect-square"
-                  } relative`}
+                  } relative ring-1 ring-transparent group-hover:ring-sand/50 transition-all duration-500`}
                 >
                   {/* Hover overlay */}
                   <div className="absolute inset-0 bg-bark/0 group-hover:bg-bark/20 transition-colors duration-500" />
@@ -144,7 +144,7 @@ export default function CollectionsPage() {
                 </div>
 
                 {/* Meta */}
-                <div className="pt-4 flex items-start justify-between">
+                <div className="pt-4 pb-5 flex items-start justify-between border-b border-sand/20">
                   <div>
                     <p className="label-text text-stone mb-1.5">{product.category} · {product.material}</p>
                     <h3 className="font-serif text-xl md:text-2xl text-bark">{product.name}</h3>

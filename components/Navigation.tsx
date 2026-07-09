@@ -52,11 +52,14 @@ export default function Navigation() {
             <Link
               key={href}
               href={href}
-              className={`label-text transition-colors duration-300 hover:text-terracotta ${
-                scrolled || !isHome
-                  ? "text-stone"
-                  : "text-off-white/80 hover:text-off-white"
-              } ${pathname === href ? "text-terracotta" : ""}`}
+              className={`label-text transition-colors duration-300 relative
+                after:absolute after:bottom-0 after:left-0 after:h-px after:transition-all after:duration-300
+                ${pathname === href
+                  ? "text-terracotta after:w-full after:bg-terracotta"
+                  : scrolled || !isHome
+                    ? "text-stone hover:text-bark after:w-0 hover:after:w-full after:bg-bark"
+                    : "text-off-white/80 hover:text-off-white after:w-0 hover:after:w-full after:bg-off-white"
+                }`}
             >
               {label}
             </Link>

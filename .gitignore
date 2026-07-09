@@ -25,3 +25,8 @@
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# build artifacts / large source assets
+/scratch_extract
+/Website-*.zip
+middleware.ts.disabled

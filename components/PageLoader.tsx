@@ -65,7 +65,7 @@ export default function PageLoader() {
 
       {/* Brand */}
       <p className="absolute top-6 left-14 font-serif text-2xl tracking-[0.12em] text-off-white/80">
-        FORMA
+        AD DESIGN
       </p>
 
       {/* Counter */}
@@ -75,7 +75,7 @@ export default function PageLoader() {
 
       {/* Bottom label */}
       <p className="absolute bottom-7 left-14 font-sans text-[0.65rem] tracking-[0.25em] uppercase text-sand/30">
-        Handcrafted Objects · London
+        Architectural Design · NSW
       </p>
     </div>
   );

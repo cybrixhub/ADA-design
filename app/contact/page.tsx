@@ -4,10 +4,10 @@ import { useState } from "react";
 import { Send, MapPin, Phone, Mail } from "lucide-react";
 
 const subjects = [
-  "Commission a piece",
-  "Visiting the studio",
-  "Trade & interior designers",
-  "Press & editorial",
+  "New residential project",
+  "New commercial / industrial project",
+  "Renders for an existing design",
+  "Council / DA advice",
   "Something else",
 ];
 
@@ -35,9 +35,9 @@ export default function ContactPage() {
         <div className="container-wide">
           <p className="label-text text-stone mb-6">Get in touch</p>
           <h1 className="font-serif text-display-lg text-bark max-w-xl [text-wrap:balance]">
-            Let's talk<br />
-            about your<br />
-            <em className="text-terracotta">space.</em>
+            Tell us about<br />
+            the site &<br />
+            <em className="text-terracotta">the brief.</em>
           </h1>
         </div>
       </section>
@@ -52,24 +52,19 @@ export default function ContactPage() {
               <div>
                 <p className="label-text text-stone mb-6">Studio</p>
                 <address className="not-italic text-bark font-light leading-relaxed space-y-1">
-                  <p>Studio 4, The Warehouse</p>
-                  <p>12 Tanner Street</p>
-                  <p>London, SE1 3LD</p>
+                  <p>Sydney, NSW</p>
+                  <p>Australia</p>
                 </address>
               </div>
 
               <div className="space-y-4">
                 <div className="flex items-center gap-3 text-stone font-light text-sm">
                   <Mail size={14} className="text-terracotta shrink-0" />
-                  <span>hello@forma.co</span>
-                </div>
-                <div className="flex items-center gap-3 text-stone font-light text-sm">
-                  <Phone size={14} className="text-terracotta shrink-0" />
-                  <span>+44 20 7946 0123</span>
+                  <span>hello@adadesign.com.au</span>
                 </div>
                 <div className="flex items-start gap-3 text-stone font-light text-sm">
                   <MapPin size={14} className="text-terracotta shrink-0 mt-0.5" />
-                  <span>Open Mon–Fri, 9am–5pm<br />Visits by appointment only</span>
+                  <span>Open Mon–Fri, 9am–5pm AEST<br />Consultations by appointment</span>
                 </div>
               </div>
 
@@ -93,7 +88,7 @@ export default function ContactPage() {
                     Message received.
                   </h2>
                   <p className="text-stone font-light text-lg leading-relaxed max-w-md">
-                    We'll be in touch shortly. In the meantime, explore our collections or take a look at how we work.
+                    We&apos;ll be in touch shortly. In the meantime, browse our projects or read about how we work.
                   </p>
                   <div className="mt-10 flex gap-6">
                     <button
@@ -167,7 +162,7 @@ export default function ContactPage() {
                       rows={6}
                       value={form.message}
                       onChange={handleChange}
-                      placeholder="Tell us about your space, what you're looking for, and any relevant dimensions. The more detail the better."
+                      placeholder="Tell us about the site (address if you can), what you want to build, and the timeline. If you have a survey, sketches, or reference images, mention that too."
                       className="w-full bg-transparent border-b border-linen focus:border-bark outline-none py-3 text-bark font-light placeholder:text-stone/40 resize-none transition-colors"
                     />
                   </div>
@@ -193,9 +188,9 @@ export default function ContactPage() {
         <div className="container-wide">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-6">
             {[
-              { num: "01", title: "Tell us your vision", body: "Describe the space, the feel, the function. Send us photos if you have them." },
-              { num: "02", title: "We talk materials", body: "We'll suggest which woods, stones, or ceramics suit the brief and the budget." },
-              { num: "03", title: "Made by hand", body: "Your piece goes into our production queue. We'll keep you updated throughout." },
+              { num: "01", title: "Tell us the site", body: "Address, block dimensions, orientation. Council area if you know it." },
+              { num: "02", title: "We propose an approach", body: "First-pass sketches, feasibility, timeline, and fee structure. Usually within a week." },
+              { num: "03", title: "Design to approval", body: "Concept → render → documentation → DA. One point of contact through to consent." },
             ].map((step) => (
               <div key={step.num} className="flex gap-6">
                 <p className="label-text text-sand/30 shrink-0 mt-1">{step.num}</p>

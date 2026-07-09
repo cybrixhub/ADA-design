@@ -5,53 +5,49 @@ import AnimatedHeading from "@/components/AnimatedHeading";
 import AnimatedFadeIn from "@/components/AnimatedFadeIn";
 import FloatingLeaves from "@/components/FloatingLeaves";
 import AnimatedTree from "@/components/AnimatedTree";
+import { projects } from "@/lib/projects";
 
-const featured = [
-  {
-    id: 1,
-    name: "Silo Dining Table",
-    category: "Dining",
-    material: "Reclaimed Oak",
-    price: "£3,200",
-    img: "https://images.unsplash.com/photo-1617806118233-18e1de247200?w=900&q=80&auto=format&fit=crop",
-    size: "col-span-2",
-  },
-  {
-    id: 2,
-    name: "Basin Lounge Chair",
-    category: "Living",
-    material: "Walnut & Linen",
-    price: "£1,840",
-    img: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=700&q=80&auto=format&fit=crop",
-    size: "col-span-1",
-  },
-  {
-    id: 3,
-    name: "Vessel Floor Lamp",
-    category: "Lighting",
-    material: "Hand-thrown Ceramic",
-    price: "£680",
-    img: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=700&q=80&auto=format&fit=crop",
-    size: "col-span-1",
-  },
+const FEATURED_SLUGS = [
+  "44-kidd-circuit-goulburn-nsw-2580",
+  "12-dexter-road-lochinvar-nsw-2321",
+  "1-bandon-road-vineyard-nsw",
 ];
+
+const featured = FEATURED_SLUGS.map((slug) => projects.find((p) => p.slug === slug)).filter(
+  (p): p is (typeof projects)[number] => Boolean(p)
+);
+
+const heroImage =
+  projects.find((p) => p.slug === "44-kidd-circuit-goulburn-nsw-2580")?.images[0] ??
+  projects[0].images[0];
 
 const values = [
   {
     num: "01",
-    title: "Materials first",
-    body: "We source reclaimed oak, hand-quarried stone, and natural linen from suppliers we know by name.",
+    title: "Site-first design",
+    body: "Every project starts from the land — orientation, aspect, view lines. The building follows the site.",
   },
   {
     num: "02",
-    title: "Made to outlast trends",
-    body: "We design for the decade, not the season. Our pieces are made to grow with you, not be replaced by you.",
+    title: "Purpose over pattern",
+    body: "We don't repeat a house type. A dual occupancy, a medical centre, and a rural home each ask for their own logic.",
   },
   {
     num: "03",
-    title: "The mark of the hand",
-    body: "Every joint, every finish, every imperfection is part of the object. We don't sand away the story.",
+    title: "Documented properly",
+    body: "Renders, plans, and specifications delivered to a level that removes doubt from build and approval.",
   },
+];
+
+const categoryShowcase = [
+  "Single Storey Dwelling",
+  "Double Storey Dwelling",
+  "Dual Occupancy",
+  "Dwelling with Granny Flat",
+  "Secondary Dwelling & Studio",
+  "Medical Centre",
+  "Industrial / Sheds",
+  "Rural House",
 ];
 
 export default function HomePage() {
@@ -63,32 +59,30 @@ export default function HomePage() {
           <div className="absolute bottom-0 left-0 w-64 h-64 md:w-96 md:h-96 bg-terracotta opacity-20 blur-3xl" />
         </div>
 
-        {/* Falling leaves — realistic autumn drift */}
+        {/* Falling leaves */}
         <FloatingLeaves count={26} className="z-[2]" />
 
-        {/* Main tree — realistic silhouette, left, warm sand against dark bark */}
+        {/* Trees */}
         <AnimatedTree
           className="absolute bottom-0 -left-14 md:-left-8 w-[360px] md:w-[560px] h-[600px] md:h-[820px] z-[1]"
           color="text-[#C9B99A]"
           opacity={0.32}
         />
-        {/* Companion tree — smaller, further right, terracotta */}
         <div className="absolute bottom-0 -right-16 md:-right-6 w-[240px] md:w-[380px] h-[440px] md:h-[620px] z-[1]">
           <AnimatedTree color="text-[#C4704F]" opacity={0.22} />
         </div>
 
-        {/* Hero image */}
+        {/* Hero render */}
         <div className="absolute top-0 right-0 w-full md:w-1/2 h-full overflow-hidden">
           <Image
-            src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1400&q=85&auto=format&fit=crop"
-            alt="Silo Collection interior"
+            src={heroImage}
+            alt="Featured project"
             fill
             priority
             className="object-cover"
             sizes="(max-width: 768px) 100vw, 50vw"
           />
           <div className="absolute inset-0 bg-bark/55" />
-          {/* Subtle horizontal rules */}
           <div className="absolute inset-0 flex flex-col justify-evenly pointer-events-none">
             {[...Array(7)].map((_, i) => (
               <div key={i} className="h-px w-full bg-white/[0.04]" />
@@ -96,7 +90,7 @@ export default function HomePage() {
           </div>
           <div className="absolute bottom-8 md:bottom-16 left-8 md:left-16 z-10 space-y-2">
             <div className="w-24 h-px bg-sand opacity-40" />
-            <p className="label-text text-sand/50">Silo Collection — 2026</p>
+            <p className="label-text text-sand/50">Selected project — Goulburn, NSW</p>
           </div>
         </div>
 
@@ -106,25 +100,25 @@ export default function HomePage() {
             <AnimatedFadeIn delay={1.9}>
               <div className="flex items-center gap-4 mb-8">
                 <div className="w-5 h-px bg-sand/30" />
-                <p className="label-text text-sand/60">Handcrafted Objects</p>
+                <p className="label-text text-sand/60">Architectural Design · NSW</p>
               </div>
             </AnimatedFadeIn>
             <AnimatedHeading as="h1" delay={2.0} className="font-serif text-display-xl text-off-white mb-10 [text-wrap:balance]">
-              Made for<br />
-              <em className="not-italic text-terracotta">how</em><br />
-              you live.
+              Purpose-built<br />
+              <em className="not-italic text-terracotta">for</em><br />
+              its site.
             </AnimatedHeading>
             <AnimatedFadeIn delay={2.3}>
               <p className="text-white/50 text-lg font-light leading-relaxed max-w-sm mb-12">
-                Furniture built from reclaimed oak, stone, and hand-thrown ceramics. Pieces that age with you, not against you.
+                {projects.length} projects across NSW — residential dwellings, medical facilities, and industrial developments. Each one designed for its land, its use, and the people it holds.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/collections" className="btn-primary group">
-                  Explore collections
+                <Link href="/projects" className="btn-primary group">
+                  View projects
                   <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <Link href="/about" className="btn-outline border-white/30 text-white/70 hover:bg-white hover:text-bark">
-                  Our story
+                  The studio
                 </Link>
               </div>
             </AnimatedFadeIn>
@@ -138,115 +132,68 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── MARQUEE BAND ── */}
-      <section className="bg-terracotta py-5 overflow-hidden">
-        <div className="flex gap-12 animate-[marquee_25s_linear_infinite] whitespace-nowrap">
-          {Array(8).fill(null).map((_, i) => (
-            <span key={i} className="flex items-center gap-12 text-off-white/90 font-serif text-xl font-light italic shrink-0">
-              Reclaimed Oak
-              <span className="text-off-white/30 not-italic font-sans text-label tracking-widest">✦</span>
-              Hand-thrown Ceramic
-              <span className="text-off-white/30 not-italic font-sans text-label tracking-widest">✦</span>
-              Natural Stone
-              <span className="text-off-white/30 not-italic font-sans text-label tracking-widest">✦</span>
-              Linen & Wool
-              <span className="text-off-white/30 not-italic font-sans text-label tracking-widest">✦</span>
-            </span>
-          ))}
+      {/* ── STATS BAND ── */}
+      <section className="bg-terracotta py-8">
+        <div className="container-wide">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-off-white">
+            {[
+              { num: projects.length, label: "Projects" },
+              { num: 9, label: "Building types" },
+              { num: "NSW", label: "Region" },
+              { num: "2026", label: "Studio" },
+            ].map((s) => (
+              <div key={s.label} className="text-center">
+                <p className="font-serif text-3xl md:text-4xl leading-none mb-2">{s.num}</p>
+                <p className="label-text text-off-white/70 text-[0.6rem]">{s.label}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* ── MATERIALS STRIP ── */}
-      <section className="flex overflow-hidden h-[220px] md:h-[300px]">
-        {[
-          {
-            name: "Reclaimed Oak",
-            img: "https://images.unsplash.com/photo-1617806118233-18e1de247200?w=500&q=80&auto=format&fit=crop",
-            overlay: "bg-[#5C3D2E]/60",
-          },
-          {
-            name: "Hand-Thrown Ceramic",
-            img: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=500&q=80&auto=format&fit=crop",
-            overlay: "bg-[#8C6A40]/55",
-          },
-          {
-            name: "Quarried Stone",
-            img: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=500&q=80&auto=format&fit=crop",
-            overlay: "bg-[#6B6059]/60",
-          },
-          {
-            name: "Natural Linen",
-            img: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=500&q=80&auto=format&fit=crop",
-            overlay: "bg-[#A89070]/50",
-          },
-          {
-            name: "Solid Walnut",
-            img: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=500&q=80&auto=format&fit=crop",
-            overlay: "bg-[#3D2B1F]/65",
-          },
-        ].map((mat, i) => (
-          <div
-            key={i}
-            className="flex-1 relative group flex items-end px-3 py-5 md:px-5 md:py-7 overflow-hidden cursor-pointer"
-          >
-            <Image
-              src={mat.img}
-              alt={mat.name}
-              fill
-              className="object-cover transition-transform duration-700 group-hover:scale-110"
-              sizes="20vw"
-            />
-            <div className={`absolute inset-0 ${mat.overlay} transition-opacity duration-500 group-hover:opacity-40`} />
-            <p className="relative z-10 text-white/50 group-hover:text-white/90 transition-colors duration-500 font-sans text-[0.6rem] tracking-[0.22em] uppercase [writing-mode:vertical-rl] rotate-180">
-              {mat.name}
-            </p>
-            <div className="absolute top-4 right-3 w-1.5 h-1.5 rounded-full bg-white/20 group-hover:bg-white/70 transition-colors duration-500" />
-          </div>
-        ))}
-      </section>
-
-      {/* ── FEATURED PIECES ── */}
+      {/* ── FEATURED PROJECTS ── */}
       <section className="section-pad bg-cream">
         <div className="container-wide">
           <div className="flex items-end justify-between mb-14">
             <div>
               <AnimatedFadeIn>
-                <p className="label-text text-stone mb-4">Selected Works</p>
+                <p className="label-text text-stone mb-4">Selected work</p>
               </AnimatedFadeIn>
               <AnimatedHeading className="font-serif text-display-md text-bark">
-                Current<br />
-                <em className="text-stone">collection</em>
+                Recent<br />
+                <em className="text-stone">projects</em>
               </AnimatedHeading>
             </div>
             <AnimatedFadeIn>
               <Link
-                href="/collections"
+                href="/projects"
                 className="hidden md:flex items-center gap-2 label-text text-terracotta hover:gap-4 transition-all"
               >
-                View all <ArrowRight size={12} />
+                All {projects.length} projects <ArrowRight size={12} />
               </Link>
             </AnimatedFadeIn>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 border-t border-l border-sand/25">
             {featured.map((item, i) => (
-              <AnimatedFadeIn key={item.id} delay={i * 0.1}>
-                <article className="group cursor-pointer border-r border-b border-sand/25 p-6 md:p-8 flex flex-col h-full bg-cream hover:bg-off-white/60 transition-colors duration-500">
-                  {/* Editorial index */}
+              <AnimatedFadeIn key={item.slug} delay={i * 0.1}>
+                <Link
+                  href={`/projects/${item.slug}`}
+                  className="group cursor-pointer border-r border-b border-sand/25 p-6 md:p-8 flex flex-col h-full bg-cream hover:bg-off-white/60 transition-colors duration-500"
+                >
                   <div className="flex items-center justify-between mb-6">
                     <p className="label-text text-sand text-[0.65rem]">
                       {String(i + 1).padStart(2, "0")} / {String(featured.length).padStart(2, "0")}
                     </p>
                     <span className="label-text text-terracotta text-[0.65rem]">
-                      · Featured
+                      · {item.category}
                     </span>
                   </div>
 
-                  {/* Image */}
-                  <div className="relative aspect-[4/5] w-full overflow-hidden ring-1 ring-transparent group-hover:ring-sand/50 transition-all duration-500">
+                  <div className="relative aspect-[4/5] w-full overflow-hidden ring-1 ring-transparent group-hover:ring-sand/50 transition-all duration-500 bg-linen">
                     <Image
-                      src={item.img}
-                      alt={item.name}
+                      src={item.images[0]}
+                      alt={item.title}
                       fill
                       className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -259,59 +206,79 @@ export default function HomePage() {
                     </div>
                   </div>
 
-                  {/* Meta */}
-                  <div className="pt-6 mt-auto flex items-end justify-between gap-4">
-                    <div className="min-w-0">
-                      <p className="label-text text-stone mb-2 truncate">
-                        {item.category} · {item.material}
-                      </p>
-                      <h3 className="font-serif text-xl md:text-2xl text-bark leading-tight">
-                        {item.name}
-                      </h3>
-                    </div>
-                    <p className="font-serif text-lg md:text-xl text-stone shrink-0">
-                      {item.price}
-                    </p>
+                  <div className="pt-6 mt-auto">
+                    <p className="label-text text-stone mb-2 truncate">{item.address}</p>
+                    <h3 className="font-serif text-xl md:text-2xl text-bark leading-tight [text-wrap:balance]">
+                      {item.title}
+                    </h3>
                   </div>
-                </article>
+                </Link>
               </AnimatedFadeIn>
             ))}
           </div>
 
           <div className="mt-10 md:hidden">
-            <Link href="/collections" className="btn-outline w-full justify-center">
-              View all collections <ArrowRight size={14} />
+            <Link href="/projects" className="btn-outline w-full justify-center">
+              All {projects.length} projects <ArrowRight size={14} />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ── PROCESS STEPS ── */}
-      <section className="border-y border-sand/30 bg-off-white">
+      {/* ── CATEGORY SHOWCASE ── */}
+      <section className="section-pad bg-off-white">
         <div className="container-wide">
-          <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-sand/30">
-            {[
-              { num: "01", title: "Tell us about the space", body: "What you need, what you already have, and how you live in it." },
-              { num: "02", title: "We propose the piece",    body: "Material samples, scale drawings, and a confirmed production timeline." },
-              { num: "03", title: "Made by hand for you",   body: "12–16 weeks. One piece, made once, for your specific space." },
-            ].map((step) => (
-              <div key={step.num} className="py-12 px-0 md:px-12 first:md:pl-0 last:md:pr-0">
-                <div className="w-8 h-px bg-sand/50 mb-5" />
-                <p className="label-text text-sand mb-6">{step.num}</p>
-                <h3 className="font-serif text-xl md:text-2xl text-bark mb-3">{step.title}</h3>
-                <p className="text-stone text-sm leading-relaxed font-light">{step.body}</p>
-              </div>
-            ))}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 mb-16">
+            <div className="md:col-span-5">
+              <AnimatedFadeIn>
+                <p className="label-text text-stone mb-6">What we design</p>
+              </AnimatedFadeIn>
+              <AnimatedHeading className="font-serif text-display-md text-bark [text-wrap:balance]">
+                Nine building<br />
+                <em className="text-terracotta">types</em><br />
+                one method.
+              </AnimatedHeading>
+            </div>
+            <div className="md:col-span-6 md:col-start-7 pt-4">
+              <p className="text-stone font-light text-lg leading-relaxed">
+                From a single-storey home in a suburban lot to a medical clinic on an arterial road — the categories differ, but the approach doesn&apos;t. Read the land. Read the brief. Draw only what earns its place.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 border-t border-l border-sand/25">
+            {categoryShowcase.map((cat, i) => {
+              const count = projects.filter((p) => p.category === cat).length;
+              return (
+                <Link
+                  key={cat}
+                  href="/projects"
+                  className="group border-r border-b border-sand/25 p-6 md:p-8 hover:bg-cream/40 transition-colors duration-500 flex flex-col"
+                >
+                  <p className="label-text text-sand text-[0.6rem] mb-4">
+                    {String(i + 1).padStart(2, "0")}
+                  </p>
+                  <h3 className="font-serif text-xl md:text-2xl text-bark leading-tight mb-3 [text-wrap:balance]">
+                    {cat}
+                  </h3>
+                  <p className="label-text text-stone mt-auto">
+                    {count} {count === 1 ? "project" : "projects"}
+                  </p>
+                  <ArrowRight
+                    size={14}
+                    className="text-terracotta mt-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
+                  />
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* ── STATEMENT BREAK ── */}
+      {/* ── STATEMENT ── */}
       <section className="py-20 md:py-32 bg-linen border-y border-sand/40 relative overflow-hidden">
-        {/* Drifting leaves overlay */}
         <FloatingLeaves count={10} color="text-terracotta" className="opacity-70" />
 
-        {/* Fern / leaf spray — right, now sways */}
         <div
           className="absolute right-0 top-0 h-full w-64 md:w-80 pointer-events-none opacity-[0.22] text-stone overflow-hidden"
           style={{ animation: "branchSway 9s ease-in-out infinite", transformOrigin: "100% 100%" }}
@@ -322,16 +289,6 @@ export default function HomePage() {
             <path d="M228 260 Q202 246 176 232 Q150 218 128 200 Q106 182 92 160" strokeWidth="0.9"/>
             <path d="M226 180 Q202 168 178 156 Q154 144 134 128 Q114 112 104 90" strokeWidth="0.85"/>
             <path d="M232 100 Q210 92 188 82 Q166 72 148 58 Q130 44 122 24" strokeWidth="0.8"/>
-            <path d="M98 236 Q84 218 76 198 Q68 178 68 156" strokeWidth="0.7"/>
-            <path d="M92 160 Q78 144 72 124 Q66 104 68 82" strokeWidth="0.7"/>
-            <path d="M104 90 Q90 74 86 54 Q82 34 86 12" strokeWidth="0.65"/>
-            <ellipse cx="68" cy="154" rx="9" ry="4" transform="rotate(35 68 154)" strokeWidth="0.6"/>
-            <ellipse cx="58" cy="164" rx="7" ry="3.5" transform="rotate(48 58 164)" strokeWidth="0.6"/>
-            <ellipse cx="68" cy="80" rx="9" ry="4" transform="rotate(32 68 80)" strokeWidth="0.6"/>
-            <ellipse cx="58" cy="88" rx="7" ry="3" transform="rotate(44 58 88)" strokeWidth="0.6"/>
-            <ellipse cx="86" cy="10" rx="8" ry="3.5" transform="rotate(28 86 10)" strokeWidth="0.6"/>
-            <ellipse cx="76" cy="18" rx="7" ry="3" transform="rotate(40 76 18)" strokeWidth="0.6"/>
-            <ellipse cx="122" cy="22" rx="8" ry="3.5" transform="rotate(22 122 22)" strokeWidth="0.6"/>
           </svg>
         </div>
         <div className="container-wide">
@@ -344,24 +301,10 @@ export default function HomePage() {
             </AnimatedFadeIn>
             <div className="border-l-2 border-terracotta/40 pl-8 md:pl-12">
               <AnimatedHeading as="blockquote" className="font-serif text-display-md text-bark [text-wrap:balance]">
-                "We don't chase trends.<br />
-                <span className="text-terracotta italic">We make things</span><br />
-                worth keeping."
+                &ldquo;Architecture that argues<br />
+                <span className="text-terracotta italic">with its site</span><br />
+                loses every time.&rdquo;
               </AnimatedHeading>
-            </div>
-          </div>
-          <div className="mt-16 md:mt-24 flex justify-end">
-            <div className="grid grid-cols-3 gap-6 md:gap-16 max-w-2xl text-right">
-              {[
-                { num: "12+", label: "Years making" },
-                { num: "400+", label: "Pieces made" },
-                { num: "8", label: "Artisans" },
-              ].map((stat, i) => (
-                <AnimatedFadeIn key={stat.label} delay={i * 0.12}>
-                  <p className="font-serif text-4xl md:text-5xl text-bark">{stat.num}</p>
-                  <p className="label-text text-stone mt-2">{stat.label}</p>
-                </AnimatedFadeIn>
-              ))}
             </div>
           </div>
         </div>
@@ -369,13 +312,12 @@ export default function HomePage() {
 
       {/* ── VALUES ── */}
       <section className="section-pad bg-off-white relative overflow-hidden">
-        {/* Single large leaf — upper right, gentle sway */}
         <div
           className="absolute top-0 right-0 w-48 md:w-72 h-64 md:h-96 pointer-events-none opacity-[0.14] text-bark"
           style={{ animation: "branchSway 10s ease-in-out infinite", transformOrigin: "100% 0%" }}
         >
           <svg viewBox="0 0 240 360" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full">
-            <path d="M220 0 Q180 40 160 80 Q140 120 130 165 Q120 210 122 255 Q124 300 130 345 Q132 352 134 360" strokeWidth="1.3"/>
+            <path d="M220 0 Q180 40 160 80 Q140 120 130 165 Q120 210 122 255 Q124 300 130 345" strokeWidth="1.3"/>
             <path d="M160 80 Q130 70 104 66 Q78 62 56 64 Q34 66 16 76" strokeWidth="0.9"/>
             <path d="M130 165 Q104 162 80 164 Q56 166 36 174 Q16 182 4 196" strokeWidth="0.85"/>
             <path d="M122 255 Q100 258 78 266 Q56 274 38 288 Q20 302 10 320" strokeWidth="0.8"/>
@@ -384,53 +326,38 @@ export default function HomePage() {
           </svg>
         </div>
         <div className="container-wide">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-8 items-center">
-            <AnimatedFadeIn className="relative">
-              <div className="aspect-[3/4] w-full max-w-md relative overflow-hidden">
-                <Image
-                  src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80&auto=format&fit=crop"
-                  alt="Studio"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 40vw"
-                />
-                <div className="absolute inset-4 border border-white/10 pointer-events-none" />
-              </div>
-              <div className="absolute inset-0 max-w-md border border-sand/25 translate-x-4 translate-y-4 pointer-events-none -z-10" />
-              <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-terracotta/20" />
-              <div className="absolute top-8 -left-4">
-                <p className="label-text text-stone [writing-mode:vertical-rl] tracking-[0.3em]">
-                  Studio Visit — 2026
-                </p>
-              </div>
-            </AnimatedFadeIn>
-
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-8 items-start">
             <div>
               <AnimatedFadeIn>
                 <p className="label-text text-stone mb-8">How we work</p>
               </AnimatedFadeIn>
-              <AnimatedHeading className="font-serif text-display-md text-bark mb-14 [text-wrap:balance]">
-                Craft as<br />
-                <em className="text-terracotta">philosophy</em>
+              <AnimatedHeading className="font-serif text-display-md text-bark mb-8 [text-wrap:balance]">
+                A method,<br />
+                <em className="text-terracotta">not a style.</em>
               </AnimatedHeading>
+              <p className="text-stone font-light text-lg leading-relaxed max-w-md">
+                We don&apos;t bring a house type to the site. We bring a way of listening — to the block, the sun, the brief, the budget — and then we draw.
+              </p>
+            </div>
 
-              <div className="space-y-10">
+            <div>
+              <div className="space-y-0">
                 {values.map((v, i) => (
                   <AnimatedFadeIn key={v.num} delay={i * 0.1}>
-                    <div className="flex gap-8 border-t border-sand/20 pt-8">
+                    <div className="flex gap-8 border-t border-sand/20 py-8">
                       <p className="label-text text-sand pt-1 shrink-0">{v.num}</p>
                       <div>
-                        <h3 className="font-serif text-2xl text-bark mb-2">{v.title}</h3>
-                        <p className="text-stone text-sm leading-relaxed font-light">{v.body}</p>
+                        <h3 className="font-serif text-2xl text-bark mb-3">{v.title}</h3>
+                        <p className="text-stone leading-relaxed font-light">{v.body}</p>
                       </div>
                     </div>
                   </AnimatedFadeIn>
                 ))}
               </div>
 
-              <AnimatedFadeIn delay={0.3} className="mt-14">
+              <AnimatedFadeIn delay={0.3} className="mt-8">
                 <Link href="/about" className="btn-outline group">
-                  Read our story
+                  About the studio
                   <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                 </Link>
               </AnimatedFadeIn>
@@ -441,10 +368,8 @@ export default function HomePage() {
 
       {/* ── CTA CLOSER ── */}
       <section className="section-pad bg-bark relative overflow-hidden">
-        {/* Drifting leaves — dark background makes them glow */}
         <FloatingLeaves count={14} color="text-terracotta" className="opacity-60" />
 
-        {/* Botanical corner — bottom right, sways */}
         <div
           className="absolute bottom-0 right-0 w-56 md:w-80 h-64 md:h-96 pointer-events-none opacity-[0.18] text-sand overflow-hidden"
           style={{ animation: "branchSway 11s ease-in-out infinite", transformOrigin: "100% 100%" }}
@@ -454,47 +379,24 @@ export default function HomePage() {
             <path d="M228 218 Q200 202 174 190 Q148 178 126 160 Q104 142 90 118" strokeWidth="0.9"/>
             <path d="M218 164 Q192 152 168 140 Q144 128 124 112 Q104 96 94 74" strokeWidth="0.85"/>
             <path d="M220 110 Q196 100 174 90 Q152 80 134 64 Q116 48 110 26" strokeWidth="0.8"/>
-            <path d="M90 118 Q74 100 66 80 Q58 60 60 38" strokeWidth="0.7"/>
-            <path d="M94 74 Q78 58 72 38 Q66 18 68 -2" strokeWidth="0.65"/>
-            <ellipse cx="60" cy="36" rx="9" ry="4" transform="rotate(40 60 36)" strokeWidth="0.6"/>
-            <ellipse cx="50" cy="44" rx="7" ry="3.5" transform="rotate(52 50 44)" strokeWidth="0.6"/>
-            <ellipse cx="68" cy="-4" rx="8" ry="3.5" transform="rotate(35 68 -4)" strokeWidth="0.6"/>
-            <ellipse cx="110" cy="24" rx="8" ry="3.5" transform="rotate(28 110 24)" strokeWidth="0.6"/>
-            <ellipse cx="100" cy="32" rx="7" ry="3" transform="rotate(40 100 32)" strokeWidth="0.6"/>
-            <ellipse cx="248" cy="2" rx="8" ry="3.5" transform="rotate(18 248 2)" strokeWidth="0.6"/>
-          </svg>
-        </div>
-        {/* Botanical corner — top left, sways */}
-        <div
-          className="absolute top-0 left-0 w-44 md:w-60 h-48 md:h-72 pointer-events-none opacity-[0.16] text-sand overflow-hidden rotate-180"
-          style={{ animation: "branchSway 13s ease-in-out infinite reverse", transformOrigin: "0% 100%" }}
-        >
-          <svg viewBox="0 0 240 280" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full">
-            <path d="M120 280 Q118 250 122 220 Q126 190 132 162 Q138 134 146 108 Q154 82 162 58 Q170 34 176 10" strokeWidth="1.2"/>
-            <path d="M132 162 Q158 150 182 138 Q206 126 224 108" strokeWidth="0.85"/>
-            <path d="M146 108 Q168 98 190 86 Q212 74 228 56" strokeWidth="0.8"/>
-            <path d="M122 220 Q100 208 80 192 Q60 176 46 155" strokeWidth="0.8"/>
-            <path d="M224 106 Q234 88 234 70" strokeWidth="0.65"/>
-            <ellipse cx="234" cy="68" rx="8" ry="3.5" transform="rotate(-35 234 68)" strokeWidth="0.6"/>
-            <ellipse cx="228" cy="54" rx="7" ry="3" transform="rotate(-45 228 54)" strokeWidth="0.6"/>
           </svg>
         </div>
         <div className="container-wide text-center">
           <AnimatedFadeIn>
             <div className="flex items-center justify-center gap-6 mb-8">
               <div className="w-10 h-px bg-sand/20" />
-              <p className="label-text text-sand/40">Commission a piece</p>
+              <p className="label-text text-sand/40">Start a project</p>
               <div className="w-10 h-px bg-sand/20" />
             </div>
           </AnimatedFadeIn>
           <AnimatedHeading className="font-serif text-display-lg text-off-white mb-10 [text-wrap:balance]">
-            Every home<br />
-            <em className="text-terracotta">deserves</em> something<br />
-            made for it.
+            Every site<br />
+            <em className="text-terracotta">has</em> a right<br />
+            answer.
           </AnimatedHeading>
           <AnimatedFadeIn delay={0.2}>
             <p className="text-white/40 text-lg font-light max-w-md mx-auto mb-12 leading-relaxed">
-              Tell us about the space. We'll make something worth living with.
+              Send us the block and the brief. We&apos;ll come back with a direction.
             </p>
             <Link href="/contact" className="btn-primary">
               Start an enquiry <ArrowRight size={14} />

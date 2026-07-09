@@ -5,8 +5,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const links = [
-  { href: "/collections", label: "Collections" },
-  { href: "/about", label: "About" },
+  { href: "/projects", label: "Projects" },
+  { href: "/about", label: "Studio" },
   { href: "/contact", label: "Enquire" },
 ];
 
@@ -43,7 +43,7 @@ export default function Navigation() {
             scrolled || !isHome || menuOpen ? "text-bark" : "text-off-white"
           }`}
         >
-          FORMA
+          AD DESIGN
         </Link>
 
         {/* Desktop nav */}

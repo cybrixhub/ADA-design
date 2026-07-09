@@ -1,58 +1,50 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { projects } from "@/lib/projects";
 
-const team = [
+const services = [
   {
-    name: "Anya Kovac",
-    role: "Founder & Lead Designer",
-    years: "12 years",
-    img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&q=80&auto=format&fit=crop&crop=face",
+    name: "Concept & Design",
+    note: "Site analysis, massing, sun and wind, floor plans, form.",
   },
   {
-    name: "Matteo Ferri",
-    role: "Head Woodworker",
-    years: "20 years",
-    img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80&auto=format&fit=crop&crop=face",
+    name: "3D Rendering",
+    note: "Photorealistic exterior and interior renders for approvals and marketing.",
   },
   {
-    name: "Clara Ashby",
-    role: "Ceramics & Objects",
-    years: "8 years",
-    img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&q=80&auto=format&fit=crop&crop=face",
+    name: "Documentation",
+    note: "DA, CC, and construction sets — drawn to build cleanly.",
+  },
+  {
+    name: "Council Liaison",
+    note: "Compliance strategy across NSW councils. LEP, DCP, BCA.",
   },
 ];
 
-const materials = [
-  {
-    name: "Reclaimed Oak",
-    note: "Sourced from UK demolition yards",
-    img: "https://images.unsplash.com/photo-1541123437800-1bb1317badc2?w=600&q=80&auto=format&fit=crop",
-  },
-  {
-    name: "Stoneware",
-    note: "Thrown in our Bermondsey studio",
-    img: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&q=80&auto=format&fit=crop",
-  },
-  {
-    name: "Natural Stone",
-    note: "Travertine, limestone, slate",
-    img: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&q=80&auto=format&fit=crop&crop=entropy",
-  },
-  {
-    name: "Linen & Wool",
-    note: "Undyed, from UK mills",
-    img: "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=600&q=80&auto=format&fit=crop",
-  },
+const buildingTypes = [
+  "Single Storey Dwelling",
+  "Double Storey Dwelling",
+  "Dual Occupancy",
+  "Dwelling with Granny Flat",
+  "Secondary Dwelling & Studio",
+  "Rural House",
+  "Multidwelling (Townhouses)",
+  "Medical Centre",
+  "Industrial / Sheds",
 ];
 
 const timeline = [
-  { year: "2014", event: "Founded in a rented workshop in East London." },
-  { year: "2016", event: "First commissioned piece — a walnut dining table for a Hackney home." },
-  { year: "2019", event: "Moved to our current studio in Bermondsey. Added the ceramics kiln." },
-  { year: "2022", event: "Began sourcing reclaimed timber from demolition yards across the UK." },
-  { year: "2026", event: "Over 400 pieces in homes across Europe. Still eight people." },
+  { year: "Concept", event: "Site visit, brief, and a first sketch of the massing." },
+  { year: "Schematic", event: "Floor plans and elevations. Options tested against light, cost, and code." },
+  { year: "Render", event: "Photorealistic 3D views. Materials selected, form resolved." },
+  { year: "Approval", event: "DA lodged with the council. We manage RFIs through to consent." },
+  { year: "Construction", event: "Documentation, tender support, and inspection through build." },
 ];
+
+const heroImage =
+  projects.find((p) => p.slug === "12-dexter-road-lochinvar-nsw-2321")?.images[0] ??
+  projects[0].images[0];
 
 export default function AboutPage() {
   return (
@@ -64,24 +56,24 @@ export default function AboutPage() {
             <div>
               <p className="label-text text-sand/40 mb-6">Who we are</p>
               <h1 className="font-serif text-display-lg text-off-white leading-none">
-                Made in<br />
-                <em className="text-terracotta">London.</em><br />
-                Kept forever.
+                A studio of<br />
+                <em className="text-terracotta">architects</em><br />
+                in NSW.
               </h1>
             </div>
             <div className="pb-8 md:pb-16">
               <p className="text-white/50 text-lg font-light leading-relaxed max-w-sm">
-                We&apos;re a small studio of eight people who believe that how something is made matters as much as how it looks. We&apos;ve held that view for twelve years. We have no plans to change it.
+                AD Design works across nine building types — from a single-storey home on a suburban lot to a medical clinic on a main road. Every project is drawn from its site, its brief, and the way a building actually gets built.
               </p>
             </div>
           </div>
 
-          {/* Full-bleed hero image */}
+          {/* Full-bleed hero */}
           <div className="mt-16 -mx-6 md:-mx-12 lg:-mx-20">
             <div className="h-[50vh] md:h-[70vh] relative overflow-hidden">
               <Image
-                src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1600&q=85&auto=format&fit=crop"
-                alt="Bermondsey Studio"
+                src={heroImage}
+                alt="AD Design project"
                 fill
                 priority
                 className="object-cover"
@@ -89,7 +81,7 @@ export default function AboutPage() {
               />
               <div className="absolute inset-0 bg-bark/40" />
               <div className="absolute bottom-8 left-6 md:left-12 lg:left-20">
-                <p className="label-text text-sand/60">Bermondsey Studio, London · 2026</p>
+                <p className="label-text text-sand/60">Selected project · Lochinvar, NSW</p>
               </div>
             </div>
           </div>
@@ -101,69 +93,115 @@ export default function AboutPage() {
         <div className="container-wide">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16">
             <div className="md:col-span-4">
-              <p className="label-text text-stone mb-6">The story</p>
+              <p className="label-text text-stone mb-6">The studio</p>
               <div className="md:sticky md:top-32">
                 <h2 className="font-serif text-display-md text-bark">
-                  Built on<br />
-                  <em className="text-terracotta">conviction</em>
+                  Built to<br />
+                  <em className="text-terracotta">the site</em>
                 </h2>
               </div>
             </div>
 
             <div className="md:col-span-7 md:col-start-6 space-y-8 text-stone font-light text-lg leading-relaxed">
               <p>
-                Forma started in 2014 with a rented workbench, a secondhand table saw, and a conviction that the world had too much furniture made to be replaced. We set out to make the opposite — objects that get better as they age, that carry the marks of use rather than hiding from them.
+                AD Design is an architectural design studio based in Sydney, working across metropolitan and regional New South Wales. Our practice covers the full spectrum of residential typology — single-storey homes, dual occupancies, granny flats, secondary dwellings — alongside medical centres, industrial developments, and townhouse projects.
               </p>
               <p>
-                We still work by hand. We use reclaimed timber from demolition yards across the UK, stone sourced from quarries we visit ourselves, and ceramics thrown in our own Bermondsey studio. Every piece is made to order. Nothing is mass-produced. We know who made each thing we send into the world.
+                Every project starts with the land. Orientation, slope, view lines, existing vegetation, neighbouring buildings, council overlays — these decide the geometry before a single wall is drawn. When the site is read properly, the plan resolves itself.
               </p>
               <p>
-                The studio has grown slowly, deliberately. We&apos;re eight people now. We turn down work when we&apos;d have to compromise to take it. We have a backlog of six months because we won&apos;t hire to speed up. We think that&apos;s right.
+                We handle design, 3D rendering, documentation, and council liaison in-house. That means one point of contact from the first sketch to the approved set — and no coordination gaps between the render and the drawings that get built.
               </p>
               <p className="font-serif text-2xl text-bark italic">
-                "Fast furniture is a contradiction. The things worth having take time."
+                &ldquo;A good design doesn&apos;t argue with its site. It clarifies it.&rdquo;
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── MATERIALS ── */}
+      {/* ── SERVICES ── */}
       <section className="section-pad bg-linen">
         <div className="container-wide">
           <div className="flex items-center gap-4 mb-12">
             <div className="w-5 h-px bg-stone/40" />
-            <p className="label-text text-stone">What we work with</p>
+            <p className="label-text text-stone">What we do</p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-            {materials.map((mat) => (
-              <div key={mat.name}>
-                <div className="aspect-square mb-5 relative overflow-hidden">
-                  <Image
-                    src={mat.img}
-                    alt={mat.name}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 50vw, 25vw"
-                  />
-                </div>
-                <h3 className="font-serif text-2xl text-bark mb-1">{mat.name}</h3>
-                <p className="label-text text-stone">{mat.note}</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-t border-l border-sand/25">
+            {services.map((s, i) => (
+              <div
+                key={s.name}
+                className="border-r border-b border-sand/25 p-6 md:p-8 bg-linen"
+              >
+                <p className="label-text text-sand text-[0.6rem] mb-6">
+                  {String(i + 1).padStart(2, "0")}
+                </p>
+                <h3 className="font-serif text-2xl text-bark mb-4">{s.name}</h3>
+                <p className="text-stone text-sm leading-relaxed font-light">{s.note}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── TIMELINE ── */}
+      {/* ── BUILDING TYPES ── */}
       <section className="section-pad bg-off-white">
+        <div className="container-wide">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 mb-16">
+            <div>
+              <p className="label-text text-stone mb-6">Building types</p>
+              <h2 className="font-serif text-display-md text-bark [text-wrap:balance]">
+                Nine categories,<br />
+                <em className="text-terracotta">one method</em>
+              </h2>
+            </div>
+            <div className="pt-4">
+              <p className="text-stone font-light text-lg leading-relaxed">
+                We work across every residential typology allowed under NSW planning — plus commercial types where the brief calls for architectural clarity. Each type has its own rules; the method that reads them stays the same.
+              </p>
+            </div>
+          </div>
+
+          <div className="border-t border-sand/25">
+            {buildingTypes.map((type, i) => {
+              const count = projects.filter((p) => p.category === type).length;
+              return (
+                <Link
+                  key={type}
+                  href="/projects"
+                  className="group flex items-center justify-between border-b border-sand/25 py-6 md:py-8 hover:bg-cream/40 transition-colors duration-300 -mx-6 md:-mx-8 px-6 md:px-8"
+                >
+                  <div className="flex items-center gap-8">
+                    <p className="label-text text-sand text-[0.65rem] shrink-0 w-8">
+                      {String(i + 1).padStart(2, "0")}
+                    </p>
+                    <h3 className="font-serif text-2xl md:text-3xl text-bark leading-tight">{type}</h3>
+                  </div>
+                  <div className="flex items-center gap-6 shrink-0">
+                    <p className="label-text text-stone">
+                      {count} {count === 1 ? "project" : "projects"}
+                    </p>
+                    <ArrowRight
+                      size={16}
+                      className="text-terracotta opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
+                    />
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ── PROCESS TIMELINE ── */}
+      <section className="section-pad bg-cream">
         <div className="container-wide">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24">
             <div>
-              <p className="label-text text-stone mb-6">Twelve years in</p>
+              <p className="label-text text-stone mb-6">The process</p>
               <h2 className="font-serif text-display-md text-bark">
-                How we<br />
-                <em className="text-terracotta">got here</em>
+                From site<br />
+                <em className="text-terracotta">to signed off</em>
               </h2>
             </div>
 
@@ -173,7 +211,7 @@ export default function AboutPage() {
                   key={item.year}
                   className={`flex gap-8 py-8 ${i < timeline.length - 1 ? "border-b border-linen" : ""}`}
                 >
-                  <p className="font-serif text-2xl text-stone shrink-0 w-16">{item.year}</p>
+                  <p className="font-serif text-xl text-stone shrink-0 w-28">{item.year}</p>
                   <p className="text-bark font-light leading-relaxed">{item.event}</p>
                 </div>
               ))}
@@ -182,48 +220,18 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── TEAM ── */}
-      <section className="section-pad bg-cream">
-        <div className="container-wide">
-          <div className="flex items-center gap-4 mb-12">
-            <div className="w-5 h-px bg-stone/40" />
-            <p className="label-text text-stone">The people behind it</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {team.map((person) => (
-              <div key={person.name}>
-                <div className="aspect-[3/4] mb-6 relative overflow-hidden ring-1 ring-sand/20">
-                  <Image
-                    src={person.img}
-                    alt={person.name}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
-                  <div className="absolute bottom-4 right-4">
-                    <span className="label-text text-off-white/80 bg-bark/50 px-2 py-1 backdrop-blur-sm">{person.years}</span>
-                  </div>
-                </div>
-                <h3 className="font-serif text-2xl text-bark">{person.name}</h3>
-                <p className="label-text text-stone mt-1">{person.role}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── CTA ── */}
       <section className="py-24 bg-terracotta">
         <div className="container-wide flex flex-col md:flex-row items-center justify-between gap-8">
           <h2 className="font-serif text-4xl md:text-5xl text-off-white max-w-md [text-wrap:balance]">
-            Come and see how it&apos;s made.
+            Have a site to design for?
           </h2>
           <div className="flex flex-col gap-4">
             <Link href="/contact" className="btn-primary bg-bark border-0">
-              Visit the studio <ArrowRight size={14} />
+              Start an enquiry <ArrowRight size={14} />
             </Link>
-            <Link href="/collections" className="label-text text-off-white/60 hover:text-off-white transition-colors text-center">
-              Browse collections instead →
+            <Link href="/projects" className="label-text text-off-white/60 hover:text-off-white transition-colors text-center">
+              Browse projects instead →
             </Link>
           </div>
         </div>

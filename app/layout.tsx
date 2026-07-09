@@ -7,11 +7,11 @@ import PageLoader from "@/components/PageLoader";
 import CornerMarkers from "@/components/CornerMarkers";
 
 export const metadata: Metadata = {
-  title: "FORMA — Handcrafted Furniture & Interior Objects",
-  description: "Furniture built from reclaimed oak, hand-thrown ceramics, and natural stone. Made to age with you.",
+  title: "AD Design — Architecture across New South Wales",
+  description: "Residential, industrial, and medical architecture across NSW. Every project purpose-built for its site.",
   openGraph: {
-    title: "FORMA — Handcrafted Furniture & Interior Objects",
-    description: "Furniture built to last. Crafted from natural materials. Made to age with you.",
+    title: "AD Design — Architecture across New South Wales",
+    description: "Residential, industrial, and medical architecture across NSW. Every project purpose-built for its site.",
     type: "website",
   },
 };

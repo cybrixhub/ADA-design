@@ -14,7 +14,7 @@ export default function AnimatedTree({
   const uid = `tree-${variant}-${color.replace(/[^a-z0-9]/gi, "")}`;
 
   return (
-    <div className={`pointer-events-none ${color} ${className}`} style={{ opacity }}>
+    <div aria-hidden="true" className={`pointer-events-none ${color} ${className}`} style={{ opacity }}>
       <svg
         viewBox="0 0 400 700"
         fill="currentColor"

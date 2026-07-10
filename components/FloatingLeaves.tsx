@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useId, useMemo, useState } from "react";
 
 type Leaf = {
   id: number;
@@ -56,6 +56,7 @@ export default function FloatingLeaves({
   realistic?: boolean;
 }) {
   const [mounted, setMounted] = useState(false);
+  const uid = useId().replace(/[^a-z0-9]/gi, "");
   useEffect(() => setMounted(true), []);
 
   const leaves = useMemo<Leaf[]>(() => {
@@ -75,10 +76,10 @@ export default function FloatingLeaves({
   }, [count, mounted]);
 
   return (
-    <div className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`}>
+    <div aria-hidden="true" className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`}>
       {leaves.map((leaf) => {
         const shape = LEAVES[leaf.variant];
-        const gradId = `leafgrad-${leaf.id}-${leaf.hue}`;
+        const gradId = `leafgrad-${uid}-${leaf.id}-${leaf.hue}`;
         const tint = realistic ? HUES[leaf.hue] : "currentColor";
         return (
           <span

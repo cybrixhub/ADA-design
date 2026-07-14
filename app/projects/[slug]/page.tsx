@@ -34,48 +34,48 @@ export default async function ProjectPage({ params }: PageProps) {
 
   return (
     <>
-      {/* ── HEADER ── */}
-      <section className="pt-24 pb-8 md:pt-32 md:pb-10 bg-linen">
+      {/* ── HEADER + HERO ── */}
+      <section className="pt-20 md:pt-24 pb-0 bg-linen">
         <div className="container-wide">
           <Link
             href="/projects"
-            className="inline-flex items-center gap-2 label-text text-stone hover:text-bark mb-10 group"
+            className="inline-flex items-center gap-2 label-text text-stone hover:text-bark mb-6 group"
           >
             <ArrowLeft size={12} className="group-hover:-translate-x-1 transition-transform" />
             All projects
           </Link>
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-end">
-            <div className="md:col-span-8">
-              <p className="label-text text-terracotta mb-6">{project.category}</p>
-              <h1 className="font-serif text-display-lg text-bark leading-[1.0] [text-wrap:balance]">
-                {project.title}
-              </h1>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-start">
+            {/* Left — title block */}
+            <div className="flex flex-col justify-between gap-8 md:py-4">
+              <div>
+                <p className="label-text text-terracotta mb-3">{project.category}</p>
+                <h1 className="font-serif text-display-lg text-bark leading-tight [text-wrap:balance]">
+                  {project.title}
+                </h1>
+              </div>
+              <div>
+                <p className="label-text text-stone mb-1">Location</p>
+                <p className="text-bark font-light leading-snug">{project.address}</p>
+              </div>
             </div>
-            <div className="md:col-span-4 md:pb-3">
-              <p className="label-text text-stone mb-1">Location</p>
-              <p className="text-bark font-light text-lg leading-snug">{project.address}</p>
-            </div>
+
+            {/* Right — hero image */}
+            {hero && (
+              <div className="relative aspect-[4/3] overflow-hidden bg-cream">
+                <Image
+                  src={hero}
+                  alt={project.title}
+                  fill
+                  priority
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </div>
+            )}
           </div>
         </div>
       </section>
-
-      {/* ── HERO IMAGE ── */}
-      {hero && (
-        <section className="bg-linen">
-          <div className="container-wide">
-            <div className="relative w-full aspect-[16/10] md:aspect-[16/9] overflow-hidden bg-cream">
-              <Image
-                src={hero}
-                alt={project.title}
-                fill
-                priority
-                className="object-cover"
-                sizes="100vw"
-              />
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* ── DESCRIPTION ── */}
       {project.description && (

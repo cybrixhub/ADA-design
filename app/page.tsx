@@ -60,7 +60,7 @@ export default function HomePage() {
         </div>
 
         {/* Falling leaves */}
-        <FloatingLeaves count={26} className="z-[2]" />
+        <FloatingLeaves count={10} className="z-[2]" />
 
         {/* Trees */}
         <AnimatedTree
@@ -280,7 +280,7 @@ export default function HomePage() {
 
       {/* ── STATEMENT ── */}
       <section className="py-20 md:py-32 bg-linen border-y border-sand/40 relative overflow-hidden">
-        <FloatingLeaves count={10} color="text-terracotta" className="opacity-70" />
+        <FloatingLeaves count={5} color="text-terracotta" className="opacity-70" />
 
         <div
           className="absolute right-0 top-0 h-full w-64 md:w-80 pointer-events-none opacity-[0.22] text-stone overflow-hidden"
@@ -371,7 +371,7 @@ export default function HomePage() {
 
       {/* ── CTA CLOSER ── */}
       <section className="section-pad bg-bark relative overflow-hidden">
-        <FloatingLeaves count={14} color="text-terracotta" className="opacity-60" />
+        <FloatingLeaves count={7} color="text-terracotta" className="opacity-60" />
 
         <div
           className="absolute bottom-0 right-0 w-56 md:w-80 h-64 md:h-96 pointer-events-none opacity-[0.18] text-sand overflow-hidden"

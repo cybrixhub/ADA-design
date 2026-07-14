@@ -9,49 +9,39 @@ interface Props {
   as?: React.ElementType;
 }
 
-export default function AnimatedHeading({
-  children,
-  className,
-  delay = 0,
-  as: Tag = "h2",
-}: Props) {
+export default function AnimatedHeading({ children, className, delay = 0, as: Tag = "h2" }: Props) {
   const ref = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
-    const init = async () => {
-      const { gsap } = await import("gsap");
-      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
-      const { SplitText } = await import("gsap/SplitText");
+    el.style.opacity = "0";
+    el.style.transform = "translateY(22px)";
 
-      gsap.registerPlugin(ScrollTrigger, SplitText);
+    let observer: IntersectionObserver;
 
-      const split = new SplitText(el, { type: "lines" });
+    const rafId = requestAnimationFrame(() => {
+      el.style.transition = `opacity 1.1s cubic-bezier(0.16,1,0.3,1) ${delay}s, transform 1.1s cubic-bezier(0.16,1,0.3,1) ${delay}s`;
 
-      split.lines.forEach((line: Element) => {
-        const wrap = document.createElement("div");
-        wrap.style.cssText = "overflow:hidden;display:block;";
-        line.parentNode?.insertBefore(wrap, line);
-        wrap.appendChild(line);
-      });
-
-      gsap.from(split.lines, {
-        yPercent: 105,
-        duration: 1.0,
-        ease: "power4.out",
-        stagger: 0.09,
-        delay,
-        scrollTrigger: {
-          trigger: el,
-          start: "top 88%",
-          once: true,
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            el.style.opacity = "1";
+            el.style.transform = "translateY(0)";
+            observer.unobserve(el);
+          }
         },
-      });
-    };
+        { threshold: 0.15, rootMargin: "0px 0px -5% 0px" }
+      );
 
-    init();
+      observer.observe(el);
+    });
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      observer?.disconnect();
+    };
   }, [delay]);
 
   const setRef = (node: HTMLElement | null) => {
@@ -59,5 +49,9 @@ export default function AnimatedHeading({
   };
 
   const AnyTag = Tag as "div";
-  return <AnyTag ref={setRef} className={className}>{children}</AnyTag>;
+  return (
+    <AnyTag ref={setRef} className={className}>
+      {children}
+    </AnyTag>
+  );
 }

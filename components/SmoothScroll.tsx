@@ -4,14 +4,11 @@ import { useEffect } from "react";
 
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
   useEffect(() => {
+    let rafId: number;
     let cleanup: (() => void) | undefined;
 
     const init = async () => {
-      const { gsap } = await import("gsap");
-      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
       const { default: Lenis } = await import("lenis");
-
-      gsap.registerPlugin(ScrollTrigger);
 
       const lenis = new Lenis({
         duration: 1.2,
@@ -19,15 +16,15 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
         smoothWheel: true,
       });
 
-      lenis.on("scroll", ScrollTrigger.update);
-
-      const ticker = (time: number) => lenis.raf(time * 1000);
-      gsap.ticker.add(ticker);
-      gsap.ticker.lagSmoothing(0);
+      const raf = (time: number) => {
+        lenis.raf(time);
+        rafId = requestAnimationFrame(raf);
+      };
+      rafId = requestAnimationFrame(raf);
 
       cleanup = () => {
         lenis.destroy();
-        gsap.ticker.remove(ticker);
+        cancelAnimationFrame(rafId);
       };
     };
 

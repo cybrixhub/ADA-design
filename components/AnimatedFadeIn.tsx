@@ -9,38 +9,41 @@ interface Props {
   y?: number;
 }
 
-export default function AnimatedFadeIn({
-  children,
-  className,
-  delay = 0,
-  y = 30,
-}: Props) {
+export default function AnimatedFadeIn({ children, className, delay = 0, y = 30 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!ref.current) return;
     const el = ref.current;
+    if (!el) return;
 
-    const init = async () => {
-      const { gsap } = await import("gsap");
-      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
-      gsap.registerPlugin(ScrollTrigger);
+    el.style.opacity = "0";
+    el.style.transform = `translateY(${y}px)`;
 
-      gsap.from(el, {
-        opacity: 0,
-        y,
-        duration: 0.9,
-        ease: "power3.out",
-        delay,
-        scrollTrigger: {
-          trigger: el,
-          start: "top 90%",
-          once: true,
+    let observer: IntersectionObserver;
+
+    // RAF ensures the hidden state is painted before the transition is attached,
+    // so elements already in view still animate in rather than snapping.
+    const rafId = requestAnimationFrame(() => {
+      el.style.transition = `opacity 0.9s cubic-bezier(0.16,1,0.3,1) ${delay}s, transform 0.9s cubic-bezier(0.16,1,0.3,1) ${delay}s`;
+
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            el.style.opacity = "1";
+            el.style.transform = "translateY(0)";
+            observer.unobserve(el);
+          }
         },
-      });
-    };
+        { threshold: 0.1, rootMargin: "0px 0px -5% 0px" }
+      );
 
-    init();
+      observer.observe(el);
+    });
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      observer?.disconnect();
+    };
   }, [delay, y]);
 
   return (

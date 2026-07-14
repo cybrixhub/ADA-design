@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, MapPin } from "lucide-react";
 import AnimatedHeading from "@/components/AnimatedHeading";
 import AnimatedFadeIn from "@/components/AnimatedFadeIn";
 import FloatingLeaves from "@/components/FloatingLeaves";
@@ -190,12 +190,12 @@ export default function HomePage() {
                     </span>
                   </div>
 
-                  <div className="relative aspect-[4/5] w-full overflow-hidden ring-1 ring-transparent group-hover:ring-sand/50 transition-all duration-500 bg-linen">
+                  <div className="relative aspect-[4/3] w-full overflow-hidden ring-1 ring-transparent group-hover:ring-sand/50 transition-all duration-500 bg-linen">
                     <Image
                       src={item.images[0]}
                       alt={item.title}
                       fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                      className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.04]"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                     <div className="absolute inset-0 bg-bark/0 group-hover:bg-bark/15 transition-colors duration-500" />
@@ -207,7 +207,10 @@ export default function HomePage() {
                   </div>
 
                   <div className="pt-6 mt-auto">
-                    <p className="label-text text-stone mb-2 truncate">{item.address}</p>
+                    <div className="flex items-center gap-1.5 mb-2">
+                      <MapPin size={11} className="text-terracotta shrink-0" />
+                      <p className="label-text text-stone truncate">{item.address}</p>
+                    </div>
                     <h3 className="font-serif text-xl md:text-2xl text-bark leading-tight [text-wrap:balance]">
                       {item.title}
                     </h3>

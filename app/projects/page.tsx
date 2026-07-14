@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, MapPin } from "lucide-react";
 import { projects, categories } from "@/lib/projects";
 
 const CATEGORY_ORDER = [
@@ -95,13 +95,13 @@ export default function ProjectsPage() {
                 </div>
 
                 {/* Image */}
-                <div className="relative aspect-[4/5] w-full overflow-hidden ring-1 ring-transparent group-hover:ring-sand/50 transition-all duration-500 bg-linen">
+                <div className="relative aspect-[4/3] w-full overflow-hidden ring-1 ring-transparent group-hover:ring-sand/50 transition-all duration-500 bg-linen">
                   {project.images[0] ? (
                     <Image
                       src={project.images[0]}
                       alt={project.title}
                       fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                      className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.04]"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
                   ) : (
@@ -119,7 +119,10 @@ export default function ProjectsPage() {
 
                 {/* Meta */}
                 <div className="pt-6 mt-auto">
-                  <p className="label-text text-stone mb-2 truncate">{project.address}</p>
+                  <div className="flex items-center gap-1.5 mb-2">
+                    <MapPin size={11} className="text-terracotta shrink-0" />
+                    <p className="label-text text-stone truncate">{project.address}</p>
+                  </div>
                   <h3 className="font-serif text-xl md:text-2xl text-bark leading-tight [text-wrap:balance]">
                     {project.title}
                   </h3>

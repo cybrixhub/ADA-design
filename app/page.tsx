@@ -154,7 +154,7 @@ export default function HomePage() {
       {/* ── FEATURED PROJECTS ── */}
       <section className="section-pad bg-cream">
         <div className="container-wide">
-          <div className="flex items-end justify-between mb-14">
+          <div className="flex items-end justify-between mb-8">
             <div>
               <AnimatedFadeIn>
                 <p className="label-text text-stone mb-4">Selected work</p>
@@ -231,7 +231,7 @@ export default function HomePage() {
       {/* ── CATEGORY SHOWCASE ── */}
       <section className="section-pad bg-off-white">
         <div className="container-wide">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-10 mb-10">
             <div className="md:col-span-5">
               <AnimatedFadeIn>
                 <p className="label-text text-stone mb-6">What we design</p>
@@ -279,7 +279,7 @@ export default function HomePage() {
       </section>
 
       {/* ── STATEMENT ── */}
-      <section className="py-20 md:py-32 bg-linen border-y border-sand/40 relative overflow-hidden">
+      <section className="py-10 md:py-14 bg-linen border-y border-sand/40 relative overflow-hidden">
         <FloatingLeaves count={5} color="text-terracotta" className="opacity-70" />
 
         <div
@@ -347,7 +347,7 @@ export default function HomePage() {
               <div className="space-y-0">
                 {values.map((v, i) => (
                   <AnimatedFadeIn key={v.num} delay={i * 0.1}>
-                    <div className="flex gap-8 border-t border-sand/20 py-8">
+                    <div className="flex gap-8 border-t border-sand/20 py-5">
                       <p className="label-text text-sand pt-1 shrink-0">{v.num}</p>
                       <div>
                         <h3 className="font-serif text-2xl text-bark mb-3">{v.title}</h3>
@@ -386,19 +386,19 @@ export default function HomePage() {
         </div>
         <div className="container-wide text-center">
           <AnimatedFadeIn>
-            <div className="flex items-center justify-center gap-6 mb-8">
+            <div className="flex items-center justify-center gap-6 mb-5">
               <div className="w-10 h-px bg-sand/20" />
               <p className="label-text text-sand/40">Start a project</p>
               <div className="w-10 h-px bg-sand/20" />
             </div>
           </AnimatedFadeIn>
-          <AnimatedHeading className="font-serif text-display-lg text-off-white mb-10 [text-wrap:balance]">
+          <AnimatedHeading className="font-serif text-display-lg text-off-white mb-6 [text-wrap:balance]">
             Every site<br />
             <em className="text-terracotta">has</em> a right<br />
             answer.
           </AnimatedHeading>
           <AnimatedFadeIn delay={0.2}>
-            <p className="text-white/40 text-lg font-light max-w-md mx-auto mb-12 leading-relaxed">
+            <p className="text-white/40 text-lg font-light max-w-md mx-auto mb-7 leading-relaxed">
               Send us the block and the brief. We&apos;ll come back with a direction.
             </p>
             <Link href="/contact" className="btn-primary">

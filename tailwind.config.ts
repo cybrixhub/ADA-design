@@ -24,9 +24,9 @@ const config: Config = {
         sans: ["var(--font-dm-sans)", "system-ui", "sans-serif"],
       },
       fontSize: {
-        "display-xl": ["clamp(1.8rem, 3.5vw, 3.25rem)", { lineHeight: "1.0", letterSpacing: "-0.02em" }],
-        "display-lg": ["clamp(1.3rem, 2.2vw, 2.1rem)", { lineHeight: "1.1", letterSpacing: "-0.01em" }],
-        "display-md": ["clamp(1.1rem, 1.6vw, 1.625rem)", { lineHeight: "1.15", letterSpacing: "-0.005em" }],
+        "display-xl": ["clamp(2rem, 4vw, 3.5rem)", { lineHeight: "1.05", letterSpacing: "-0.02em" }],
+        "display-lg": ["clamp(1.6rem, 2.8vw, 2.75rem)", { lineHeight: "1.1", letterSpacing: "-0.01em" }],
+        "display-md": ["clamp(1.3rem, 2vw, 2rem)", { lineHeight: "1.15", letterSpacing: "-0.005em" }],
         "label": ["0.7rem", { lineHeight: "1", letterSpacing: "0.2em" }],
       },
       spacing: {

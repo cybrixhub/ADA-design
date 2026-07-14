@@ -104,7 +104,7 @@ export default async function ProjectPage({ params }: PageProps) {
 
       {/* ── ADDITIONAL RENDERS ── */}
       {rest.length > 0 && (
-        <section className="pb-24 md:pb-32 bg-off-white">
+        <section className="pb-12 md:pb-16 bg-off-white">
           <div className="container-wide">
             <div className="flex items-center gap-4 mb-12">
               <div className="w-5 h-px bg-stone/40" />
@@ -165,7 +165,7 @@ export default async function ProjectPage({ params }: PageProps) {
       </section>
 
       {/* ── CTA ── */}
-      <section className="py-24 bg-bark">
+      <section className="py-12 bg-bark">
         <div className="container-wide flex flex-col md:flex-row items-center justify-between gap-8">
           <h2 className="font-serif text-2xl md:text-3xl text-off-white max-w-lg [text-wrap:balance]">
             Have a site with a story?

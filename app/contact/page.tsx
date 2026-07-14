@@ -45,7 +45,7 @@ export default function ContactPage() {
       {/* ── MAIN ── */}
       <section className="section-pad bg-off-white">
         <div className="container-wide">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 md:gap-20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-14">
 
             {/* Left — info */}
             <div className="lg:col-span-4 space-y-12">
@@ -184,7 +184,7 @@ export default function ContactPage() {
       </section>
 
       {/* ── STUDIO VISIT BAND ── */}
-      <section className="py-20 bg-bark">
+      <section className="py-12 bg-bark">
         <div className="container-wide">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-6">
             {[

@@ -34,7 +34,7 @@ export default function ProjectsPage() {
   return (
     <>
       {/* ── HEADER ── */}
-      <section className="pt-36 pb-16 md:pt-48 md:pb-24 bg-linen">
+      <section className="pt-24 pb-8 md:pt-32 md:pb-10 bg-linen">
         <div className="container-wide">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
             <div>
@@ -42,7 +42,7 @@ export default function ProjectsPage() {
               <h1 className="font-serif text-display-lg text-bark">Projects</h1>
             </div>
             <p className="text-stone font-light text-lg max-w-md leading-relaxed pb-2">
-              {projects.length} projects across New South Wales — residential dwellings, medical facilities, and industrial developments, each designed for its site and use.
+              Across New South Wales — residential dwellings, medical facilities, and industrial developments, each designed for its site and use.
             </p>
           </div>
         </div>
@@ -66,7 +66,6 @@ export default function ProjectsPage() {
                   }`}
                 >
                   {cat}
-                  <span className="ml-2 text-[0.6rem] text-sand">{count}</span>
                 </button>
               );
             })}

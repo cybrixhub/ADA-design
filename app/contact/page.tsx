@@ -31,7 +31,7 @@ export default function ContactPage() {
   return (
     <>
       {/* ── PAGE HEADER ── */}
-      <section className="pt-36 pb-20 md:pt-48 md:pb-28 bg-linen">
+      <section className="pt-24 pb-12 md:pt-32 md:pb-16 bg-linen">
         <div className="container-wide">
           <p className="label-text text-stone mb-6">Get in touch</p>
           <h1 className="font-serif text-display-lg text-bark max-w-xl [text-wrap:balance]">

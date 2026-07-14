@@ -110,7 +110,7 @@ export default function HomePage() {
             </AnimatedHeading>
             <AnimatedFadeIn delay={2.3}>
               <p className="text-white/50 text-lg font-light leading-relaxed max-w-sm mb-12">
-                {projects.length} projects across NSW — residential dwellings, medical facilities, and industrial developments. Each one designed for its land, its use, and the people it holds.
+                Residential dwellings, medical facilities, and industrial developments across NSW. Each one designed for its land, its use, and the people it holds.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link href="/projects" className="btn-primary group">
@@ -137,9 +137,9 @@ export default function HomePage() {
         <div className="container-wide">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-off-white">
             {[
-              { num: projects.length, label: "Projects" },
               { num: 9, label: "Building types" },
               { num: "NSW", label: "Region" },
+              { num: "DA", label: "Approval ready" },
               { num: "2026", label: "Studio" },
             ].map((s) => (
               <div key={s.label} className="text-center">
@@ -169,7 +169,7 @@ export default function HomePage() {
                 href="/projects"
                 className="hidden md:flex items-center gap-2 label-text text-terracotta hover:gap-4 transition-all"
               >
-                All {projects.length} projects <ArrowRight size={12} />
+                All projects <ArrowRight size={12} />
               </Link>
             </AnimatedFadeIn>
           </div>
@@ -222,7 +222,7 @@ export default function HomePage() {
 
           <div className="mt-10 md:hidden">
             <Link href="/projects" className="btn-outline w-full justify-center">
-              All {projects.length} projects <ArrowRight size={14} />
+              All projects <ArrowRight size={14} />
             </Link>
           </div>
         </div>

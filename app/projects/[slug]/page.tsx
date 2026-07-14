@@ -35,7 +35,7 @@ export default async function ProjectPage({ params }: PageProps) {
   return (
     <>
       {/* ── HEADER ── */}
-      <section className="pt-36 pb-12 md:pt-48 md:pb-16 bg-linen">
+      <section className="pt-24 pb-8 md:pt-32 md:pb-10 bg-linen">
         <div className="container-wide">
           <Link
             href="/projects"
@@ -47,7 +47,7 @@ export default async function ProjectPage({ params }: PageProps) {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-end">
             <div className="md:col-span-8">
               <p className="label-text text-terracotta mb-6">{project.category}</p>
-              <h1 className="font-serif text-display-md md:text-display-lg text-bark leading-[0.95] [text-wrap:balance]">
+              <h1 className="font-serif text-display-lg text-bark leading-[1.0] [text-wrap:balance]">
                 {project.title}
               </h1>
             </div>

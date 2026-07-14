@@ -173,7 +173,7 @@ export default function AboutPage() {
                   <p className="label-text text-sand text-[0.65rem] shrink-0 w-8">
                     {String(i + 1).padStart(2, "0")}
                   </p>
-                  <h3 className="font-serif text-2xl md:text-3xl text-bark leading-tight">{type}</h3>
+                  <h3 className="font-serif text-xl md:text-2xl text-bark leading-tight">{type}</h3>
                 </div>
                 <ArrowRight
                   size={16}
@@ -215,7 +215,7 @@ export default function AboutPage() {
       {/* ── CTA ── */}
       <section className="py-24 bg-terracotta">
         <div className="container-wide flex flex-col md:flex-row items-center justify-between gap-8">
-          <h2 className="font-serif text-4xl md:text-5xl text-off-white max-w-md [text-wrap:balance]">
+          <h2 className="font-serif text-2xl md:text-3xl text-off-white max-w-md [text-wrap:balance]">
             Have a site to design for?
           </h2>
           <div className="flex flex-col gap-4">

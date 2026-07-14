@@ -132,7 +132,7 @@ export default function ProjectsPage() {
 
           {filtered.length === 0 && (
             <div className="text-center py-24">
-              <p className="font-serif text-3xl text-stone mb-4">Nothing here yet.</p>
+              <p className="font-serif text-2xl text-stone mb-4">Nothing here yet.</p>
               <button onClick={() => setActive("All")} className="label-text text-terracotta underline underline-offset-4">
                 View all projects
               </button>
@@ -146,7 +146,7 @@ export default function ProjectsPage() {
         <div className="container-wide flex flex-col md:flex-row items-center justify-between gap-8">
           <div>
             <p className="label-text text-sand/40 mb-4">Talk to the studio</p>
-            <h2 className="font-serif text-4xl md:text-5xl text-off-white">
+            <h2 className="font-serif text-2xl md:text-3xl text-off-white">
               Have a site in mind?
             </h2>
           </div>

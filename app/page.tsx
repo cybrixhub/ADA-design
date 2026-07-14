@@ -143,7 +143,7 @@ export default function HomePage() {
               { num: "2026", label: "Studio" },
             ].map((s) => (
               <div key={s.label} className="text-center">
-                <p className="font-serif text-3xl md:text-4xl leading-none mb-2">{s.num}</p>
+                <p className="font-serif text-2xl md:text-3xl leading-none mb-2">{s.num}</p>
                 <p className="label-text text-off-white/70 text-[0.6rem]">{s.label}</p>
               </div>
             ))}

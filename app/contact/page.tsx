@@ -84,7 +84,7 @@ export default function ContactPage() {
               {submitted ? (
                 <div className="flex flex-col items-start justify-center min-h-[400px]">
                   <div className="w-12 h-px bg-terracotta mb-8" />
-                  <h2 className="font-serif text-4xl md:text-5xl text-bark mb-6">
+                  <h2 className="font-serif text-2xl md:text-3xl text-bark mb-6">
                     Message received.
                   </h2>
                   <p className="text-stone font-light text-lg leading-relaxed max-w-md">

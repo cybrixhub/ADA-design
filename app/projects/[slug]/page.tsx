@@ -167,7 +167,7 @@ export default async function ProjectPage({ params }: PageProps) {
       {/* ── CTA ── */}
       <section className="py-24 bg-bark">
         <div className="container-wide flex flex-col md:flex-row items-center justify-between gap-8">
-          <h2 className="font-serif text-4xl md:text-5xl text-off-white max-w-lg [text-wrap:balance]">
+          <h2 className="font-serif text-2xl md:text-3xl text-off-white max-w-lg [text-wrap:balance]">
             Have a site with a story?
           </h2>
           <Link href="/contact" className="btn-primary shrink-0">

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, DM_Sans } from "next/font/google";
+import { EB_Garamond, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -7,16 +7,17 @@ import SmoothScroll from "@/components/SmoothScroll";
 import PageLoader from "@/components/PageLoader";
 import CornerMarkers from "@/components/CornerMarkers";
 
-const cormorant = Cormorant_Garamond({
+const ebGaramond = EB_Garamond({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["400", "500", "600"],
   style: ["normal", "italic"],
   variable: "--font-cormorant",
   display: "swap",
 });
 
-const dmSans = DM_Sans({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
+  weight: ["300", "400", "500"],
   variable: "--font-dm-sans",
   display: "swap",
 });
@@ -49,7 +50,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${cormorant.variable} ${dmSans.variable} bg-off-white text-bark antialiased`}
+        className={`${ebGaramond.variable} ${spaceGrotesk.variable} bg-off-white text-bark antialiased`}
       >
         <PageLoader />
         <CornerMarkers />

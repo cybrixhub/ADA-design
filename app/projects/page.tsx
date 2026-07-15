@@ -1,8 +1,10 @@
 "use client";
 
+import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { ArrowRight, MapPin } from "lucide-react";
 import { projects, categories } from "@/lib/projects";
 
@@ -23,8 +25,12 @@ const displayCategories = ["All", ...categories.filter((c) => c !== "Uncategoriz
   (a, b) => CATEGORY_ORDER.indexOf(a) - CATEGORY_ORDER.indexOf(b)
 );
 
-export default function ProjectsPage() {
-  const [active, setActive] = useState("All");
+function ProjectsContent() {
+  const searchParams = useSearchParams();
+  const [active, setActive] = useState(() => {
+    const cat = searchParams.get("category") ?? "All";
+    return displayCategories.includes(cat) ? cat : "All";
+  });
 
   const filtered = useMemo(
     () => (active === "All" ? projects : projects.filter((p) => p.category === active)),
@@ -52,23 +58,19 @@ export default function ProjectsPage() {
       <div className="sticky top-16 md:top-20 z-30 bg-off-white/95 backdrop-blur border-b border-linen">
         <div className="container-wide">
           <div className="flex gap-1 overflow-x-auto py-4 scrollbar-hide">
-            {displayCategories.map((cat) => {
-              const count =
-                cat === "All" ? projects.length : projects.filter((p) => p.category === cat).length;
-              return (
-                <button
-                  key={cat}
-                  onClick={() => setActive(cat)}
-                  className={`shrink-0 px-4 py-3 text-label tracking-[0.15em] uppercase transition-all duration-200 border-b-2 ${
-                    active === cat
-                      ? "border-bark text-bark"
-                      : "border-transparent text-stone hover:text-bark hover:border-sand/50"
-                  }`}
-                >
-                  {cat}
-                </button>
-              );
-            })}
+            {displayCategories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActive(cat)}
+                className={`shrink-0 px-4 py-3 text-label tracking-[0.15em] uppercase transition-all duration-200 border-b-2 ${
+                  active === cat
+                    ? "border-bark text-bark"
+                    : "border-transparent text-stone hover:text-bark hover:border-sand/50"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
           </div>
         </div>
       </div>
@@ -83,7 +85,6 @@ export default function ProjectsPage() {
                 href={`/projects/${project.slug}`}
                 className="group cursor-pointer border-r border-b border-sand/25 p-6 md:p-8 flex flex-col bg-off-white hover:bg-cream/40 transition-colors duration-500"
               >
-                {/* Editorial index */}
                 <div className="flex items-center justify-between mb-6">
                   <p className="label-text text-sand text-[0.65rem]">
                     {String(i + 1).padStart(2, "0")} / {String(filtered.length).padStart(2, "0")}
@@ -93,7 +94,6 @@ export default function ProjectsPage() {
                   </span>
                 </div>
 
-                {/* Image */}
                 <div className="relative aspect-[4/3] w-full overflow-hidden ring-1 ring-transparent group-hover:ring-sand/50 transition-all duration-500 bg-linen">
                   {project.images[0] ? (
                     <Image
@@ -116,7 +116,6 @@ export default function ProjectsPage() {
                   </div>
                 </div>
 
-                {/* Meta */}
                 <div className="pt-6 mt-auto">
                   <div className="flex items-center gap-1.5 mb-2">
                     <MapPin size={11} className="text-terracotta shrink-0" />
@@ -142,7 +141,7 @@ export default function ProjectsPage() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="py-20 bg-bark">
+      <section className="py-12 bg-bark">
         <div className="container-wide flex flex-col md:flex-row items-center justify-between gap-8">
           <div>
             <p className="label-text text-sand/40 mb-4">Talk to the studio</p>
@@ -156,5 +155,13 @@ export default function ProjectsPage() {
         </div>
       </section>
     </>
+  );
+}
+
+export default function ProjectsPage() {
+  return (
+    <Suspense fallback={null}>
+      <ProjectsContent />
+    </Suspense>
   );
 }

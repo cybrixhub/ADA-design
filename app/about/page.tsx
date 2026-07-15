@@ -112,9 +112,6 @@ export default function AboutPage() {
               <p>
                 We handle design, 3D rendering, documentation, and council liaison in-house. That means one point of contact from the first sketch to the approved set — and no coordination gaps between the render and the drawings that get built.
               </p>
-              <p className="font-serif text-2xl text-bark italic">
-                &ldquo;A good design doesn&apos;t argue with its site. It clarifies it.&rdquo;
-              </p>
             </div>
           </div>
         </div>
@@ -131,7 +128,7 @@ export default function AboutPage() {
             {services.map((s, i) => (
               <div
                 key={s.name}
-                className="border-r border-b border-sand/25 p-6 md:p-8 bg-linen"
+                className="border-r border-b border-sand/25 p-6 md:p-8 bg-linen hover:bg-cream/60 transition-colors duration-300"
               >
                 <p className="label-text text-sand text-[0.6rem] mb-6">
                   {String(i + 1).padStart(2, "0")}
@@ -166,7 +163,7 @@ export default function AboutPage() {
             {buildingTypes.map((type, i) => (
               <Link
                 key={type}
-                href="/projects"
+                href={`/projects?category=${encodeURIComponent(type)}`}
                 className="group flex items-center justify-between border-b border-sand/25 py-4 md:py-6 hover:bg-cream/40 transition-colors duration-300 -mx-6 md:-mx-8 px-6 md:px-8"
               >
                 <div className="flex items-center gap-8">

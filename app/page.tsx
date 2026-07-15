@@ -39,17 +39,6 @@ const values = [
   },
 ];
 
-const categoryShowcase = [
-  "Single Storey Dwelling",
-  "Double Storey Dwelling",
-  "Dual Occupancy",
-  "Dwelling with Granny Flat",
-  "Secondary Dwelling & Studio",
-  "Medical Centre",
-  "Industrial / Sheds",
-  "Rural House",
-];
-
 export default function HomePage() {
   return (
     <>
@@ -137,10 +126,10 @@ export default function HomePage() {
         <div className="container-wide">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-off-white">
             {[
+              { num: "42+", label: "Projects" },
               { num: 9, label: "Building types" },
-              { num: "NSW", label: "Region" },
-              { num: "DA", label: "Approval ready" },
-              { num: "2026", label: "Studio" },
+              { num: "100%", label: "In-house" },
+              { num: "NSW", label: "Wide" },
             ].map((s) => (
               <div key={s.label} className="text-center">
                 <p className="font-serif text-2xl md:text-3xl leading-none mb-2">{s.num}</p>
@@ -174,50 +163,72 @@ export default function HomePage() {
             </AnimatedFadeIn>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 border-t border-l border-sand/25">
-            {featured.map((item, i) => (
-              <AnimatedFadeIn key={item.slug} delay={i * 0.1}>
-                <Link
-                  href={`/projects/${item.slug}`}
-                  className="group cursor-pointer border-r border-b border-sand/25 p-6 md:p-8 flex flex-col h-full bg-cream hover:bg-off-white/60 transition-colors duration-500"
-                >
-                  <div className="flex items-center justify-between mb-6">
-                    <p className="label-text text-sand text-[0.65rem]">
-                      {String(i + 1).padStart(2, "0")} / {String(featured.length).padStart(2, "0")}
-                    </p>
-                    <span className="label-text text-terracotta text-[0.65rem]">
-                      · {item.category}
-                    </span>
-                  </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 border-t border-l border-sand/25">
+            {/* Hero card — 2/3 width */}
+            <Link
+              href={`/projects/${featured[0].slug}`}
+              className="md:col-span-2 group cursor-pointer border-r border-b border-sand/25 p-6 md:p-8 flex flex-col bg-cream hover:bg-off-white/60 transition-colors duration-500"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <p className="label-text text-sand text-[0.65rem]">01 / 03</p>
+                <span className="label-text text-terracotta text-[0.65rem]">· {featured[0].category}</span>
+              </div>
+              <div className="relative aspect-[16/10] md:flex-1 md:min-h-[260px] overflow-hidden ring-1 ring-transparent group-hover:ring-sand/50 transition-all duration-500 bg-linen">
+                <Image
+                  src={featured[0].images[0]}
+                  alt={featured[0].title}
+                  fill
+                  priority
+                  className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.04]"
+                  sizes="(max-width: 768px) 100vw, 66vw"
+                />
+                <div className="absolute inset-0 bg-bark/0 group-hover:bg-bark/15 transition-colors duration-500" />
+              </div>
+              <div className="pt-5">
+                <div className="flex items-center gap-1.5 mb-2">
+                  <MapPin size={11} className="text-terracotta shrink-0" />
+                  <p className="label-text text-stone truncate">{featured[0].address}</p>
+                </div>
+                <h3 className="font-serif text-display-md text-bark leading-tight [text-wrap:balance]">
+                  {featured[0].title}
+                </h3>
+              </div>
+            </Link>
 
-                  <div className="relative aspect-[4/3] w-full overflow-hidden ring-1 ring-transparent group-hover:ring-sand/50 transition-all duration-500 bg-linen">
+            {/* Right column — 2 stacked smaller cards */}
+            <div className="flex flex-col">
+              {featured.slice(1).map((item, i) => (
+                <Link
+                  key={item.slug}
+                  href={`/projects/${item.slug}`}
+                  className="flex-1 group cursor-pointer border-b border-sand/25 p-5 md:p-6 flex flex-col bg-cream hover:bg-off-white/60 transition-colors duration-500"
+                >
+                  <div className="flex items-center justify-between mb-3">
+                    <p className="label-text text-sand text-[0.65rem]">{String(i + 2).padStart(2, "0")} / 03</p>
+                    <span className="label-text text-terracotta text-[0.65rem]">· {item.category}</span>
+                  </div>
+                  <div className="relative aspect-[4/3] overflow-hidden ring-1 ring-transparent group-hover:ring-sand/50 transition-all duration-500 bg-linen">
                     <Image
                       src={item.images[0]}
                       alt={item.title}
                       fill
                       className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.04]"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      sizes="(max-width: 768px) 100vw, 33vw"
                     />
                     <div className="absolute inset-0 bg-bark/0 group-hover:bg-bark/15 transition-colors duration-500" />
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="bg-off-white text-bark p-3">
-                        <ArrowRight size={18} />
-                      </div>
-                    </div>
                   </div>
-
-                  <div className="pt-6 mt-auto">
-                    <div className="flex items-center gap-1.5 mb-2">
+                  <div className="pt-4">
+                    <div className="flex items-center gap-1.5 mb-1.5">
                       <MapPin size={11} className="text-terracotta shrink-0" />
                       <p className="label-text text-stone truncate">{item.address}</p>
                     </div>
-                    <h3 className="font-serif text-xl md:text-2xl text-bark leading-tight [text-wrap:balance]">
+                    <h3 className="font-serif text-lg text-bark leading-tight [text-wrap:balance]">
                       {item.title}
                     </h3>
                   </div>
                 </Link>
-              </AnimatedFadeIn>
-            ))}
+              ))}
+            </div>
           </div>
 
           <div className="mt-10 md:hidden">
@@ -228,87 +239,57 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── CATEGORY SHOWCASE ── */}
+      {/* ── PROCESS ── */}
       <section className="section-pad bg-off-white">
         <div className="container-wide">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-10 mb-10">
             <div className="md:col-span-5">
               <AnimatedFadeIn>
-                <p className="label-text text-stone mb-6">What we design</p>
+                <p className="label-text text-stone mb-6">How it works</p>
               </AnimatedFadeIn>
               <AnimatedHeading className="font-serif text-display-md text-bark [text-wrap:balance]">
-                Nine building<br />
-                <em className="text-terracotta">types</em><br />
-                one method.
+                Three steps<br />
+                <em className="text-terracotta">from brief</em><br />
+                to approval.
               </AnimatedHeading>
             </div>
             <div className="md:col-span-6 md:col-start-7 pt-4">
               <p className="text-stone font-light text-lg leading-relaxed">
-                From a single-storey home in a suburban lot to a medical clinic on an arterial road — the categories differ, but the approach doesn&apos;t. Read the land. Read the brief. Draw only what earns its place.
+                Every project follows the same sequence. Site and brief analysis first — design and documentation follow. One contact handles it through to council sign-off.
               </p>
             </div>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 border-t border-l border-sand/25">
-            {categoryShowcase.map((cat, i) => {
-              const count = projects.filter((p) => p.category === cat).length;
-              return (
-                <Link
-                  key={cat}
-                  href="/projects"
-                  className="group border-r border-b border-sand/25 p-6 md:p-8 hover:bg-cream/40 transition-colors duration-500 flex flex-col"
-                >
-                  <p className="label-text text-sand text-[0.6rem] mb-4">
-                    {String(i + 1).padStart(2, "0")}
-                  </p>
-                  <h3 className="font-serif text-xl md:text-2xl text-bark leading-tight mb-3 [text-wrap:balance]">
-                    {cat}
-                  </h3>
-                  <p className="label-text text-stone mt-auto">
-                    {count} {count === 1 ? "project" : "projects"}
-                  </p>
-                  <ArrowRight
-                    size={14}
-                    className="text-terracotta mt-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
-                  />
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* ── STATEMENT ── */}
-      <section className="py-10 md:py-14 bg-linen border-y border-sand/40 relative overflow-hidden">
-        <FloatingLeaves count={5} color="text-terracotta" className="opacity-70" />
-
-        <div
-          className="absolute right-0 top-0 h-full w-64 md:w-80 pointer-events-none opacity-[0.22] text-stone overflow-hidden"
-          style={{ animation: "branchSway 9s ease-in-out infinite", transformOrigin: "100% 100%" }}
-        >
-          <svg viewBox="0 0 280 500" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full">
-            <path d="M280 500 Q265 460 255 420 Q245 380 238 340 Q231 300 228 260 Q225 220 226 180 Q227 140 232 100 Q237 60 244 20" strokeWidth="1.2"/>
-            <path d="M238 340 Q210 322 184 308 Q158 294 136 276 Q114 258 98 236" strokeWidth="0.9"/>
-            <path d="M228 260 Q202 246 176 232 Q150 218 128 200 Q106 182 92 160" strokeWidth="0.9"/>
-            <path d="M226 180 Q202 168 178 156 Q154 144 134 128 Q114 112 104 90" strokeWidth="0.85"/>
-            <path d="M232 100 Q210 92 188 82 Q166 72 148 58 Q130 44 122 24" strokeWidth="0.8"/>
-          </svg>
-        </div>
-        <div className="container-wide">
-          <div className="max-w-3xl">
-            <AnimatedFadeIn>
-              <div className="flex items-center gap-4 mb-10">
-                <div className="w-5 h-px bg-stone/40" />
-                <p className="label-text text-stone">What we believe</p>
-              </div>
-            </AnimatedFadeIn>
-            <div className="border-l-2 border-terracotta/40 pl-8 md:pl-12">
-              <AnimatedHeading as="blockquote" className="font-serif text-display-md text-bark [text-wrap:balance]">
-                &ldquo;Architecture that argues<br />
-                <span className="text-terracotta italic">with its site</span><br />
-                loses every time.&rdquo;
-              </AnimatedHeading>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 border-t border-l border-sand/25">
+            {[
+              {
+                num: "01",
+                title: "Brief & site",
+                body: "Tell us the block, the orientation, and what you want to build. We visit the site and return with a first-pass massing concept.",
+                note: "Week 1–2",
+              },
+              {
+                num: "02",
+                title: "Design & render",
+                body: "Floor plans, elevations, and a photorealistic 3D render. Materials resolved, cost-tested against the brief, ready for council.",
+                note: "Week 3–8",
+              },
+              {
+                num: "03",
+                title: "DA & approval",
+                body: "We lodge the Development Application and manage all council RFIs through to consent. One point of contact from first sketch to signed-off drawings.",
+                note: "Week 8+",
+              },
+            ].map((step, i) => (
+              <AnimatedFadeIn key={step.num} delay={i * 0.1}>
+                <div className="border-r border-b border-sand/25 p-6 md:p-8 flex flex-col h-full">
+                  <p className="label-text text-sand text-[0.6rem] mb-4">{step.num}</p>
+                  <h3 className="font-serif text-xl md:text-2xl text-bark mb-3">{step.title}</h3>
+                  <p className="text-stone font-light text-sm leading-relaxed mb-6">{step.body}</p>
+                  <p className="label-text text-terracotta mt-auto">{step.note}</p>
+                </div>
+              </AnimatedFadeIn>
+            ))}
           </div>
         </div>
       </section>

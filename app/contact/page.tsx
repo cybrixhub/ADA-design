@@ -1,7 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { Send, MapPin, Phone, Mail } from "lucide-react";
+import Image from "next/image";
+import { Send, MapPin, Mail } from "lucide-react";
+import { projects } from "@/lib/projects";
+
+// Create a free form at formspree.io and replace the ID below
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
 
 const subjects = [
   "New residential project",
@@ -11,8 +16,14 @@ const subjects = [
   "Something else",
 ];
 
+const contactImage =
+  projects.find((p) => p.slug === "44-kidd-circuit-goulburn-nsw-2580")?.images[0] ??
+  projects[0].images[0];
+
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const [form, setForm] = useState({
     name: "", email: "", subject: subjects[0], message: "",
   });
@@ -23,9 +34,26 @@ export default function ContactPage() {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+    setError("");
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (res.ok) {
+        setSubmitted(true);
+      } else {
+        setError("Something went wrong. Email us directly at hello@adadesign.com.au");
+      }
+    } catch {
+      setError("Something went wrong. Email us directly at hello@adadesign.com.au");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -48,7 +76,7 @@ export default function ContactPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-14">
 
             {/* Left — info */}
-            <div className="lg:col-span-4 space-y-12">
+            <div className="lg:col-span-4 space-y-10">
               <div>
                 <p className="label-text text-stone mb-6">Studio</p>
                 <address className="not-italic text-bark font-light leading-relaxed space-y-1">
@@ -68,15 +96,22 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Subtle note */}
               <div className="border-l-2 border-terracotta pl-5">
                 <p className="font-serif text-xl text-bark italic leading-relaxed">
-                  "We reply to every enquiry personally. Usually within a day."
+                  &ldquo;We reply to every enquiry personally. Usually within a day.&rdquo;
                 </p>
               </div>
 
-              {/* Studio image placeholder */}
-              <div className="bg-[#7A6854] aspect-[4/3] hidden md:block" />
+              <div className="relative aspect-[4/3] overflow-hidden hidden md:block">
+                <Image
+                  src={contactImage}
+                  alt="AD Design project"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 33vw"
+                />
+                <div className="absolute inset-0 bg-bark/20" />
+              </div>
             </div>
 
             {/* Right — form */}
@@ -90,9 +125,9 @@ export default function ContactPage() {
                   <p className="text-stone font-light text-lg leading-relaxed max-w-md">
                     We&apos;ll be in touch shortly. In the meantime, browse our projects or read about how we work.
                   </p>
-                  <div className="mt-10 flex gap-6">
+                  <div className="mt-10">
                     <button
-                      onClick={() => setSubmitted(false)}
+                      onClick={() => { setSubmitted(false); setForm({ name: "", email: "", subject: subjects[0], message: "" }); }}
                       className="label-text text-terracotta underline underline-offset-4"
                     >
                       Send another message
@@ -107,12 +142,8 @@ export default function ContactPage() {
                         Your name
                       </label>
                       <input
-                        id="name"
-                        name="name"
-                        type="text"
-                        required
-                        value={form.name}
-                        onChange={handleChange}
+                        id="name" name="name" type="text" required
+                        value={form.name} onChange={handleChange}
                         placeholder="Jane Smith"
                         className="w-full bg-transparent border-b border-linen focus:border-bark outline-none py-3 text-bark font-light placeholder:text-stone/40 transition-colors"
                       />
@@ -122,12 +153,8 @@ export default function ContactPage() {
                         Email address
                       </label>
                       <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        required
-                        value={form.email}
-                        onChange={handleChange}
+                        id="email" name="email" type="email" required
+                        value={form.email} onChange={handleChange}
                         placeholder="jane@studio.com"
                         className="w-full bg-transparent border-b border-linen focus:border-bark outline-none py-3 text-bark font-light placeholder:text-stone/40 transition-colors"
                       />
@@ -135,14 +162,10 @@ export default function ContactPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <label className="label-text text-stone" htmlFor="subject">
-                      Subject
-                    </label>
+                    <label className="label-text text-stone" htmlFor="subject">Subject</label>
                     <select
-                      id="subject"
-                      name="subject"
-                      value={form.subject}
-                      onChange={handleChange}
+                      id="subject" name="subject"
+                      value={form.subject} onChange={handleChange}
                       className="w-full bg-transparent border-b border-linen focus:border-bark outline-none py-3 text-bark font-light appearance-none cursor-pointer transition-colors"
                     >
                       {subjects.map((s) => (
@@ -156,24 +179,30 @@ export default function ContactPage() {
                       Your message
                     </label>
                     <textarea
-                      id="message"
-                      name="message"
-                      required
-                      rows={6}
-                      value={form.message}
-                      onChange={handleChange}
+                      id="message" name="message" required rows={6}
+                      value={form.message} onChange={handleChange}
                       placeholder="Tell us about the site (address if you can), what you want to build, and the timeline. If you have a survey, sketches, or reference images, mention that too."
                       className="w-full bg-transparent border-b border-linen focus:border-bark outline-none py-3 text-bark font-light placeholder:text-stone/40 resize-none transition-colors"
                     />
                   </div>
 
+                  {error && (
+                    <p className="text-terracotta text-sm font-light">{error}</p>
+                  )}
+
                   <div className="flex items-center justify-between pt-4 border-t border-linen">
                     <p className="text-stone text-sm font-light">
                       We respond to every message personally.
                     </p>
-                    <button type="submit" className="btn-primary group">
-                      Send message
-                      <Send size={13} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className="btn-primary group disabled:opacity-60 disabled:cursor-not-allowed"
+                    >
+                      {loading ? "Sending…" : "Send message"}
+                      {!loading && (
+                        <Send size={13} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                      )}
                     </button>
                   </div>
                 </form>
@@ -183,7 +212,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* ── STUDIO VISIT BAND ── */}
+      {/* ── HOW IT WORKS BAND ── */}
       <section className="py-12 bg-bark">
         <div className="container-wide">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-6">

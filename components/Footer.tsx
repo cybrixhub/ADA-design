@@ -9,11 +9,11 @@ const navItems = [
 export default function Footer() {
   return (
     <footer className="bg-bark text-off-white">
-      <div className="container-wide py-20 md:py-28">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-0 pb-16 border-b border-white/10">
+      <div className="container-wide py-12 md:py-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-0 pb-10 border-b border-white/10">
           {/* Brand */}
           <div className="md:col-span-1 md:pr-16">
-            <p className="font-serif text-4xl font-light tracking-[0.08em] mb-6">AD DESIGN</p>
+            <p className="font-serif text-2xl font-light tracking-[0.08em] mb-6">AD DESIGN</p>
             <p className="text-sm text-white/50 leading-relaxed max-w-xs font-light">
               Architectural design across New South Wales.<br />
               Residential, industrial, and medical — every project designed for its site.

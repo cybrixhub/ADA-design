@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { projects } from "@/lib/projects";
+import { formatAddress } from "@/lib/format-address";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -56,7 +57,7 @@ export default async function ProjectPage({ params }: PageProps) {
               </div>
               <div>
                 <p className="label-text text-stone mb-1">Location</p>
-                <p className="text-bark font-light leading-snug">{project.address}</p>
+                <p className="text-bark font-light leading-snug">{formatAddress(project.address)}</p>
               </div>
             </div>
 

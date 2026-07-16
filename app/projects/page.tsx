@@ -7,6 +7,7 @@ import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { ArrowRight, MapPin } from "lucide-react";
 import { projects, categories } from "@/lib/projects";
+import { formatAddress } from "@/lib/format-address";
 
 const CATEGORY_ORDER = [
   "All",
@@ -119,7 +120,7 @@ function ProjectsContent() {
                 <div className="pt-6 mt-auto">
                   <div className="flex items-center gap-1.5 mb-2">
                     <MapPin size={11} className="text-terracotta shrink-0" />
-                    <p className="label-text text-stone truncate">{project.address}</p>
+                    <p className="label-text text-stone truncate">{formatAddress(project.address)}</p>
                   </div>
                   <h3 className="font-serif text-xl md:text-2xl text-bark leading-tight [text-wrap:balance]">
                     {project.title}

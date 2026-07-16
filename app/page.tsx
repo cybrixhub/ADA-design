@@ -7,6 +7,7 @@ import FloatingLeaves from "@/components/FloatingLeaves";
 import AnimatedTree from "@/components/AnimatedTree";
 import MapSection from "@/components/MapSection";
 import { projects } from "@/lib/projects";
+import { formatAddress } from "@/lib/format-address";
 
 const FEATURED_SLUGS = [
   "44-kidd-circuit-goulburn-nsw-2580",
@@ -191,7 +192,7 @@ export default function HomePage() {
               <div className="pt-5">
                 <div className="flex items-center gap-1.5 mb-2">
                   <MapPin size={11} className="text-terracotta shrink-0" />
-                  <p className="label-text text-stone truncate">{featured[0].address}</p>
+                  <p className="label-text text-stone truncate">{formatAddress(featured[0].address)}</p>
                 </div>
                 <h3 className="font-serif text-display-md text-bark leading-tight [text-wrap:balance]">
                   {featured[0].title}
@@ -224,7 +225,7 @@ export default function HomePage() {
                   <div className="pt-4">
                     <div className="flex items-center gap-1.5 mb-1.5">
                       <MapPin size={11} className="text-terracotta shrink-0" />
-                      <p className="label-text text-stone truncate">{item.address}</p>
+                      <p className="label-text text-stone truncate">{formatAddress(item.address)}</p>
                     </div>
                     <h3 className="font-serif text-lg text-bark leading-tight [text-wrap:balance]">
                       {item.title}

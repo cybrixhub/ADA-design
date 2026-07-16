@@ -5,6 +5,7 @@ import AnimatedHeading from "@/components/AnimatedHeading";
 import AnimatedFadeIn from "@/components/AnimatedFadeIn";
 import FloatingLeaves from "@/components/FloatingLeaves";
 import AnimatedTree from "@/components/AnimatedTree";
+import MapSection from "@/components/MapSection";
 import { projects } from "@/lib/projects";
 
 const FEATURED_SLUGS = [
@@ -139,6 +140,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ── PROJECT MAP ── */}
+      <MapSection count={projects.length} />
 
       {/* ── FEATURED PROJECTS ── */}
       <section className="section-pad bg-cream">

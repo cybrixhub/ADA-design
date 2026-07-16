@@ -3,6 +3,7 @@
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import { MapContainer, TileLayer, Marker, Tooltip } from "react-leaflet";
+import MarkerClusterGroup from "react-leaflet-cluster";
 import { useRouter } from "next/navigation";
 import { projects } from "@/lib/projects";
 import { projectCoords } from "@/lib/project-coords";
@@ -14,6 +15,16 @@ const PIN_SVG = `
   <circle cx="12" cy="12" r="4.5" fill="white"/>
 </svg>
 `;
+
+const createClusterIcon = (cluster: L.MarkerCluster) => {
+  const count = cluster.getChildCount();
+  return L.divIcon({
+    className: "",
+    html: `<div style="background:#C4704F;color:#fff;border:2px solid #2F2018;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;letter-spacing:0.04em;">${count}</div>`,
+    iconSize: [36, 36],
+    iconAnchor: [18, 18],
+  });
+};
 
 const pinIcon = typeof window !== "undefined"
   ? L.divIcon({
@@ -47,20 +58,27 @@ export default function ProjectMap() {
         attribution='&copy; <a href="https://carto.com">CARTO</a>'
       />
 
-      {pinIcon && markers.map((p) => (
-        <Marker
-          key={p.slug}
-          position={p.coords}
-          icon={pinIcon}
-          eventHandlers={{ click: () => router.push(`/projects/${p.slug}`) }}
-        >
-          <Tooltip direction="top" offset={[0, -4]} opacity={1}>
-            <span style={{ fontFamily: "Georgia, serif", fontSize: "12px", color: "#2F2018" }}>
-              {p.title}
-            </span>
-          </Tooltip>
-        </Marker>
-      ))}
+      <MarkerClusterGroup
+        iconCreateFunction={createClusterIcon}
+        maxClusterRadius={50}
+        showCoverageOnHover={false}
+        zoomToBoundsOnClick
+      >
+        {pinIcon && markers.map((p) => (
+          <Marker
+            key={p.slug}
+            position={p.coords}
+            icon={pinIcon}
+            eventHandlers={{ click: () => router.push(`/projects/${p.slug}`) }}
+          >
+            <Tooltip direction="top" offset={[0, -4]} opacity={1}>
+              <span style={{ fontFamily: "Georgia, serif", fontSize: "12px", color: "#2F2018" }}>
+                {p.title}
+              </span>
+            </Tooltip>
+          </Marker>
+        ))}
+      </MarkerClusterGroup>
     </MapContainer>
   );
 }

@@ -47,7 +47,7 @@ export default function PageLoader() {
   return (
     <div
       ref={loaderRef}
-      className="fixed inset-0 z-[200] bg-bark flex flex-col items-end justify-end pb-14 pr-14"
+      className="fixed inset-0 z-[9999] bg-bark flex flex-col items-end justify-end pb-14 pr-14"
     >
       {/* Corner brackets */}
       <svg className="absolute top-6 left-6 text-sand/30" width="14" height="14" viewBox="0 0 10 10" fill="none">

@@ -7,6 +7,7 @@ import AnimatedTree from "@/components/AnimatedTree";
 import MapSection from "@/components/MapSection";
 import ProjectMarquee from "@/components/ProjectMarquee";
 import HeroSlideshow, { type HeroSlide } from "@/components/HeroSlideshow";
+import FeaturedProjects from "@/components/FeaturedProjects";
 import Testimonials from "@/components/Testimonials";
 import { projects } from "@/lib/projects";
 
@@ -128,6 +129,9 @@ export default function HomePage() {
 
       {/* ── PROJECT MAP ── */}
       <MapSection />
+
+      {/* ── FEATURED PROJECTS ── */}
+      <FeaturedProjects />
 
       {/* ── TESTIMONIALS ── */}
       <Testimonials />

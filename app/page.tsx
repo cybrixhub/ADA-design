@@ -76,26 +76,25 @@ export default function HomePage() {
         {/* Falling leaves */}
         <FloatingLeaves count={10} className="z-[2]" />
 
-        {/* Tree — anchored to the 25% left column */}
+        {/* Slideshow — full bleed, no dedicated tree column */}
+        <div className="absolute inset-0 overflow-hidden">
+          <HeroSlideshow slides={heroSlides} interval={5000} />
+          {/* Soft corner blob — only darkens the bottom-left where tree + copy sit */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                "radial-gradient(ellipse 85% 90% at 0% 100%, rgba(47,32,24,0.82) 0%, rgba(47,32,24,0.5) 30%, rgba(47,32,24,0.15) 55%, transparent 75%)",
+            }}
+          />
+        </div>
+
+        {/* Tree — overlays slideshow, no background block */}
         <AnimatedTree
           className="absolute bottom-0 -left-10 md:-left-6 w-[280px] md:w-[380px] h-[520px] md:h-[760px] z-[2]"
           color="text-[#C9B99A]"
-          opacity={0.32}
+          opacity={0.45}
         />
-
-        {/* Slideshow — right 75% */}
-        <div className="absolute top-0 right-0 w-full md:w-3/4 h-full overflow-hidden">
-          <HeroSlideshow slides={heroSlides} interval={5000} />
-          {/* Scrim — strong on left where copy sits, lets images breathe on the right.
-              Mobile stacks so gradient runs bottom → top instead. */}
-          <div className="absolute inset-0 bg-gradient-to-t from-bark/80 via-bark/40 to-bark/10 md:bg-gradient-to-r md:from-bark/90 md:via-bark/30 md:to-transparent" />
-          {/* Faint horizontal rule field */}
-          <div className="absolute inset-0 flex flex-col justify-evenly pointer-events-none">
-            {[...Array(7)].map((_, i) => (
-              <div key={i} className="h-px w-full bg-white/[0.04]" />
-            ))}
-          </div>
-        </div>
 
         {/* Hero content */}
         <div className="relative container-wide pb-20 md:pb-28 pt-32 md:pt-0 z-10">

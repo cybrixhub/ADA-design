@@ -41,31 +41,31 @@ export default function HeroSlideshow({
         </div>
       ))}
 
-      {/* Bottom-left label — refades on slide change */}
-      <div className="absolute bottom-8 md:bottom-16 left-8 md:left-16 z-20 space-y-2 max-w-xs">
-        <div className="w-24 h-px bg-sand opacity-40" />
-        <p key={index} className="label-text text-sand/60 animate-[fadeIn_0.6s_ease]">
+      {/* Label + indicators — bottom-right so they don't fight the copy on the left */}
+      <div className="absolute bottom-8 md:bottom-16 right-8 md:right-16 z-20 flex flex-col items-end gap-3">
+        <p
+          key={index}
+          className="label-text text-off-white/70 animate-[fadeIn_0.6s_ease] drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]"
+        >
           {slides[index].label}
         </p>
-      </div>
-
-      {/* Slide indicators */}
-      <div className="absolute bottom-8 md:bottom-16 right-8 md:right-16 z-20 flex items-center gap-3">
-        {slides.map((_, i) => (
-          <button
-            key={i}
-            type="button"
-            onClick={() => setIndex(i)}
-            aria-label={`Slide ${i + 1}`}
-            className="group h-6 flex items-center"
-          >
-            <span
-              className={`block h-px transition-all duration-500 ${
-                i === index ? "w-8 bg-sand" : "w-4 bg-sand/30 group-hover:bg-sand/60"
-              }`}
-            />
-          </button>
-        ))}
+        <div className="flex items-center gap-3">
+          {slides.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => setIndex(i)}
+              aria-label={`Slide ${i + 1}`}
+              className="group h-6 flex items-center"
+            >
+              <span
+                className={`block h-px transition-all duration-500 ${
+                  i === index ? "w-8 bg-off-white" : "w-4 bg-off-white/40 group-hover:bg-off-white/70"
+                }`}
+              />
+            </button>
+          ))}
+        </div>
       </div>
     </>
   );

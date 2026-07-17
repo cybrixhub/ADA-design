@@ -137,27 +137,31 @@ export default function HomePage() {
       <Testimonials />
 
       {/* ── PROCESS ── */}
-      <section className="section-pad bg-off-white">
-        <div className="container-wide">
+      <section className="section-pad bg-bark relative overflow-hidden">
+        {/* Terracotta bloom + falling leaves atmosphere */}
+        <div className="absolute top-0 right-0 w-64 h-64 md:w-[28rem] md:h-[28rem] bg-terracotta/15 blur-3xl pointer-events-none" />
+        <FloatingLeaves count={7} color="text-terracotta" className="opacity-60" />
+
+        <div className="container-wide relative">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-10 mb-10">
             <div className="md:col-span-5">
               <AnimatedFadeIn>
-                <p className="label-text text-stone mb-6">How it works</p>
+                <p className="label-text text-sand/60 mb-6">How it works</p>
               </AnimatedFadeIn>
-              <AnimatedHeading className="font-serif text-display-md text-bark [text-wrap:balance]">
+              <AnimatedHeading className="font-serif text-display-md text-off-white [text-wrap:balance]">
                 Three steps<br />
                 <em className="text-terracotta">from brief</em><br />
                 to approval.
               </AnimatedHeading>
             </div>
             <div className="md:col-span-6 md:col-start-7 pt-4">
-              <p className="text-stone font-light text-lg leading-relaxed">
+              <p className="text-white/55 font-light text-lg leading-relaxed">
                 Every project follows the same sequence. Site and brief analysis first — design and documentation follow. One contact handles it through to council sign-off.
               </p>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 border-t border-l border-sand/25">
+          <div className="grid grid-cols-1 md:grid-cols-3 border-t border-l border-white/10">
             {[
               {
                 num: "01",
@@ -179,10 +183,10 @@ export default function HomePage() {
               },
             ].map((step, i) => (
               <AnimatedFadeIn key={step.num} delay={i * 0.1}>
-                <div className="border-r border-b border-sand/25 p-6 md:p-8 flex flex-col h-full">
-                  <p className="label-text text-sand text-[0.6rem] mb-4">{step.num}</p>
-                  <h3 className="font-serif text-xl md:text-2xl text-bark mb-3">{step.title}</h3>
-                  <p className="text-stone font-light text-sm leading-relaxed mb-6">{step.body}</p>
+                <div className="border-r border-b border-white/10 p-6 md:p-8 flex flex-col h-full">
+                  <p className="label-text text-sand/70 text-[0.6rem] mb-4">{step.num}</p>
+                  <h3 className="font-serif text-xl md:text-2xl text-off-white mb-3">{step.title}</h3>
+                  <p className="text-white/55 font-light text-sm leading-relaxed mb-6">{step.body}</p>
                   <p className="label-text text-terracotta mt-auto">{step.note}</p>
                 </div>
               </AnimatedFadeIn>

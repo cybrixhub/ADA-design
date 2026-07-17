@@ -6,6 +6,7 @@ import AnimatedFadeIn from "@/components/AnimatedFadeIn";
 import FloatingLeaves from "@/components/FloatingLeaves";
 import AnimatedTree from "@/components/AnimatedTree";
 import MapSection from "@/components/MapSection";
+import ProjectMarquee from "@/components/ProjectMarquee";
 import { projects } from "@/lib/projects";
 import { formatAddress } from "@/lib/format-address";
 
@@ -122,6 +123,9 @@ export default function HomePage() {
           <p className="label-text rotate-90 origin-center text-white/30">Scroll</p>
         </div>
       </section>
+
+      {/* ── PROJECT MARQUEE ── */}
+      <ProjectMarquee />
 
       {/* ── PROJECT MAP ── */}
       <MapSection count={projects.length} />

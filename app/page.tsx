@@ -1,6 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, MapPin } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import AnimatedHeading from "@/components/AnimatedHeading";
 import AnimatedFadeIn from "@/components/AnimatedFadeIn";
 import FloatingLeaves from "@/components/FloatingLeaves";
@@ -8,18 +7,8 @@ import AnimatedTree from "@/components/AnimatedTree";
 import MapSection from "@/components/MapSection";
 import ProjectMarquee from "@/components/ProjectMarquee";
 import HeroSlideshow, { type HeroSlide } from "@/components/HeroSlideshow";
+import Testimonials from "@/components/Testimonials";
 import { projects } from "@/lib/projects";
-import { formatAddress } from "@/lib/format-address";
-
-const FEATURED_SLUGS = [
-  "44-kidd-circuit-goulburn-nsw-2580",
-  "12-dexter-road-lochinvar-nsw-2321",
-  "1-bandon-road-vineyard-nsw",
-];
-
-const featured = FEATURED_SLUGS.map((slug) => projects.find((p) => p.slug === slug)).filter(
-  (p): p is (typeof projects)[number] => Boolean(p)
-);
 
 const HERO_SLIDE_SLUGS = [
   "44-kidd-circuit-goulburn-nsw-2580",
@@ -140,102 +129,8 @@ export default function HomePage() {
       {/* ── PROJECT MAP ── */}
       <MapSection />
 
-      {/* ── FEATURED PROJECTS ── */}
-      <section className="section-pad bg-cream">
-        <div className="container-wide">
-          <div className="flex items-end justify-between mb-8">
-            <div>
-              <AnimatedFadeIn>
-                <p className="label-text text-stone mb-4">Selected work</p>
-              </AnimatedFadeIn>
-              <AnimatedHeading className="font-serif text-display-md text-bark">
-                Recent<br />
-                <em className="text-stone">projects</em>
-              </AnimatedHeading>
-            </div>
-            <AnimatedFadeIn>
-              <Link
-                href="/projects"
-                className="hidden md:flex items-center gap-2 label-text text-terracotta hover:gap-4 transition-all"
-              >
-                All projects <ArrowRight size={12} />
-              </Link>
-            </AnimatedFadeIn>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 border-t border-l border-sand/25">
-            {/* Hero card — 2/3 width */}
-            <Link
-              href={`/projects/${featured[0].slug}`}
-              className="md:col-span-2 group cursor-pointer border-r border-b border-sand/25 p-6 md:p-8 flex flex-col bg-cream hover:bg-off-white/60 transition-colors duration-500"
-            >
-              <div className="flex items-center justify-end mb-4">
-                <span className="label-text text-terracotta text-[0.65rem]">· {featured[0].category}</span>
-              </div>
-              <div className="relative aspect-[16/10] md:flex-1 md:min-h-[260px] overflow-hidden ring-1 ring-transparent group-hover:ring-sand/50 transition-all duration-500 bg-linen">
-                <Image
-                  src={featured[0].images[0]}
-                  alt={featured[0].title}
-                  fill
-                  priority
-                  className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.04]"
-                  sizes="(max-width: 768px) 100vw, 66vw"
-                />
-                <div className="absolute inset-0 bg-bark/0 group-hover:bg-bark/15 transition-colors duration-500" />
-              </div>
-              <div className="pt-5">
-                <div className="flex items-center gap-1.5 mb-2">
-                  <MapPin size={11} className="text-terracotta shrink-0" />
-                  <p className="label-text text-stone truncate">{formatAddress(featured[0].address)}</p>
-                </div>
-                <h3 className="font-serif text-display-md text-bark leading-tight [text-wrap:balance]">
-                  {featured[0].title}
-                </h3>
-              </div>
-            </Link>
-
-            {/* Right column — 2 stacked smaller cards */}
-            <div className="flex flex-col">
-              {featured.slice(1).map((item, i) => (
-                <Link
-                  key={item.slug}
-                  href={`/projects/${item.slug}`}
-                  className="flex-1 group cursor-pointer border-b border-sand/25 p-5 md:p-6 flex flex-col bg-cream hover:bg-off-white/60 transition-colors duration-500"
-                >
-                  <div className="flex items-center justify-end mb-3">
-                    <span className="label-text text-terracotta text-[0.65rem]">· {item.category}</span>
-                  </div>
-                  <div className="relative aspect-[4/3] overflow-hidden ring-1 ring-transparent group-hover:ring-sand/50 transition-all duration-500 bg-linen">
-                    <Image
-                      src={item.images[0]}
-                      alt={item.title}
-                      fill
-                      className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.04]"
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                    />
-                    <div className="absolute inset-0 bg-bark/0 group-hover:bg-bark/15 transition-colors duration-500" />
-                  </div>
-                  <div className="pt-4">
-                    <div className="flex items-center gap-1.5 mb-1.5">
-                      <MapPin size={11} className="text-terracotta shrink-0" />
-                      <p className="label-text text-stone truncate">{formatAddress(item.address)}</p>
-                    </div>
-                    <h3 className="font-serif text-lg text-bark leading-tight [text-wrap:balance]">
-                      {item.title}
-                    </h3>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          <div className="mt-10 md:hidden">
-            <Link href="/projects" className="btn-outline w-full justify-center">
-              All projects <ArrowRight size={14} />
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* ── TESTIMONIALS ── */}
+      <Testimonials />
 
       {/* ── PROCESS ── */}
       <section className="section-pad bg-off-white">

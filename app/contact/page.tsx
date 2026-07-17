@@ -105,7 +105,7 @@ export default function ContactPage() {
               <div className="relative aspect-[4/3] overflow-hidden hidden md:block">
                 <Image
                   src={contactImage}
-                  alt="AD Design project"
+                  alt="ADA Design project"
                   fill
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 33vw"

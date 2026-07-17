@@ -58,7 +58,7 @@ export default function Footer() {
         </div>
 
         <div className="pt-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-          <p className="label-text text-white/25">© 2026 AD Design. All rights reserved.</p>
+          <p className="label-text text-white/25">© 2026 ADA Design. All rights reserved.</p>
           <p className="text-xs text-white/25 font-light tracking-widest uppercase">
             Purpose-built for its site.
           </p>

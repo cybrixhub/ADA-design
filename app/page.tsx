@@ -79,12 +79,12 @@ export default function HomePage() {
         {/* Slideshow — full bleed, no dedicated tree column */}
         <div className="absolute inset-0 overflow-hidden">
           <HeroSlideshow slides={heroSlides} interval={5000} />
-          {/* Soft corner blob — only darkens the bottom-left where tree + copy sit */}
+          {/* Corner blob — covers the tree + copy area so text stays readable */}
           <div
             className="absolute inset-0 pointer-events-none"
             style={{
               background:
-                "radial-gradient(ellipse 85% 90% at 0% 100%, rgba(47,32,24,0.82) 0%, rgba(47,32,24,0.5) 30%, rgba(47,32,24,0.15) 55%, transparent 75%)",
+                "radial-gradient(ellipse 110% 100% at 0% 100%, rgba(47,32,24,0.95) 0%, rgba(47,32,24,0.75) 25%, rgba(47,32,24,0.4) 50%, rgba(47,32,24,0.1) 70%, transparent 85%)",
             }}
           />
         </div>
@@ -105,13 +105,13 @@ export default function HomePage() {
                 <p className="label-text text-sand/60">Architectural Design · NSW</p>
               </div>
             </AnimatedFadeIn>
-            <AnimatedHeading as="h1" delay={2.0} className="font-serif text-display-xl text-off-white mb-10 [text-wrap:balance]">
+            <AnimatedHeading as="h1" delay={2.0} className="font-serif text-display-xl text-off-white mb-10 [text-wrap:balance] drop-shadow-[0_2px_20px_rgba(0,0,0,0.55)]">
               Purpose-built<br />
               <em className="not-italic text-terracotta">for</em><br />
               its site.
             </AnimatedHeading>
             <AnimatedFadeIn delay={2.3}>
-              <p className="text-white/50 text-lg font-light leading-relaxed max-w-sm mb-12">
+              <p className="text-white/85 text-lg font-light leading-relaxed max-w-sm mb-12 drop-shadow-[0_1px_12px_rgba(0,0,0,0.7)]">
                 Residential dwellings, medical facilities, and industrial developments across NSW. Each one designed for its land, its use, and the people it holds.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">

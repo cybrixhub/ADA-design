@@ -39,7 +39,7 @@ export default function Image() {
             marginBottom: 28,
           }}
         >
-          AD Design
+          ADA Design
         </div>
         <div
           style={{

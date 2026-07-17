@@ -65,7 +65,7 @@ export default function PageLoader() {
 
       {/* Brand */}
       <p className="absolute top-6 left-14 font-serif text-2xl tracking-[0.12em] text-off-white/80">
-        AD DESIGN
+        ADA DESIGN
       </p>
 
       {/* Counter */}

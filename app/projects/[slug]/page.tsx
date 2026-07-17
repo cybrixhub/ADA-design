@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: PageProps) {
   const project = projects.find((p) => p.slug === slug);
   if (!project) return {};
   return {
-    title: `${project.title} — AD Design`,
+    title: `${project.title} — ADA Design`,
     description: project.description.slice(0, 160),
   };
 }

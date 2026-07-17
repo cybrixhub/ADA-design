@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const navItems = [
@@ -13,7 +14,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-0 pb-10 border-b border-white/10">
           {/* Brand */}
           <div className="md:col-span-1 md:pr-16">
-            <p className="font-serif text-2xl font-light tracking-[0.08em] mb-6">AD DESIGN</p>
+            <Image
+              src="/ada-logo.jpg"
+              alt="ADA Design"
+              width={220}
+              height={120}
+              className="h-12 md:h-14 w-auto mb-6 invert mix-blend-screen"
+            />
             <p className="text-sm text-white/50 leading-relaxed max-w-xs font-light">
               Architectural design across New South Wales.<br />
               Residential, industrial, and medical — every project designed for its site.

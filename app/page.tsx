@@ -7,6 +7,7 @@ import FloatingLeaves from "@/components/FloatingLeaves";
 import AnimatedTree from "@/components/AnimatedTree";
 import MapSection from "@/components/MapSection";
 import ProjectMarquee from "@/components/ProjectMarquee";
+import HeroSlideshow, { type HeroSlide } from "@/components/HeroSlideshow";
 import { projects } from "@/lib/projects";
 import { formatAddress } from "@/lib/format-address";
 
@@ -20,9 +21,30 @@ const featured = FEATURED_SLUGS.map((slug) => projects.find((p) => p.slug === sl
   (p): p is (typeof projects)[number] => Boolean(p)
 );
 
-const heroImage =
-  projects.find((p) => p.slug === "44-kidd-circuit-goulburn-nsw-2580")?.images[0] ??
-  projects[0].images[0];
+const HERO_SLIDE_SLUGS = [
+  "44-kidd-circuit-goulburn-nsw-2580",
+  "12-dexter-road-lochinvar-nsw-2321",
+  "1-bandon-road-vineyard-nsw",
+  "10-mccormack-street-arndell-park-nsw-2148",
+  "19-bayview-road-burraneer-nsw-2230",
+];
+
+function extractSuburb(address: string) {
+  const parts = address.trim().split(/\s+/);
+  const nswIdx = parts.findIndex((p) => p.toUpperCase() === "NSW");
+  return nswIdx > 0 ? `${parts[nswIdx - 1]}, NSW` : address;
+}
+
+const heroSlides: HeroSlide[] = HERO_SLIDE_SLUGS.map((slug) =>
+  projects.find((p) => p.slug === slug)
+)
+  .filter((p): p is (typeof projects)[number] => Boolean(p))
+  .filter((p) => p.images.length > 0)
+  .map((p) => ({
+    src: p.images[0],
+    alt: p.title,
+    label: `Selected project — ${extractSuburb(p.address)}`,
+  }));
 
 const values = [
   {
@@ -54,35 +76,23 @@ export default function HomePage() {
         {/* Falling leaves */}
         <FloatingLeaves count={10} className="z-[2]" />
 
-        {/* Trees */}
+        {/* Tree — anchored to the 25% left column */}
         <AnimatedTree
-          className="absolute bottom-0 -left-14 md:-left-8 w-[360px] md:w-[560px] h-[600px] md:h-[820px] z-[1]"
+          className="absolute bottom-0 -left-10 md:-left-6 w-[280px] md:w-[380px] h-[520px] md:h-[760px] z-[2]"
           color="text-[#C9B99A]"
           opacity={0.32}
         />
-        <div className="absolute bottom-0 -right-16 md:-right-6 w-[240px] md:w-[380px] h-[440px] md:h-[620px] z-[1]">
-          <AnimatedTree color="text-[#C4704F]" opacity={0.22} />
-        </div>
 
-        {/* Hero render */}
-        <div className="absolute top-0 right-0 w-full md:w-1/2 h-full overflow-hidden">
-          <Image
-            src={heroImage}
-            alt="Featured project"
-            fill
-            priority
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, 50vw"
-          />
-          <div className="absolute inset-0 bg-bark/55" />
+        {/* Slideshow — right 75% */}
+        <div className="absolute top-0 right-0 w-full md:w-3/4 h-full overflow-hidden">
+          <HeroSlideshow slides={heroSlides} interval={5000} />
+          {/* Left-edge dark scrim so the copy stays readable over any image */}
+          <div className="absolute inset-0 bg-gradient-to-r from-bark via-bark/70 to-bark/10 md:via-bark/55 md:to-bark/0" />
+          {/* Faint horizontal rule field */}
           <div className="absolute inset-0 flex flex-col justify-evenly pointer-events-none">
             {[...Array(7)].map((_, i) => (
               <div key={i} className="h-px w-full bg-white/[0.04]" />
             ))}
-          </div>
-          <div className="absolute bottom-8 md:bottom-16 left-8 md:left-16 z-10 space-y-2">
-            <div className="w-24 h-px bg-sand opacity-40" />
-            <p className="label-text text-sand/50">Selected project — Goulburn, NSW</p>
           </div>
         </div>
 

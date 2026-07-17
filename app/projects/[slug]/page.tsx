@@ -1,9 +1,9 @@
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { projects } from "@/lib/projects";
 import { formatAddress } from "@/lib/format-address";
+import ClickableImage from "@/components/ClickableImage";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -61,18 +61,16 @@ export default async function ProjectPage({ params }: PageProps) {
               </div>
             </div>
 
-            {/* Right — hero image */}
+            {/* Right — hero image (click to open lightbox) */}
             {hero && (
-              <div className="relative aspect-[4/3] overflow-hidden bg-cream">
-                <Image
-                  src={hero}
-                  alt={project.title}
-                  fill
-                  priority
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-              </div>
+              <ClickableImage
+                images={project.images}
+                index={0}
+                title={project.title}
+                containerClassName="relative aspect-[4/3] overflow-hidden bg-cream"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority
+              />
             )}
           </div>
         </div>
@@ -115,20 +113,16 @@ export default async function ProjectPage({ params }: PageProps) {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
               {rest.map((src, i) => (
-                <div
+                <ClickableImage
                   key={src}
-                  className={`relative overflow-hidden bg-linen ${
+                  images={project.images}
+                  index={i + 1}
+                  title={project.title}
+                  containerClassName={`relative overflow-hidden bg-linen ${
                     i === 0 && rest.length > 2 ? "md:col-span-2 aspect-[16/9]" : "aspect-[4/3]"
                   }`}
-                >
-                  <Image
-                    src={src}
-                    alt={`${project.title} — view ${i + 2}`}
-                    fill
-                    className="object-cover"
-                    sizes={i === 0 && rest.length > 2 ? "100vw" : "(max-width: 768px) 100vw, 50vw"}
-                  />
-                </div>
+                  sizes={i === 0 && rest.length > 2 ? "100vw" : "(max-width: 768px) 100vw, 50vw"}
+                />
               ))}
             </div>
           </div>

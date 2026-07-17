@@ -123,25 +123,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── STATS BAND ── */}
-      <section className="bg-terracotta py-8">
-        <div className="container-wide">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-off-white">
-            {[
-              { num: "42+", label: "Projects" },
-              { num: 9, label: "Building types" },
-              { num: "100%", label: "In-house" },
-              { num: "NSW", label: "Wide" },
-            ].map((s) => (
-              <div key={s.label} className="text-center">
-                <p className="font-serif text-2xl md:text-3xl leading-none mb-2">{s.num}</p>
-                <p className="label-text text-off-white/70 text-[0.6rem]">{s.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── PROJECT MAP ── */}
       <MapSection count={projects.length} />
 

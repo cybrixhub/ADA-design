@@ -63,7 +63,7 @@ export default function AboutPage() {
             </div>
             <div className="pb-8 md:pb-16">
               <p className="text-white/50 text-lg font-light leading-relaxed max-w-sm">
-                ADA Design works across the full range of residential and commercial typologies — from a single-storey home on a suburban lot to a medical clinic on a main road. Every project is drawn from its site, its brief, and the way a building actually gets built.
+                ADA Design works across nine building types — from a single-storey home on a suburban lot to a medical clinic on a main road. Every project is drawn from its site, its brief, and the way a building actually gets built.
               </p>
             </div>
           </div>
@@ -148,7 +148,7 @@ export default function AboutPage() {
             <div>
               <p className="label-text text-stone mb-6">Building types</p>
               <h2 className="font-serif text-display-md text-bark [text-wrap:balance]">
-                Many categories,<br />
+                Nine categories,<br />
                 <em className="text-terracotta">one method</em>
               </h2>
             </div>

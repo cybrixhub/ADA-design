@@ -24,7 +24,7 @@ const loop = [...items, ...items];
 
 export default function ProjectMarquee() {
   return (
-    <section className="bg-off-white py-16 md:py-24 overflow-hidden">
+    <section className="bg-off-white pt-16 md:pt-24 pb-4 overflow-hidden">
       <div className="container-wide mb-10 md:mb-14">
         <div className="flex items-end justify-between gap-6">
           <div>
@@ -43,7 +43,7 @@ export default function ProjectMarquee() {
         </div>
       </div>
 
-      <div className="group relative pb-28">
+      <div className="group relative pb-14">
         <div className="flex gap-10 md:gap-14 w-max animate-[marquee_50s_linear_infinite] group-hover:[animation-play-state:paused]">
           {loop.map((p, i) => (
             <Link

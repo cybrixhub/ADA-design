@@ -169,8 +169,7 @@ export default function HomePage() {
               href={`/projects/${featured[0].slug}`}
               className="md:col-span-2 group cursor-pointer border-r border-b border-sand/25 p-6 md:p-8 flex flex-col bg-cream hover:bg-off-white/60 transition-colors duration-500"
             >
-              <div className="flex items-center justify-between mb-4">
-                <p className="label-text text-sand text-[0.65rem]">01 / 03</p>
+              <div className="flex items-center justify-end mb-4">
                 <span className="label-text text-terracotta text-[0.65rem]">· {featured[0].category}</span>
               </div>
               <div className="relative aspect-[16/10] md:flex-1 md:min-h-[260px] overflow-hidden ring-1 ring-transparent group-hover:ring-sand/50 transition-all duration-500 bg-linen">
@@ -203,8 +202,7 @@ export default function HomePage() {
                   href={`/projects/${item.slug}`}
                   className="flex-1 group cursor-pointer border-b border-sand/25 p-5 md:p-6 flex flex-col bg-cream hover:bg-off-white/60 transition-colors duration-500"
                 >
-                  <div className="flex items-center justify-between mb-3">
-                    <p className="label-text text-sand text-[0.65rem]">{String(i + 2).padStart(2, "0")} / 03</p>
+                  <div className="flex items-center justify-end mb-3">
                     <span className="label-text text-terracotta text-[0.65rem]">· {item.category}</span>
                   </div>
                   <div className="relative aspect-[4/3] overflow-hidden ring-1 ring-transparent group-hover:ring-sand/50 transition-all duration-500 bg-linen">

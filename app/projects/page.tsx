@@ -86,10 +86,7 @@ function ProjectsContent() {
                 href={`/projects/${project.slug}`}
                 className="group cursor-pointer border-r border-b border-sand/25 p-6 md:p-8 flex flex-col bg-off-white hover:bg-cream/40 transition-colors duration-500"
               >
-                <div className="flex items-center justify-between mb-6">
-                  <p className="label-text text-sand text-[0.65rem]">
-                    {String(i + 1).padStart(2, "0")} / {String(filtered.length).padStart(2, "0")}
-                  </p>
+                <div className="flex items-center justify-end mb-6">
                   <span className="label-text text-terracotta text-[0.65rem]">
                     · {project.category}
                   </span>

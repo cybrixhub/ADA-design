@@ -16,7 +16,7 @@ const PIN_SVG = `
 </svg>
 `;
 
-const createClusterIcon = (cluster: L.MarkerCluster) => {
+const createClusterIcon = (cluster: { getChildCount(): number }) => {
   const count = cluster.getChildCount();
   return L.divIcon({
     className: "",

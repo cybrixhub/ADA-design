@@ -43,7 +43,7 @@ export default function ProjectMarquee() {
         </div>
       </div>
 
-      <div className="group relative pb-16">
+      <div className="group relative pb-28">
         <div className="flex gap-10 md:gap-14 w-max animate-[marquee_50s_linear_infinite] group-hover:[animation-play-state:paused]">
           {loop.map((p, i) => (
             <Link
@@ -62,11 +62,9 @@ export default function ProjectMarquee() {
                 />
                 <div className="absolute inset-0 bg-bark/10 group-hover/item:bg-bark/0 transition-colors duration-500" />
               </div>
-              <div className="absolute -bottom-10 opacity-0 group-hover/item:opacity-100 translate-y-1 group-hover/item:translate-y-0 transition-all duration-300 text-center">
-                <p className="label-text text-terracotta whitespace-nowrap">
-                  {p.category}
-                </p>
-                <p className="font-serif text-sm text-bark whitespace-nowrap mt-1 max-w-[14rem] truncate">
+              <div className="absolute top-full mt-3 w-[16rem] opacity-0 group-hover/item:opacity-100 translate-y-1 group-hover/item:translate-y-0 transition-all duration-300 text-center pointer-events-none">
+                <p className="label-text text-terracotta">{p.category}</p>
+                <p className="font-serif text-sm text-bark mt-1 leading-snug [text-wrap:balance]">
                   {p.title}
                 </p>
               </div>

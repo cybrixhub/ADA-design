@@ -86,8 +86,9 @@ export default function HomePage() {
         {/* Slideshow — right 75% */}
         <div className="absolute top-0 right-0 w-full md:w-3/4 h-full overflow-hidden">
           <HeroSlideshow slides={heroSlides} interval={5000} />
-          {/* Left-edge dark scrim so the copy stays readable over any image */}
-          <div className="absolute inset-0 bg-gradient-to-r from-bark via-bark/70 to-bark/10 md:via-bark/55 md:to-bark/0" />
+          {/* Scrim — strong on left where copy sits, lets images breathe on the right.
+              Mobile stacks so gradient runs bottom → top instead. */}
+          <div className="absolute inset-0 bg-gradient-to-t from-bark/80 via-bark/40 to-bark/10 md:bg-gradient-to-r md:from-bark/90 md:via-bark/30 md:to-transparent" />
           {/* Faint horizontal rule field */}
           <div className="absolute inset-0 flex flex-col justify-evenly pointer-events-none">
             {[...Array(7)].map((_, i) => (

@@ -19,9 +19,15 @@ const PIN_SVG = `
 const createClusterIcon = () => {
   return L.divIcon({
     className: "",
-    html: `<div style="background:#C4704F;border:2px solid #2F2018;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(47,32,24,0.35);"><div style="background:#FDFCFA;border-radius:50%;width:8px;height:8px;"></div></div>`,
-    iconSize: [32, 32],
-    iconAnchor: [16, 16],
+    html: `<div style="position:relative;width:52px;height:52px;">
+      <div style="position:absolute;inset:0;background:rgba(196,112,79,0.25);border-radius:50%;animation:adaClusterPulse 2s ease-out infinite;"></div>
+      <div style="position:absolute;inset:8px;background:#C4704F;border:2px solid #2F2018;border-radius:50%;box-shadow:0 4px 14px rgba(47,32,24,0.4);display:flex;align-items:center;justify-content:center;">
+        <div style="width:6px;height:6px;background:#FDFCFA;border-radius:50%;box-shadow:0 0 0 3px rgba(253,252,250,0.35);"></div>
+      </div>
+    </div>
+    <style>@keyframes adaClusterPulse{0%{transform:scale(0.85);opacity:0.7}70%{transform:scale(1.15);opacity:0}100%{transform:scale(1.15);opacity:0}}</style>`,
+    iconSize: [52, 52],
+    iconAnchor: [26, 26],
   });
 };
 
@@ -57,7 +63,8 @@ export default function ProjectMap() {
 
       <MarkerClusterGroup
         iconCreateFunction={createClusterIcon}
-        maxClusterRadius={50}
+        maxClusterRadius={140}
+        spiderfyOnMaxZoom
         showCoverageOnHover={false}
         zoomToBoundsOnClick
       >

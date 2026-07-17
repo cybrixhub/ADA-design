@@ -8,7 +8,6 @@ export default function AnimatedTree({
   className?: string;
   color?: string;
   opacity?: number;
-  variant?: "oak" | "pine" | "willow";
 }) {
   return (
     <div aria-hidden="true" className={`pointer-events-none ${color} ${className}`} style={{ opacity }}>

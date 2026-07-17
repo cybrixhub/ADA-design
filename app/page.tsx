@@ -138,7 +138,7 @@ export default function HomePage() {
       <ProjectMarquee />
 
       {/* ── PROJECT MAP ── */}
-      <MapSection count={projects.length} />
+      <MapSection />
 
       {/* ── FEATURED PROJECTS ── */}
       <section className="section-pad bg-cream">

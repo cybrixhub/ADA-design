@@ -16,13 +16,12 @@ const PIN_SVG = `
 </svg>
 `;
 
-const createClusterIcon = (cluster: { getChildCount(): number }) => {
-  const count = cluster.getChildCount();
+const createClusterIcon = () => {
   return L.divIcon({
     className: "",
-    html: `<div style="background:#C4704F;color:#fff;border:2px solid #2F2018;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;letter-spacing:0.04em;">${count}</div>`,
-    iconSize: [36, 36],
-    iconAnchor: [18, 18],
+    html: `<div style="background:#C4704F;border:2px solid #2F2018;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(47,32,24,0.35);"><div style="background:#FDFCFA;border-radius:50%;width:8px;height:8px;"></div></div>`,
+    iconSize: [32, 32],
+    iconAnchor: [16, 16],
   });
 };
 

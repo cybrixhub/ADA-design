@@ -20,7 +20,7 @@ const config: Config = {
         "off-white": "#FDFCFA",
       },
       fontFamily: {
-        serif: ["var(--font-poppins)", "system-ui", "sans-serif"],
+        serif: ["var(--font-montserrat)", "system-ui", "sans-serif"],
         sans: ["var(--font-poppins)", "system-ui", "sans-serif"],
       },
       fontSize: {

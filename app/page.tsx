@@ -9,11 +9,11 @@ import ProjectMarquee from "@/components/ProjectMarquee";
 import HeroSlideshow, { type HeroSlide } from "@/components/HeroSlideshow";
 import FeaturedProjects from "@/components/FeaturedProjects";
 import Testimonials from "@/components/Testimonials";
-import { getProjects } from "@/lib/admin/kv";
+import { getProjects, getSettings } from "@/lib/admin/kv";
 
 export const dynamic = "force-dynamic";
 
-const HERO_SLIDE_SLUGS = [
+const DEFAULT_HERO_SLUGS = [
   "44-kidd-circuit-goulburn-nsw-2580",
   "12-dexter-road-lochinvar-nsw-2321",
   "1-bandon-road-vineyard-nsw",
@@ -46,9 +46,10 @@ const values = [
 ];
 
 export default async function HomePage() {
-  const projects = await getProjects();
+  const [projects, settings] = await Promise.all([getProjects(), getSettings()]);
+  const heroSlugs = settings.heroSlugs.length > 0 ? settings.heroSlugs : DEFAULT_HERO_SLUGS;
 
-  const heroSlides: HeroSlide[] = HERO_SLIDE_SLUGS.map((slug) =>
+  const heroSlides: HeroSlide[] = heroSlugs.map((slug) =>
     projects.find((p) => p.slug === slug)
   )
     .filter((p): p is (typeof projects)[number] => Boolean(p))

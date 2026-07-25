@@ -106,3 +106,34 @@ export async function deleteUser(username: string) {
   if (!r) throw new Error("Redis not configured");
   await r.hdel(USERS_KEY, username);
 }
+
+// ── Site settings ─────────────────────────────────────────────────────────────
+
+const SETTINGS_KEY = "ada:settings";
+
+export interface SiteSettings {
+  heroSlugs: string[];
+  contactEmail: string;
+}
+
+const DEFAULT_SETTINGS: SiteSettings = {
+  heroSlugs: [],
+  contactEmail: "",
+};
+
+export async function getSettings(): Promise<SiteSettings> {
+  const r = redis();
+  if (!r) return DEFAULT_SETTINGS;
+  try {
+    const data = await r.get<SiteSettings>(SETTINGS_KEY);
+    return data ?? DEFAULT_SETTINGS;
+  } catch {
+    return DEFAULT_SETTINGS;
+  }
+}
+
+export async function saveSettings(s: SiteSettings) {
+  const r = redis();
+  if (!r) throw new Error("Redis not configured");
+  await r.set(SETTINGS_KEY, s);
+}

@@ -29,7 +29,7 @@ export default async function EditProjectPage({ params }: Props) {
     revalidatePath(`/projects/${project.slug}`);
     revalidatePath("/projects");
     revalidatePath("/");
-    redirect("/admin/projects");
+    redirect("/admin/projects?msg=saved");
   }
 
   async function handleDelete() {
@@ -38,7 +38,7 @@ export default async function EditProjectPage({ params }: Props) {
     revalidatePath("/admin/projects");
     revalidatePath("/projects");
     revalidatePath("/");
-    redirect("/admin/projects");
+    redirect("/admin/projects?msg=deleted");
   }
 
   const sortedCategories = [...new Set(categories)].sort();
@@ -53,11 +53,20 @@ export default async function EditProjectPage({ params }: Props) {
           <h1 className="font-serif text-xl text-bark mt-3">Edit project</h1>
           <p className="text-xs text-stone mt-1 font-mono">{project.slug}</p>
         </div>
-        <DeleteButton
-          action={handleDelete}
-          label="Delete project"
-          confirm={`Permanently delete "${project.title}"?`}
-        />
+        <div className="flex items-center gap-3">
+          <Link
+            href={`/projects/${project.slug}`}
+            target="_blank"
+            className="text-xs text-stone hover:text-bark transition-colors"
+          >
+            View on site ↗
+          </Link>
+          <DeleteButton
+            action={handleDelete}
+            label="Delete project"
+            confirm={`Permanently delete "${project.title}"?`}
+          />
+        </div>
       </div>
 
       <form action={save} className="space-y-7">

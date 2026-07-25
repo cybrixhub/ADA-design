@@ -33,7 +33,7 @@ export default function NewProjectPage() {
     revalidatePath("/admin/projects");
     revalidatePath("/projects");
     revalidatePath("/");
-    redirect("/admin/projects");
+    redirect("/admin/projects?msg=created");
   }
 
   const sortedCategories = [...new Set(categories)].sort();

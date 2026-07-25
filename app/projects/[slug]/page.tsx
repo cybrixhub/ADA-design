@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { projects } from "@/lib/projects";
 import { formatAddress } from "@/lib/format-address";
+import ProjectGallery from "@/components/ProjectGallery";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -18,6 +19,18 @@ export async function generateMetadata({ params }: PageProps) {
   return {
     title: `${project.title} — AD Design`,
     description: project.description.slice(0, 160),
+    openGraph: {
+      title: `${project.title} — AD Design`,
+      description: project.description.slice(0, 160),
+      ...(project.images[0] && {
+        images: [{ url: project.images[0], width: 1200, height: 630, alt: project.title }],
+      }),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${project.title} — AD Design`,
+      description: project.description.slice(0, 160),
+    },
   };
 }
 
@@ -30,8 +43,9 @@ export default async function ProjectPage({ params }: PageProps) {
   const prev = projects[(idx - 1 + projects.length) % projects.length];
   const next = projects[(idx + 1) % projects.length];
 
-  const hero = project.images[0];
-  const rest = project.images.slice(1);
+  const related = projects
+    .filter((p) => p.category === project.category && p.slug !== project.slug)
+    .slice(0, 3);
 
   return (
     <>
@@ -61,19 +75,8 @@ export default async function ProjectPage({ params }: PageProps) {
               </div>
             </div>
 
-            {/* Right — hero image */}
-            {hero && (
-              <div className="relative aspect-[4/3] overflow-hidden bg-cream">
-                <Image
-                  src={hero}
-                  alt={project.title}
-                  fill
-                  priority
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-              </div>
-            )}
+            {/* Right — hero image (clickable lightbox) */}
+            <ProjectGallery images={project.images} title={project.title} />
           </div>
         </div>
       </section>
@@ -103,32 +106,29 @@ export default async function ProjectPage({ params }: PageProps) {
         </section>
       )}
 
-      {/* ── ADDITIONAL RENDERS ── */}
-      {rest.length > 0 && (
-        <section className="pb-12 md:pb-16 bg-off-white">
+      {/* ── RELATED PROJECTS ── */}
+      {related.length > 0 && (
+        <section className="section-pad bg-linen">
           <div className="container-wide">
-            <div className="flex items-center gap-4 mb-12">
-              <div className="w-5 h-px bg-stone/40" />
-              <p className="label-text text-stone">
-                {rest.length === 1 ? "Alternate view" : `${rest.length} more views`}
-              </p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-              {rest.map((src, i) => (
-                <div
-                  key={src}
-                  className={`relative overflow-hidden bg-linen ${
-                    i === 0 && rest.length > 2 ? "md:col-span-2 aspect-[16/9]" : "aspect-[4/3]"
-                  }`}
-                >
-                  <Image
-                    src={src}
-                    alt={`${project.title} — view ${i + 2}`}
-                    fill
-                    className="object-cover"
-                    sizes={i === 0 && rest.length > 2 ? "100vw" : "(max-width: 768px) 100vw, 50vw"}
-                  />
-                </div>
+            <p className="label-text text-stone mb-8">More in {project.category}</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+              {related.map((r) => (
+                <Link key={r.slug} href={`/projects/${r.slug}`} className="group flex flex-col">
+                  <div className="relative aspect-[4/3] overflow-hidden bg-cream mb-4">
+                    {r.images[0] && (
+                      <Image
+                        src={r.images[0]}
+                        alt={r.title}
+                        fill
+                        className="object-contain transition-transform duration-500 group-hover:scale-[1.04]"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      />
+                    )}
+                    <div className="absolute inset-0 bg-bark/0 group-hover:bg-bark/10 transition-colors duration-500" />
+                  </div>
+                  <p className="label-text text-stone mb-1">{formatAddress(r.address)}</p>
+                  <h3 className="font-serif text-xl text-bark leading-tight">{r.title}</h3>
+                </Link>
               ))}
             </div>
           </div>

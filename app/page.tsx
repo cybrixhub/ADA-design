@@ -184,7 +184,7 @@ export default function HomePage() {
                   alt={featured[0].title}
                   fill
                   priority
-                  className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.04]"
+                  className="object-contain object-center transition-transform duration-700 group-hover:scale-[1.04]"
                   sizes="(max-width: 768px) 100vw, 66vw"
                 />
                 <div className="absolute inset-0 bg-bark/0 group-hover:bg-bark/15 transition-colors duration-500" />
@@ -208,8 +208,7 @@ export default function HomePage() {
                   href={`/projects/${item.slug}`}
                   className="flex-1 group cursor-pointer border-b border-sand/25 p-5 md:p-6 flex flex-col bg-cream hover:bg-off-white/60 transition-colors duration-500"
                 >
-                  <div className="flex items-center justify-between mb-3">
-                    <p className="label-text text-sand text-[0.65rem]">{String(i + 2).padStart(2, "0")} / 03</p>
+                  <div className="flex items-center justify-end mb-3">
                     <span className="label-text text-terracotta text-[0.65rem]">· {item.category}</span>
                   </div>
                   <div className="relative aspect-[4/3] overflow-hidden ring-1 ring-transparent group-hover:ring-sand/50 transition-all duration-500 bg-linen">
@@ -217,7 +216,7 @@ export default function HomePage() {
                       src={item.images[0]}
                       alt={item.title}
                       fill
-                      className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.04]"
+                      className="object-contain object-center transition-transform duration-700 group-hover:scale-[1.04]"
                       sizes="(max-width: 768px) 100vw, 33vw"
                     />
                     <div className="absolute inset-0 bg-bark/0 group-hover:bg-bark/15 transition-colors duration-500" />

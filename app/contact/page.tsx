@@ -5,8 +5,8 @@ import Image from "next/image";
 import { Send, MapPin, Mail } from "lucide-react";
 import { projects } from "@/lib/projects";
 
-// Create a free form at formspree.io and replace the ID below
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+// Set NEXT_PUBLIC_FORMSPREE_ENDPOINT in Vercel (formspree.io → New Form → copy endpoint URL)
+const FORMSPREE_ENDPOINT = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT ?? "";
 
 const subjects = [
   "New residential project",
@@ -38,6 +38,11 @@ export default function ContactPage() {
     e.preventDefault();
     setLoading(true);
     setError("");
+    if (!FORMSPREE_ENDPOINT) {
+      setError("Contact form not configured. Email us directly at hello@adadesign.com.au");
+      setLoading(false);
+      return;
+    }
     try {
       const res = await fetch(FORMSPREE_ENDPOINT, {
         method: "POST",

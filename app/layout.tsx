@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
 import PageLoader from "@/components/PageLoader";
 import CornerMarkers from "@/components/CornerMarkers";
+import ScrollToTop from "@/components/ScrollToTop";
 
 const ebGaramond = EB_Garamond({
   subsets: ["latin"],
@@ -59,6 +60,7 @@ export default function RootLayout({
           <main>{children}</main>
           <Footer />
         </SmoothScroll>
+        <ScrollToTop />
       </body>
     </html>
   );

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { getProjectBySlug, upsertProject, removeProject } from "@/lib/admin/kv";
@@ -46,9 +47,9 @@ export default async function EditProjectPage({ params }: Props) {
     <div className="p-8 max-w-2xl">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <a href="/admin/projects" className="text-xs text-stone hover:text-bark transition-colors">
+          <Link href="/admin/projects" className="text-xs text-stone hover:text-bark transition-colors">
             ← Back to projects
-          </a>
+          </Link>
           <h1 className="font-serif text-xl text-bark mt-3">Edit project</h1>
           <p className="text-xs text-stone mt-1 font-mono">{project.slug}</p>
         </div>
@@ -106,12 +107,12 @@ export default async function EditProjectPage({ params }: Props) {
           >
             Save changes
           </button>
-          <a
+          <Link
             href="/admin/projects"
             className="px-6 py-2.5 border border-sand text-stone text-xs tracking-widest uppercase rounded hover:bg-linen transition-colors"
           >
             Cancel
-          </a>
+          </Link>
         </div>
       </form>
     </div>

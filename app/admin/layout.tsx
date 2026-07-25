@@ -7,7 +7,7 @@ export const metadata = { title: "Admin — AD Design" };
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const session = await getSession();
-  if (!session) redirect("/admin/login");
+  if (!session) return <>{children}</>;
 
   async function logout() {
     "use server";

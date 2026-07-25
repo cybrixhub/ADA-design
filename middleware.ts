@@ -9,7 +9,17 @@ const secret = () =>
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
-  if (pathname === "/admin/login") return NextResponse.next();
+  if (pathname === "/admin/login") {
+    // If already authenticated, skip the login page
+    const token = req.cookies.get(COOKIE)?.value;
+    if (token) {
+      try {
+        await jwtVerify(token, secret());
+        return NextResponse.redirect(new URL("/admin/projects", req.url));
+      } catch {}
+    }
+    return NextResponse.next();
+  }
 
   const token = req.cookies.get(COOKIE)?.value;
   if (!token) return NextResponse.redirect(new URL("/admin/login", req.url));

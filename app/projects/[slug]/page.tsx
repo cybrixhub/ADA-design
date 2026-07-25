@@ -2,19 +2,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { projects } from "@/lib/projects";
+import { getProjects, getProjectBySlug } from "@/lib/admin/kv";
 import { formatAddress } from "@/lib/format-address";
 import ProjectGallery from "@/components/ProjectGallery";
 
-type PageProps = { params: Promise<{ slug: string }> };
+export const dynamic = "force-dynamic";
 
-export function generateStaticParams() {
-  return projects.map((p) => ({ slug: p.slug }));
-}
+type PageProps = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params;
-  const project = projects.find((p) => p.slug === slug);
+  const project = await getProjectBySlug(slug);
   if (!project) return {};
   return {
     title: `${project.title} — AD Design`,
@@ -36,7 +34,7 @@ export async function generateMetadata({ params }: PageProps) {
 
 export default async function ProjectPage({ params }: PageProps) {
   const { slug } = await params;
-  const project = projects.find((p) => p.slug === slug);
+  const [project, projects] = await Promise.all([getProjectBySlug(slug), getProjects()]);
   if (!project) notFound();
 
   const idx = projects.findIndex((p) => p.slug === project.slug);
@@ -61,7 +59,6 @@ export default async function ProjectPage({ params }: PageProps) {
           </Link>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-start">
-            {/* Left — title block */}
             <div className="flex flex-col justify-between gap-8 md:py-4">
               <div>
                 <p className="label-text text-terracotta mb-3">{project.category}</p>
@@ -75,7 +72,6 @@ export default async function ProjectPage({ params }: PageProps) {
               </div>
             </div>
 
-            {/* Right — hero image (clickable lightbox) */}
             <ProjectGallery images={project.images} title={project.title} />
           </div>
         </div>

@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
 import { EB_Garamond, Space_Grotesk } from "next/font/google";
 import "./globals.css";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
-import SmoothScroll from "@/components/SmoothScroll";
 import PageLoader from "@/components/PageLoader";
 import CornerMarkers from "@/components/CornerMarkers";
-import ScrollToTop from "@/components/ScrollToTop";
+import AppShell from "@/components/AppShell";
 
 const ebGaramond = EB_Garamond({
   subsets: ["latin"],
@@ -53,14 +50,9 @@ export default function RootLayout({
       <body
         className={`${ebGaramond.variable} ${spaceGrotesk.variable} bg-off-white text-bark antialiased`}
       >
-        <PageLoader />
-        <CornerMarkers />
-        <SmoothScroll>
-          <Navigation />
-          <main>{children}</main>
-          <Footer />
-        </SmoothScroll>
-        <ScrollToTop />
+        <AppShell pageLoader={<PageLoader />} cornerMarkers={<CornerMarkers />}>
+          {children}
+        </AppShell>
       </body>
     </html>
   );

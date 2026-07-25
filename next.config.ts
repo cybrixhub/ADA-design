@@ -4,9 +4,9 @@ const csp = [
   "default-src 'self'",
   "script-src 'self' 'unsafe-inline'",
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob: https://*.tile.openstreetmap.org",
+  "img-src 'self' data: blob: https://*.tile.openstreetmap.org https://*.public.blob.vercel-storage.com",
   "font-src 'self'",
-  "connect-src 'self' https://*.tile.openstreetmap.org",
+  "connect-src 'self' https://*.tile.openstreetmap.org https://*.public.blob.vercel-storage.com",
   "media-src 'none'",
   "object-src 'none'",
   "frame-ancestors 'none'",
@@ -31,6 +31,7 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com" },
+      { protocol: "https", hostname: "*.public.blob.vercel-storage.com" },
     ],
   },
   async headers() {

@@ -6,22 +6,16 @@ import AnimatedFadeIn from "@/components/AnimatedFadeIn";
 import FloatingLeaves from "@/components/FloatingLeaves";
 import AnimatedTree from "@/components/AnimatedTree";
 import MapSection from "@/components/MapSection";
-import { projects } from "@/lib/projects";
+import { getProjects } from "@/lib/admin/kv";
 import { formatAddress } from "@/lib/format-address";
+
+export const dynamic = "force-dynamic";
 
 const FEATURED_SLUGS = [
   "44-kidd-circuit-goulburn-nsw-2580",
   "12-dexter-road-lochinvar-nsw-2321",
   "1-bandon-road-vineyard-nsw",
 ];
-
-const featured = FEATURED_SLUGS.map((slug) => projects.find((p) => p.slug === slug)).filter(
-  (p): p is (typeof projects)[number] => Boolean(p)
-);
-
-const heroImage =
-  projects.find((p) => p.slug === "44-kidd-circuit-goulburn-nsw-2580")?.images[0] ??
-  projects[0].images[0];
 
 const values = [
   {
@@ -41,7 +35,15 @@ const values = [
   },
 ];
 
-export default function HomePage() {
+export default async function HomePage() {
+  const projects = await getProjects();
+  const featured = FEATURED_SLUGS.map((slug) => projects.find((p) => p.slug === slug)).filter(
+    (p): p is (typeof projects)[number] => Boolean(p)
+  );
+  const heroImage =
+    projects.find((p) => p.slug === "44-kidd-circuit-goulburn-nsw-2580")?.images[0] ??
+    projects[0]?.images[0] ??
+    "";
   return (
     <>
       {/* ── HERO ── */}

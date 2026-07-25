@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -37,13 +38,19 @@ export default function Navigation() {
     >
       <div className="container-wide flex items-center justify-between h-16 md:h-20">
         {/* Logo */}
-        <Link
-          href="/"
-          className={`font-serif text-2xl tracking-[0.12em] font-medium transition-colors duration-300 ${
-            scrolled || !isHome || menuOpen ? "text-bark" : "text-off-white"
-          }`}
-        >
-          AD DESIGN
+        <Link href="/" aria-label="ADA Design" className="flex items-center h-10 md:h-12">
+          <Image
+            src="/ada-logo.jpg"
+            alt="ADA Design"
+            width={220}
+            height={120}
+            priority
+            className={`h-full w-auto transition-[filter] duration-300 ${
+              scrolled || !isHome || menuOpen
+                ? "mix-blend-multiply"
+                : "invert mix-blend-screen"
+            }`}
+          />
         </Link>
 
         {/* Desktop nav */}

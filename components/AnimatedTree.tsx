@@ -4,143 +4,95 @@ export default function AnimatedTree({
   className = "",
   color = "text-sand",
   opacity = 0.28,
-  variant = "oak",
 }: {
   className?: string;
   color?: string;
   opacity?: number;
-  variant?: "oak" | "pine" | "willow";
 }) {
-  const uid = `tree-${variant}-${color.replace(/[^a-z0-9]/gi, "")}`;
-
   return (
     <div aria-hidden="true" className={`pointer-events-none ${color} ${className}`} style={{ opacity }}>
       <svg
         viewBox="0 0 400 700"
-        fill="currentColor"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
         className="w-full h-full"
         preserveAspectRatio="xMidYMax meet"
       >
-        <defs>
-          <radialGradient id={`${uid}-canopy`} cx="0.5" cy="0.45" r="0.7">
-            <stop offset="0%" stopColor="currentColor" stopOpacity="0.95" />
-            <stop offset="70%" stopColor="currentColor" stopOpacity="0.75" />
-            <stop offset="100%" stopColor="currentColor" stopOpacity="0.3" />
-          </radialGradient>
-          <radialGradient id={`${uid}-canopy2`} cx="0.5" cy="0.5" r="0.6">
-            <stop offset="0%" stopColor="currentColor" stopOpacity="0.85" />
-            <stop offset="100%" stopColor="currentColor" stopOpacity="0.35" />
-          </radialGradient>
-          <filter id={`${uid}-blur`} x="-10%" y="-10%" width="120%" height="120%">
-            <feGaussianBlur stdDeviation="1.2" />
-          </filter>
-        </defs>
+        {/* Trunk — solid, doesn't sway */}
+        <path d="M198 700 Q200 620 200 540 Q200 460 200 380" strokeWidth="6" />
+        <path d="M203 700 Q204 620 204 540" strokeWidth="1.5" strokeOpacity="0.5" />
+        <path d="M197 700 Q195 620 196 540" strokeWidth="1.5" strokeOpacity="0.5" />
 
-        {/* Root flare + trunk — tapered silhouette */}
-        <path
-          d="M175 700
-             L180 640 L184 560 L188 480 L192 400 L196 340
-             C 198 320 198 300 200 285
-             C 202 300 202 320 204 340
-             L208 400 L212 480 L216 560 L220 640 L225 700 Z"
-          fillOpacity="0.85"
-        />
+        {/* Everything above the fork sways */}
+        <g style={{ transformOrigin: "200px 380px", animation: "treeSway 9s ease-in-out infinite" }}>
+          {/* Primary fork — three main leads */}
+          <path d="M200 380 Q170 340 138 300 Q108 260 82 210" strokeWidth="5" />
+          <path d="M200 380 Q230 340 262 300 Q292 260 318 210" strokeWidth="5" />
+          <path d="M200 380 Q198 320 202 250 Q206 180 210 110" strokeWidth="4.5" />
 
-        {/* Trunk texture — subtle bark grooves */}
-        <g stroke="currentColor" strokeWidth="1" strokeOpacity="0.35" fill="none" strokeLinecap="round">
-          <path d="M188 680 Q190 620 192 560 Q194 500 196 440" />
-          <path d="M210 680 Q208 620 206 560 Q204 500 202 440" />
-          <path d="M195 500 L198 380" strokeOpacity="0.25" />
-        </g>
+          {/* Secondary branches off the left lead */}
+          <path d="M138 300 Q118 275 96 258 Q72 240 50 232" strokeWidth="2.6" />
+          <path d="M108 260 Q92 232 80 208 Q70 184 68 158" strokeWidth="2.4" />
+          <path d="M82 210 Q68 194 52 184 Q34 174 18 172" strokeWidth="2.2" />
+          <path d="M82 210 Q76 186 74 160 Q72 132 78 108" strokeWidth="2.2" />
 
-        {/* Everything above trunk sways as a unit */}
-        <g style={{ transformOrigin: "200px 340px", animation: "treeSway 8s ease-in-out infinite" }}>
-          {/* Major structural branches — visible through foliage */}
-          <g fill="none" stroke="currentColor" strokeLinecap="round" strokeOpacity="0.75">
-            <path d="M200 340 Q170 300 140 260 Q110 220 90 190" strokeWidth="8" />
-            <path d="M200 340 Q230 300 260 260 Q290 220 310 190" strokeWidth="8" />
-            <path d="M200 340 Q195 280 200 220 Q205 160 210 100" strokeWidth="7" />
-            <path d="M180 300 Q150 260 128 220 Q108 190 100 160" strokeWidth="5" />
-            <path d="M220 300 Q250 260 272 220 Q292 190 300 160" strokeWidth="5" />
-            <path d="M195 260 Q175 220 165 180 Q158 150 155 120" strokeWidth="4" />
-            <path d="M205 260 Q225 220 235 180 Q242 150 245 120" strokeWidth="4" />
+          {/* Secondary branches off the right lead */}
+          <path d="M262 300 Q282 275 304 258 Q328 240 350 232" strokeWidth="2.6" />
+          <path d="M292 260 Q308 232 320 208 Q330 184 332 158" strokeWidth="2.4" />
+          <path d="M318 210 Q332 194 348 184 Q366 174 382 172" strokeWidth="2.2" />
+          <path d="M318 210 Q324 186 326 160 Q328 132 322 108" strokeWidth="2.2" />
+
+          {/* Secondary branches off the center lead */}
+          <path d="M202 250 Q180 226 158 210 Q136 194 120 190" strokeWidth="2.4" />
+          <path d="M202 250 Q224 226 246 210 Q268 194 284 190" strokeWidth="2.4" />
+          <path d="M206 180 Q188 158 176 132 Q168 108 168 82" strokeWidth="2.2" />
+          <path d="M206 180 Q224 158 236 132 Q244 108 244 82" strokeWidth="2.2" />
+          <path d="M210 110 Q206 88 208 62 Q212 38 216 18" strokeWidth="2" />
+          <path d="M210 110 Q214 88 216 62 Q220 38 226 18" strokeWidth="2" />
+
+          {/* Fine twigs — outermost stroke, thinnest */}
+          <g strokeWidth="1.2" strokeOpacity="0.75">
+            <path d="M50 232 Q36 224 22 224" />
+            <path d="M50 232 Q44 216 42 200" />
+            <path d="M68 158 Q58 142 56 124" />
+            <path d="M68 158 Q54 152 40 154" />
+            <path d="M18 172 Q10 164 4 152" />
+            <path d="M78 108 Q72 94 72 78" />
+            <path d="M78 108 Q66 104 54 108" />
+            <path d="M120 190 Q108 180 92 178" />
+            <path d="M168 82 Q166 66 172 50" />
+            <path d="M168 82 Q158 76 148 76" />
+            <path d="M244 82 Q246 66 240 50" />
+            <path d="M244 82 Q254 76 264 76" />
+            <path d="M216 18 Q218 8 222 0" />
+            <path d="M226 18 Q230 8 236 2" />
+
+            <path d="M350 232 Q364 224 378 224" />
+            <path d="M350 232 Q356 216 358 200" />
+            <path d="M332 158 Q342 142 344 124" />
+            <path d="M332 158 Q346 152 360 154" />
+            <path d="M382 172 Q390 164 396 152" />
+            <path d="M322 108 Q328 94 328 78" />
+            <path d="M322 108 Q334 104 346 108" />
+            <path d="M284 190 Q296 180 312 178" />
           </g>
 
-          {/* Fine twigs at branch tips */}
-          <g fill="none" stroke="currentColor" strokeLinecap="round" strokeOpacity="0.55">
-            <path d="M90 190 Q78 170 74 148 Q72 128 78 108" strokeWidth="2" />
-            <path d="M90 190 Q76 178 62 172 Q46 168 32 172" strokeWidth="1.5" />
-            <path d="M310 190 Q322 170 326 148 Q328 128 322 108" strokeWidth="2" />
-            <path d="M310 190 Q324 178 338 172 Q354 168 368 172" strokeWidth="1.5" />
-            <path d="M210 100 Q212 80 218 62 Q224 44 232 30" strokeWidth="2" />
-            <path d="M210 100 Q200 80 194 62 Q188 44 182 30" strokeWidth="2" />
-            <path d="M100 160 Q86 148 68 142" strokeWidth="1.5" />
-            <path d="M300 160 Q314 148 332 142" strokeWidth="1.5" />
-          </g>
-
-          {/* FOLIAGE — wide irregular canopy, branches poke through */}
-          {/* Back cloud layer — hazy foundation, wider than tall */}
-          <g fill={`url(#${uid}-canopy)`} filter={`url(#${uid}-blur)`}>
-            <ellipse cx="200" cy="200" rx="180" ry="95" />
-            <ellipse cx="115" cy="180" rx="75" ry="65" />
-            <ellipse cx="285" cy="180" rx="75" ry="65" />
-            <ellipse cx="200" cy="115" rx="95" ry="60" />
-            <ellipse cx="150" cy="140" rx="55" ry="45" />
-            <ellipse cx="250" cy="140" rx="55" ry="45" />
-          </g>
-          {/* Mid layer — irregular tufts with dips between them */}
-          <g fill={`url(#${uid}-canopy2)`}>
-            <path d="M110 220 Q60 210 55 175 Q52 138 92 130 Q120 128 138 145 Q152 165 148 190 Q142 218 110 220 Z" />
-            <path d="M290 220 Q340 210 345 175 Q348 138 308 130 Q280 128 262 145 Q248 165 252 190 Q258 218 290 220 Z" />
-            <path d="M165 105 Q130 100 122 68 Q118 40 148 30 Q178 24 192 48 Q198 70 190 92 Q182 108 165 105 Z" />
-            <path d="M235 105 Q270 100 278 68 Q282 40 252 30 Q222 24 208 48 Q202 70 210 92 Q218 108 235 105 Z" />
-            <path d="M200 195 Q165 210 148 180 Q140 152 168 130 Q196 118 218 128 Q248 138 250 172 Q248 200 220 208 Q205 210 200 195 Z" />
-            {/* Small irregular tufts between main clumps for organic edges */}
-            <ellipse cx="85" cy="155" rx="24" ry="20" />
-            <ellipse cx="315" cy="155" rx="24" ry="20" />
-            <ellipse cx="180" cy="70" rx="22" ry="18" />
-            <ellipse cx="220" cy="70" rx="22" ry="18" />
-            <ellipse cx="70" cy="200" rx="28" ry="22" />
-            <ellipse cx="330" cy="200" rx="28" ry="22" />
-          </g>
-          {/* Highlight blobs — sun-lit side, top-left */}
-          <g fill="currentColor" fillOpacity="0.55">
-            <ellipse cx="148" cy="128" rx="38" ry="26" transform="rotate(-18 148 128)" />
-            <ellipse cx="100" cy="172" rx="34" ry="28" transform="rotate(-22 100 172)" />
-            <ellipse cx="175" cy="72" rx="30" ry="22" transform="rotate(-10 175 72)" />
-            <ellipse cx="200" cy="180" rx="42" ry="30" transform="rotate(-5 200 180)" />
-          </g>
-
-          {/* Branches poking through the top of the canopy — key detail for realism */}
-          <g fill="none" stroke="currentColor" strokeLinecap="round" strokeOpacity="0.85">
-            <path d="M210 100 Q212 78 216 58 Q220 40 224 24" strokeWidth="2.5" />
-            <path d="M210 100 Q206 78 202 58 Q198 40 194 24" strokeWidth="2.5" />
-            <path d="M200 60 Q198 42 200 24 Q202 10 205 -2" strokeWidth="2" />
-            <path d="M90 190 Q78 172 72 152 Q68 132 74 114" strokeWidth="2.5" />
-            <path d="M310 190 Q322 172 328 152 Q332 132 326 114" strokeWidth="2.5" />
-            <path d="M74 114 Q66 100 62 84" strokeWidth="1.6" />
-            <path d="M326 114 Q334 100 338 84" strokeWidth="1.6" />
-          </g>
-
-          {/* Edge detail — individual small leaves poking out of the silhouette */}
-          <g fill="currentColor" fillOpacity="0.9">
+          {/* Sparse buds — tiny circles at select tips to suggest life without foliage */}
+          <g fill="currentColor" stroke="none" fillOpacity="0.55">
             {[
-              [60, 165, -35], [50, 178, -50], [72, 148, -20],
-              [340, 165, 35], [350, 178, 50], [328, 148, 20],
-              [232, 30, 25], [218, 22, 10], [200, 20, -8], [182, 22, -20],
-              [70, 210, -10], [330, 210, 10],
-              [190, 65, -12], [210, 65, 12],
-              [40, 175, -55], [360, 175, 55],
-            ].map(([cx, cy, rot], i) => (
-              <ellipse
+              [4, 152], [22, 224], [42, 200], [56, 124], [72, 78],
+              [396, 152], [378, 224], [358, 200], [344, 124], [328, 78],
+              [172, 50], [240, 50], [222, 0], [236, 2],
+            ].map(([cx, cy], i) => (
+              <circle
                 key={i}
                 cx={cx}
                 cy={cy}
-                rx={7}
-                ry={3.2}
-                transform={`rotate(${rot} ${cx} ${cy})`}
+                r={1.6}
                 style={{
-                  animation: `leafShimmer ${3.5 + (i % 4)}s ease-in-out ${i * 0.2}s infinite`,
+                  animation: `leafShimmer ${4 + (i % 3)}s ease-in-out ${i * 0.25}s infinite`,
                   transformOrigin: `${cx}px ${cy}px`,
                 }}
               />

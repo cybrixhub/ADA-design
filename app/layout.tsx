@@ -1,32 +1,33 @@
 import type { Metadata } from "next";
-import { EB_Garamond, Space_Grotesk } from "next/font/google";
+import { Poppins, Montserrat } from "next/font/google";
 import "./globals.css";
 import PageLoader from "@/components/PageLoader";
 import CornerMarkers from "@/components/CornerMarkers";
 import AppShell from "@/components/AppShell";
 
-const ebGaramond = EB_Garamond({
+const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["300", "400", "500", "600", "700"],
   style: ["normal", "italic"],
-  variable: "--font-cormorant",
+  variable: "--font-poppins",
   display: "swap",
 });
 
-const spaceGrotesk = Space_Grotesk({
+const montserrat = Montserrat({
   subsets: ["latin"],
-  weight: ["300", "400", "500"],
-  variable: "--font-dm-sans",
+  weight: ["300", "400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-montserrat",
   display: "swap",
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://adadesign.com.au"),
-  title: "AD Design — Architecture across New South Wales",
+  title: "ADA Design — Architecture across New South Wales",
   description:
     "Residential, industrial, and medical architecture across NSW. Every project purpose-built for its site.",
   openGraph: {
-    title: "AD Design — Architecture across New South Wales",
+    title: "ADA Design — Architecture across New South Wales",
     description:
       "Residential, industrial, and medical architecture across NSW. Every project purpose-built for its site.",
     type: "website",
@@ -34,7 +35,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AD Design — Architecture across New South Wales",
+    title: "ADA Design — Architecture across New South Wales",
     description:
       "Residential, industrial, and medical architecture across NSW. Every project purpose-built for its site.",
   },
@@ -48,7 +49,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${ebGaramond.variable} ${spaceGrotesk.variable} bg-off-white text-bark antialiased`}
+        className={`${poppins.variable} ${montserrat.variable} bg-off-white text-bark antialiased`}
       >
         <AppShell pageLoader={<PageLoader />} cornerMarkers={<CornerMarkers />}>
           {children}

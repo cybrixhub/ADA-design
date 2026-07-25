@@ -63,7 +63,7 @@ export default function AboutPage() {
             </div>
             <div className="pb-8 md:pb-16">
               <p className="text-white/50 text-lg font-light leading-relaxed max-w-sm">
-                AD Design works across nine building types — from a single-storey home on a suburban lot to a medical clinic on a main road. Every project is drawn from its site, its brief, and the way a building actually gets built.
+                ADA Design works across nine building types — from a single-storey home on a suburban lot to a medical clinic on a main road. Every project is drawn from its site, its brief, and the way a building actually gets built.
               </p>
             </div>
           </div>
@@ -73,7 +73,7 @@ export default function AboutPage() {
             <div className="h-[50vh] md:h-[70vh] relative overflow-hidden">
               <Image
                 src={heroImage}
-                alt="AD Design project"
+                alt="ADA Design project"
                 fill
                 priority
                 className="object-cover"
@@ -104,7 +104,7 @@ export default function AboutPage() {
 
             <div className="md:col-span-7 md:col-start-6 space-y-8 text-stone font-light text-lg leading-relaxed">
               <p>
-                AD Design is an architectural design studio based in Sydney, working across metropolitan and regional New South Wales. Our practice covers the full spectrum of residential typology — single-storey homes, dual occupancies, granny flats, secondary dwellings — alongside medical centres, industrial developments, and townhouse projects.
+                ADA Design is an architectural design studio based in Sydney, working across metropolitan and regional New South Wales. Our practice covers the full spectrum of residential typology — single-storey homes, dual occupancies, granny flats, secondary dwellings — alongside medical centres, industrial developments, and townhouse projects.
               </p>
               <p>
                 Every project starts with the land. Orientation, slope, view lines, existing vegetation, neighbouring buildings, council overlays — these decide the geometry before a single wall is drawn. When the site is read properly, the plan resolves itself.

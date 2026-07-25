@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 
 const ProjectMap = dynamic(() => import("./ProjectMap"), { ssr: false });
 
-export default function MapSection({ count }: { count: number }) {
+export default function MapSection() {
   return (
     <section className="bg-off-white border-b border-sand/25">
       <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 pt-8 pb-0">
@@ -18,7 +18,7 @@ export default function MapSection({ count }: { count: number }) {
             </h2>
           </div>
           <p className="text-stone font-light text-sm max-w-xs text-right leading-relaxed hidden md:block">
-            {count} projects spanning Western Sydney,
+            Projects spanning Western Sydney,
             <br />Hunter Valley, and beyond.
           </p>
         </div>

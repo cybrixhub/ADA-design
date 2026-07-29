@@ -44,8 +44,8 @@ export default async function ProjectPage({ params }: PageProps) {
 
   return (
     <>
-      {/* ── HEADER + MAIN IMAGE ── */}
-      <section className="pt-20 md:pt-24 pb-0 bg-linen">
+      {/* ── HEADLINE ── */}
+      <section className="pt-20 md:pt-24 pb-6 md:pb-8 bg-linen">
         <div className="container-wide">
           <Link
             href="/projects"
@@ -55,34 +55,29 @@ export default async function ProjectPage({ params }: PageProps) {
             All projects
           </Link>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start pb-0">
-            {/* Title block */}
-            <div className="flex flex-col gap-6 md:py-4">
-              <p className="label-text text-terracotta">{project.category}</p>
-              <h1 className="font-serif text-display-lg text-bark leading-tight [text-wrap:balance]">
-                {project.title}
-              </h1>
-            </div>
-
-            {/* Main image */}
-            {mainImage && (
-              <ProjectLightbox images={project.images} startIndex={0}>
-                <div className="relative aspect-[4/3] overflow-hidden bg-cream cursor-pointer rounded-sm">
-                  <Image
-                    src={mainImage}
-                    alt={project.title}
-                    fill
-                    priority
-                    className="object-contain hover:scale-[1.02] transition-transform duration-500"
-                    sizes="(max-width: 768px) 100vw, 55vw"
-                    quality={90}
-                  />
-                </div>
-              </ProjectLightbox>
-            )}
-          </div>
+          <p className="label-text text-terracotta mb-3">{project.category}</p>
+          <h1 className="font-serif text-display-lg text-bark leading-tight [text-wrap:balance] max-w-2xl">
+            {project.title}
+          </h1>
         </div>
       </section>
+
+      {/* ── MAIN IMAGE ── full width */}
+      {mainImage && (
+        <ProjectLightbox images={project.images} startIndex={0}>
+          <div className="relative w-full bg-cream cursor-pointer" style={{ aspectRatio: "16/9", maxHeight: "72vh" }}>
+            <Image
+              src={mainImage}
+              alt={project.title}
+              fill
+              priority
+              className="object-contain hover:scale-[1.01] transition-transform duration-700"
+              sizes="100vw"
+              quality={90}
+            />
+          </div>
+        </ProjectLightbox>
+      )}
 
       {/* ── BRIEFING / SPECS ── */}
       <section className="bg-linen border-t border-sand/20">

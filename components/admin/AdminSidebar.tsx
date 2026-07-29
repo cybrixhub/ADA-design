@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
   FolderKanban,
+  Briefcase,
   Users,
   Settings,
   ExternalLink,
@@ -54,6 +55,11 @@ export default function AdminSidebar({ username, projectCount, logout }: Props) 
           <span className="text-[0.6rem] bg-white/10 text-white/40 px-1.5 py-0.5 rounded font-mono">
             {projectCount}
           </span>
+        </Link>
+
+        <Link href="/admin/services" className={cls("/admin/services")}>
+          <Briefcase size={15} />
+          Services
         </Link>
 
         <Link href="/admin/users" className={cls("/admin/users")}>

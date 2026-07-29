@@ -189,27 +189,56 @@ export default async function ProjectPage({ params }: PageProps) {
       <section className="border-t border-sand/25 bg-cream">
         <div className="container-wide">
           <div className="grid grid-cols-2">
+            {/* Previous */}
             <Link
               href={`/projects/${prev.slug}`}
-              className="group flex flex-col gap-3 p-8 md:p-12 border-r border-sand/25 hover:bg-off-white transition-colors"
+              className="group flex flex-col border-r border-sand/25 hover:bg-off-white transition-colors overflow-hidden"
             >
-              <div className="flex items-center gap-2 label-text text-stone">
-                <ArrowLeft size={12} className="group-hover:-translate-x-1 transition-transform" />
-                Previous
+              {prev.images[0] && (
+                <div className="relative w-full aspect-[16/7] overflow-hidden bg-cream">
+                  <Image
+                    src={prev.images[0]}
+                    alt={prev.title}
+                    fill
+                    className="object-contain group-hover:scale-[1.02] transition-transform duration-500"
+                    sizes="50vw"
+                  />
+                </div>
+              )}
+              <div className="flex flex-col gap-2 p-6 md:p-8">
+                <div className="flex items-center gap-2 label-text text-stone">
+                  <ArrowLeft size={12} className="group-hover:-translate-x-1 transition-transform" />
+                  Previous
+                </div>
+                <p className="font-serif text-lg md:text-xl text-bark leading-tight">{prev.title}</p>
+                <p className="label-text text-sand">{prev.category}</p>
               </div>
-              <p className="font-serif text-xl md:text-2xl text-bark leading-tight">{prev.title}</p>
-              <p className="label-text text-sand">{prev.category}</p>
             </Link>
+
+            {/* Next */}
             <Link
               href={`/projects/${next.slug}`}
-              className="group flex flex-col gap-3 p-8 md:p-12 hover:bg-off-white transition-colors text-right items-end"
+              className="group flex flex-col hover:bg-off-white transition-colors text-right items-end overflow-hidden"
             >
-              <div className="flex items-center gap-2 label-text text-stone">
-                Next
-                <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
+              {next.images[0] && (
+                <div className="relative w-full aspect-[16/7] overflow-hidden bg-cream">
+                  <Image
+                    src={next.images[0]}
+                    alt={next.title}
+                    fill
+                    className="object-contain group-hover:scale-[1.02] transition-transform duration-500"
+                    sizes="50vw"
+                  />
+                </div>
+              )}
+              <div className="flex flex-col gap-2 p-6 md:p-8 items-end">
+                <div className="flex items-center gap-2 label-text text-stone">
+                  Next
+                  <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
+                </div>
+                <p className="font-serif text-lg md:text-xl text-bark leading-tight">{next.title}</p>
+                <p className="label-text text-sand">{next.category}</p>
               </div>
-              <p className="font-serif text-xl md:text-2xl text-bark leading-tight">{next.title}</p>
-              <p className="label-text text-sand">{next.category}</p>
             </Link>
           </div>
         </div>

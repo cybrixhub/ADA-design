@@ -96,9 +96,6 @@ export default async function HomePage() {
                   View projects
                   <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                 </Link>
-                <Link href="/about" className="btn-outline border-white/30 text-white/70 hover:bg-white hover:text-bark">
-                  The studio
-                </Link>
               </div>
             </AnimatedFadeIn>
           </div>

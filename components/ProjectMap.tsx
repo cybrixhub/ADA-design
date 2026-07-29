@@ -7,24 +7,16 @@ import Link from "next/link";
 import type { Project } from "@/lib/projects";
 import { projectCoords } from "@/lib/project-coords";
 
-const bubbleHtml = (size: number) => `
-<div style="position:relative;width:${size}px;height:${size}px;">
-  <div style="position:absolute;inset:0;background:rgba(196,112,79,0.28);border-radius:50%;animation:adaPinPulse 2.2s ease-out infinite;"></div>
-  <div style="position:absolute;inset:${Math.round(size * 0.18)}px;background:#C4704F;border:2px solid #2F2018;border-radius:50%;box-shadow:0 3px 10px rgba(47,32,24,0.4);display:flex;align-items:center;justify-content:center;">
-    <div style="width:${Math.max(4, Math.round(size * 0.14))}px;height:${Math.max(4, Math.round(size * 0.14))}px;background:#FDFCFA;border-radius:50%;box-shadow:0 0 0 2px rgba(253,252,250,0.35);"></div>
-  </div>
-</div>
-<style>@keyframes adaPinPulse{0%{transform:scale(0.85);opacity:0.75}70%{transform:scale(1.25);opacity:0}100%{transform:scale(1.25);opacity:0}}</style>
-`;
+const pinHtml = `<div style="filter:drop-shadow(0 3px 6px rgba(47,32,24,0.4))"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="32" viewBox="0 0 22 32"><path d="M11 0C4.925 0 0 4.925 0 11C0 19.25 11 32 11 32C11 32 22 19.25 22 11C22 4.925 17.075 0 11 0Z" fill="#C4704F"/><circle cx="11" cy="11" r="4.5" fill="#FDFCFA"/><circle cx="11" cy="11" r="2" fill="#C4704F"/></svg></div>`;
 
 const pinIcon =
   typeof window !== "undefined"
     ? L.divIcon({
         className: "",
-        html: bubbleHtml(34),
-        iconSize: [34, 34],
-        iconAnchor: [17, 17],
-        popupAnchor: [0, -22],
+        html: pinHtml,
+        iconSize: [22, 32],
+        iconAnchor: [11, 32],
+        popupAnchor: [0, -34],
       })
     : undefined;
 

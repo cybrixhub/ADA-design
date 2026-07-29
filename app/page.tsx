@@ -114,11 +114,11 @@ export default async function HomePage() {
       {/* ── PROJECT MAP ── */}
       <MapSection projects={projects} />
 
-      {/* ── FEATURED PROJECTS ── */}
-      <FeaturedProjects />
-
       {/* ── TESTIMONIALS ── */}
       <Testimonials />
+
+      {/* ── FEATURED PROJECTS ── */}
+      <FeaturedProjects />
 
       {/* ── PROCESS ── */}
       <section className="section-pad bg-bark relative overflow-hidden">

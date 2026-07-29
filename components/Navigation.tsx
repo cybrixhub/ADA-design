@@ -26,18 +26,14 @@ export default function Navigation() {
     setMenuOpen(false);
   }, [pathname]);
 
-  const isHome = pathname === "/";
-
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled || !isHome || menuOpen
-          ? "bg-off-white/95 backdrop-blur-md border-b border-linen"
-          : "bg-transparent"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-off-white/95 backdrop-blur-md border-b border-linen ${
+        scrolled ? "shadow-sm" : ""
       }`}
     >
       <div className="container-wide flex items-center justify-between h-16 md:h-20">
-        {/* Logo */}
+        {/* Logo — always shown in its original form */}
         <Link href="/" aria-label="ADA Design" className="flex items-center h-10 md:h-12">
           <Image
             src="/ada-logo.jpg"
@@ -45,11 +41,7 @@ export default function Navigation() {
             width={220}
             height={120}
             priority
-            className={`h-full w-auto transition-[filter] duration-300 ${
-              scrolled || !isHome || menuOpen
-                ? "mix-blend-multiply"
-                : "invert mix-blend-screen"
-            }`}
+            className="h-full w-auto mix-blend-multiply"
           />
         </Link>
 
@@ -63,9 +55,7 @@ export default function Navigation() {
                 after:absolute after:bottom-0 after:left-0 after:h-px after:transition-all after:duration-300
                 ${pathname === href
                   ? "text-terracotta after:w-full after:bg-terracotta"
-                  : scrolled || !isHome
-                    ? "text-stone hover:text-bark after:w-0 hover:after:w-full after:bg-bark"
-                    : "text-off-white/80 hover:text-off-white after:w-0 hover:after:w-full after:bg-off-white"
+                  : "text-stone hover:text-bark after:w-0 hover:after:w-full after:bg-bark"
                 }`}
             >
               {label}
@@ -79,21 +69,9 @@ export default function Navigation() {
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
-          <span
-            className={`block h-px w-6 transition-all duration-300 ${
-              scrolled || !isHome || menuOpen ? "bg-bark" : "bg-off-white"
-            } ${menuOpen ? "rotate-45 translate-y-[7px]" : ""}`}
-          />
-          <span
-            className={`block h-px w-6 transition-all duration-300 ${
-              scrolled || !isHome || menuOpen ? "bg-bark" : "bg-off-white"
-            } ${menuOpen ? "opacity-0" : ""}`}
-          />
-          <span
-            className={`block h-px w-6 transition-all duration-300 ${
-              scrolled || !isHome || menuOpen ? "bg-bark" : "bg-off-white"
-            } ${menuOpen ? "-rotate-45 -translate-y-[7px]" : ""}`}
-          />
+          <span className={`block h-px w-6 bg-bark transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-[7px]" : ""}`} />
+          <span className={`block h-px w-6 bg-bark transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`} />
+          <span className={`block h-px w-6 bg-bark transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-[7px]" : ""}`} />
         </button>
       </div>
 

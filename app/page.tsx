@@ -9,23 +9,16 @@ import ProjectMarquee from "@/components/ProjectMarquee";
 import HeroSlideshow, { type HeroSlide } from "@/components/HeroSlideshow";
 import FeaturedProjects from "@/components/FeaturedProjects";
 import Testimonials from "@/components/Testimonials";
-import { getProjects, getSettings } from "@/lib/admin/kv";
+import { getProjects } from "@/lib/admin/kv";
 
 export const dynamic = "force-dynamic";
 
-const DEFAULT_HERO_SLUGS = [
-  "44-kidd-circuit-goulburn-nsw-2580",
-  "12-dexter-road-lochinvar-nsw-2321",
-  "1-bandon-road-vineyard-nsw",
-  "10-mccormack-street-arndell-park-nsw-2148",
-  "19-bayview-road-burraneer-nsw-2230",
+const HERO_SLIDES: HeroSlide[] = [
+  { src: "/hero/01.png", alt: "AD Design architectural render", label: "Residential design · NSW" },
+  { src: "/hero/02.jpg", alt: "AD Design architectural render", label: "Purpose-built spaces · NSW" },
+  { src: "/hero/03.png", alt: "AD Design architectural render", label: "Site-first architecture · NSW" },
+  { src: "/hero/04.png", alt: "AD Design architectural render", label: "Built to last · NSW" },
 ];
-
-function extractSuburb(address: string) {
-  const parts = address.trim().split(/\s+/);
-  const nswIdx = parts.findIndex((p) => p.toUpperCase() === "NSW");
-  return nswIdx > 0 ? `${parts[nswIdx - 1]}, NSW` : address;
-}
 
 const values = [
   {
@@ -46,19 +39,8 @@ const values = [
 ];
 
 export default async function HomePage() {
-  const [projects, settings] = await Promise.all([getProjects(), getSettings()]);
-  const heroSlugs = settings.heroSlugs.length > 0 ? settings.heroSlugs : DEFAULT_HERO_SLUGS;
-
-  const heroSlides: HeroSlide[] = heroSlugs.map((slug) =>
-    projects.find((p) => p.slug === slug)
-  )
-    .filter((p): p is (typeof projects)[number] => Boolean(p))
-    .filter((p) => p.images.length > 0)
-    .map((p) => ({
-      src: p.images[0],
-      alt: p.title,
-      label: `Selected project — ${extractSuburb(p.address)}`,
-    }));
+  const projects = await getProjects();
+  const heroSlides = HERO_SLIDES;
 
   return (
     <>

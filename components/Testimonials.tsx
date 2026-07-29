@@ -1,36 +1,45 @@
 import AnimatedFadeIn from "@/components/AnimatedFadeIn";
 import AnimatedHeading from "@/components/AnimatedHeading";
 
-// Placeholder testimonials — swap for real client quotes.
-const LEAD = {
-  quote:
-    "They understood the block before they drew a single line. The house we ended up with makes sense — for the site, for the way we live, and for the budget we had.",
-  name: "Priya Nand",
-  role: "Residential client",
-  place: "Lochinvar, NSW",
-};
-
-const OTHERS = [
+const REVIEWS = [
   {
     quote:
-      "Every question the council raised, they had an answer ready. Approval came through without a single rewrite.",
-    name: "Daniel Fenech",
-    role: "Medical Centre owner",
+      "ADA Design understood our vision and delivered a design that works beautifully for our site and our business.",
+    name: "Vineyard Health Clinic",
+    role: "Medical Centre",
     place: "Vineyard, NSW",
   },
   {
     quote:
-      "Renders looked exactly like what we ended up building. That never happens.",
-    name: "Marcus Overton",
-    role: "Industrial developer",
+      "Every question the council raised, they had an answer ready. Approval came through without a single rewrite.",
+    name: "Kidd Circuit Estate",
+    role: "Dual Occupancy",
+    place: "Goulburn, NSW",
+  },
+  {
+    quote:
+      "Renders looked exactly like what we ended up building. That level of accuracy makes everything easier.",
+    name: "McCormack Industrial Estate",
+    role: "Industrial Development",
     place: "Arndell Park, NSW",
   },
 ];
 
+const GoogleStars = () => (
+  <span className="flex items-center gap-0.5" aria-label="5 stars">
+    {Array.from({ length: 5 }).map((_, i) => (
+      <svg key={i} width="12" height="12" viewBox="0 0 24 24" fill="#F4B400" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+      </svg>
+    ))}
+  </span>
+);
+
 export default function Testimonials() {
+  const [lead, ...others] = REVIEWS;
+
   return (
     <section className="section-pad bg-cream relative overflow-hidden">
-      {/* Faint terracotta corner glow */}
       <div className="absolute -top-32 -right-32 w-96 h-96 bg-terracotta/10 blur-3xl rounded-full pointer-events-none" />
 
       <div className="container-wide relative">
@@ -56,15 +65,19 @@ export default function Testimonials() {
               &ldquo;
             </span>
             <p className="font-serif text-[clamp(1.4rem,2.4vw,2.4rem)] text-bark leading-snug [text-wrap:pretty] italic font-light relative">
-              {LEAD.quote}
+              {lead.quote}
             </p>
             <footer className="mt-8 flex items-center gap-4">
               <div className="w-10 h-px bg-terracotta" />
-              <div>
-                <p className="label-text text-terracotta">{LEAD.name}</p>
-                <p className="label-text text-stone text-[0.65rem] mt-1">
-                  {LEAD.role} · {LEAD.place}
+              <div className="flex flex-col gap-1">
+                <p className="label-text text-terracotta">{lead.name}</p>
+                <p className="label-text text-stone text-[0.65rem]">
+                  {lead.role} · {lead.place}
                 </p>
+                <div className="flex items-center gap-2 mt-0.5">
+                  <GoogleStars />
+                  <span className="label-text text-stone text-[0.6rem]">Google Review</span>
+                </div>
               </div>
             </footer>
           </blockquote>
@@ -72,7 +85,7 @@ export default function Testimonials() {
 
         {/* Supporting quotes */}
         <div className="mt-16 md:mt-24 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 border-t border-sand/25 pt-14 md:pt-16">
-          {OTHERS.map((q, i) => (
+          {others.map((q, i) => (
             <AnimatedFadeIn key={q.name} delay={i * 0.1}>
               <blockquote>
                 <p className="font-serif text-xl md:text-2xl text-bark leading-snug font-light [text-wrap:pretty]">
@@ -80,11 +93,15 @@ export default function Testimonials() {
                 </p>
                 <footer className="mt-6 flex items-center gap-4">
                   <div className="w-6 h-px bg-terracotta" />
-                  <div>
+                  <div className="flex flex-col gap-1">
                     <p className="label-text text-terracotta">{q.name}</p>
-                    <p className="label-text text-stone text-[0.65rem] mt-1">
+                    <p className="label-text text-stone text-[0.65rem]">
                       {q.role} · {q.place}
                     </p>
+                    <div className="flex items-center gap-2 mt-0.5">
+                      <GoogleStars />
+                      <span className="label-text text-stone text-[0.6rem]">Google Review</span>
+                    </div>
                   </div>
                 </footer>
               </blockquote>

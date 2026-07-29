@@ -151,27 +151,23 @@ export default async function HomePage() {
                 num: "01",
                 title: "Brief & site",
                 body: "Tell us the block, the orientation, and what you want to build. We visit the site and return with a first-pass massing concept.",
-                note: "Week 1–2",
               },
               {
                 num: "02",
                 title: "Design & render",
                 body: "Floor plans, elevations, and a photorealistic 3D render. Materials resolved, cost-tested against the brief, ready for council.",
-                note: "Week 3–8",
               },
               {
                 num: "03",
-                title: "DA & approval",
+                title: "DA/CDC approval",
                 body: "We lodge the Development Application and manage all council RFIs through to consent. One point of contact from first sketch to signed-off drawings.",
-                note: "Week 8+",
               },
             ].map((step, i) => (
               <AnimatedFadeIn key={step.num} delay={i * 0.1}>
                 <div className="border-r border-b border-white/10 p-6 md:p-8 flex flex-col h-full">
                   <p className="label-text text-sand/70 text-[0.6rem] mb-4">{step.num}</p>
                   <h3 className="font-serif text-xl md:text-2xl text-off-white mb-3">{step.title}</h3>
-                  <p className="text-white/55 font-light text-sm leading-relaxed mb-6">{step.body}</p>
-                  <p className="label-text text-terracotta mt-auto">{step.note}</p>
+                  <p className="text-white/55 font-light text-sm leading-relaxed">{step.body}</p>
                 </div>
               </AnimatedFadeIn>
             ))}

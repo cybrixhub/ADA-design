@@ -35,7 +35,8 @@ export default function HeroSlideshow({
             alt={s.alt}
             fill
             priority={i === 0}
-            sizes="(max-width: 768px) 100vw, 75vw"
+            sizes="100vw"
+            quality={90}
             className="object-cover object-center"
           />
         </div>

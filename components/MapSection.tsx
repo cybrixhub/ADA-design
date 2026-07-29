@@ -1,10 +1,15 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import type { Project } from "@/lib/projects";
 
 const ProjectMap = dynamic(() => import("./ProjectMap"), { ssr: false });
 
-export default function MapSection() {
+interface Props {
+  projects: Project[];
+}
+
+export default function MapSection({ projects }: Props) {
   return (
     <section className="bg-off-white border-b border-sand/25">
       <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 pt-8 pb-0">
@@ -24,7 +29,7 @@ export default function MapSection() {
         </div>
       </div>
       <div className="h-[380px] md:h-[480px]">
-        <ProjectMap />
+        <ProjectMap projects={projects} />
       </div>
     </section>
   );

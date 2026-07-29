@@ -112,7 +112,7 @@ export default async function HomePage() {
       <ProjectMarquee />
 
       {/* ── PROJECT MAP ── */}
-      <MapSection />
+      <MapSection projects={projects} />
 
       {/* ── FEATURED PROJECTS ── */}
       <FeaturedProjects />

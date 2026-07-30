@@ -14,10 +14,10 @@ import { getProjects } from "@/lib/admin/kv";
 export const dynamic = "force-dynamic";
 
 const HERO_SLIDES: HeroSlide[] = [
-  { src: "/hero/01.png", alt: "AD Design architectural render", label: "Residential design · NSW" },
-  { src: "/hero/02.jpg", alt: "AD Design architectural render", label: "Purpose-built spaces · NSW" },
-  { src: "/hero/03.png", alt: "AD Design architectural render", label: "Site-first architecture · NSW" },
-  { src: "/hero/04.png", alt: "AD Design architectural render", label: "Built to last · NSW" },
+  { src: "/hero/01.jpg", alt: "44 Kidd Circuit Goulburn — Dual Occupancy", label: "Dual occupancy · Goulburn, NSW" },
+  { src: "/hero/02.jpg", alt: "44 Kidd Circuit Goulburn — Built project", label: "Residential design · Goulburn, NSW" },
+  { src: "/hero/03.jpg", alt: "27 Frederick Street Ryde — Dual Occupancy", label: "Dual occupancy · Ryde, NSW" },
+  { src: "/hero/04.jpg", alt: "53 Marsden Road St Marys — Double Storey", label: "Double storey dwelling · St Marys, NSW" },
 ];
 
 const values = [

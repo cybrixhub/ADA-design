@@ -52,7 +52,7 @@ export default function AboutPage() {
       {/* ── PAGE HEADER ── */}
       <section className="pt-24 pb-0 md:pt-32 bg-bark overflow-hidden">
         <div className="container-wide">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-end pb-0">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start pb-0">
             <div>
               <p className="label-text text-sand/40 mb-6">Who we are</p>
               <h1 className="font-serif text-display-lg text-off-white leading-none">
@@ -61,7 +61,7 @@ export default function AboutPage() {
                 in NSW.
               </h1>
             </div>
-            <div className="pb-8 md:pb-16">
+            <div className="md:pt-10">
               <p className="text-white/50 text-lg font-light leading-relaxed max-w-sm">
                 ADA Design works across nine building types — from a single-storey home on a suburban lot to a medical clinic on a main road. Every project is drawn from its site, its brief, and the way a building actually gets built.
               </p>
@@ -210,7 +210,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="py-12 bg-terracotta">
+      <section className="py-12 bg-bark">
         <div className="container-wide flex flex-col md:flex-row items-center justify-between gap-8">
           <h2 className="font-serif text-2xl md:text-3xl text-off-white max-w-md [text-wrap:balance]">
             Have a site to design for?

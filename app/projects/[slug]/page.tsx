@@ -139,23 +139,55 @@ export default async function ProjectPage({ params }: PageProps) {
       )}
 
       {/* ── DESCRIPTION ── */}
-      {project.description && (
-        <section className="section-pad bg-cream border-t border-sand/20">
-          <div className="container-wide">
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16">
-              <div className="md:col-span-3">
-                <p className="label-text text-stone mb-4">Project brief</p>
-                <div className="w-8 h-px bg-terracotta" />
-              </div>
-              <div className="md:col-span-9">
-                <p className="font-serif text-lg md:text-xl text-bark leading-relaxed font-light [text-wrap:pretty]">
-                  {project.description}
-                </p>
+      {project.description && (() => {
+        const sepIdx = project.description.indexOf('\nBRIEFING\n');
+        const fallbackIdx = project.description.indexOf('BRIEFING');
+        const hasSep = sepIdx !== -1;
+        const narrative = hasSep
+          ? project.description.slice(0, sepIdx).trim()
+          : fallbackIdx !== -1
+            ? project.description.slice(0, fallbackIdx).trim()
+            : project.description.trim();
+        const briefingRaw = hasSep
+          ? project.description.slice(sepIdx + '\nBRIEFING\n'.length)
+          : fallbackIdx !== -1
+            ? project.description.slice(fallbackIdx + 'BRIEFING'.length).replace(/^\s*/, '')
+            : '';
+        const briefingItems = briefingRaw.split('\n').filter(Boolean).map(line => {
+          const colon = line.indexOf(':');
+          return colon > 0 ? { label: line.slice(0, colon).trim(), value: line.slice(colon + 1).trim() } : null;
+        }).filter((x): x is { label: string; value: string } => x !== null);
+
+        return (
+          <section className="section-pad bg-cream border-t border-sand/20">
+            <div className="container-wide">
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16">
+                <div className="md:col-span-3">
+                  <p className="label-text text-stone mb-4">Project brief</p>
+                  <div className="w-8 h-px bg-terracotta" />
+                </div>
+                <div className="md:col-span-9 space-y-8">
+                  {narrative && (
+                    <p className="font-serif text-lg md:text-xl text-bark leading-relaxed font-light [text-wrap:pretty]">
+                      {narrative}
+                    </p>
+                  )}
+                  {briefingItems.length > 0 && (
+                    <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-5 border-t border-sand/20 pt-6">
+                      {briefingItems.map(({ label, value }) => (
+                        <div key={label}>
+                          <dt className="label-text text-stone mb-1">{label}</dt>
+                          <dd className="text-bark text-sm font-light leading-relaxed">{value}</dd>
+                        </div>
+                      ))}
+                    </dl>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-        </section>
-      )}
+          </section>
+        );
+      })()}
 
       {/* ── RELATED PROJECTS ── */}
       {related.length > 0 && (

@@ -345,3 +345,5 @@ export const projects: Project[] = [
     "images": ["/projects/lot-8-fifteenth-avenue-austral-nsw-2179/01.jpg", "/projects/lot-8-fifteenth-avenue-austral-nsw-2179/02.jpg", "/projects/lot-8-fifteenth-avenue-austral-nsw-2179/03.jpg", "/projects/lot-8-fifteenth-avenue-austral-nsw-2179/04.jpg"]
   },
 ];
+
+export const categories: string[] = projects.map((p) => p.category);

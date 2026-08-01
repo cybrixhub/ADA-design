@@ -224,25 +224,25 @@ export default async function ProjectPage({ params }: PageProps) {
             {/* Previous */}
             <Link
               href={`/projects/${prev.slug}`}
-              className="group flex flex-col border-r border-sand/25 hover:bg-off-white transition-colors overflow-hidden"
+              className="group flex items-center gap-4 border-r border-sand/25 p-6 md:p-8 hover:bg-off-white transition-colors overflow-hidden"
             >
               {prev.images[0] && (
-                <div className="relative w-full aspect-[16/7] overflow-hidden bg-cream">
+                <div className="relative w-20 h-16 md:w-28 md:h-20 shrink-0 overflow-hidden rounded-sm bg-linen">
                   <Image
                     src={prev.images[0]}
                     alt={prev.title}
                     fill
-                    className="object-contain group-hover:scale-[1.02] transition-transform duration-500"
-                    sizes="50vw"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    sizes="112px"
                   />
                 </div>
               )}
-              <div className="flex flex-col gap-2 p-6 md:p-8">
+              <div className="flex flex-col gap-1 min-w-0">
                 <div className="flex items-center gap-2 label-text text-stone">
-                  <ArrowLeft size={12} className="group-hover:-translate-x-1 transition-transform" />
+                  <ArrowLeft size={12} className="group-hover:-translate-x-1 transition-transform shrink-0" />
                   Previous
                 </div>
-                <p className="font-serif text-lg md:text-xl text-bark leading-tight">{prev.title}</p>
+                <p className="font-serif text-base md:text-lg text-bark leading-tight line-clamp-2">{prev.title}</p>
                 <p className="label-text text-sand">{prev.category}</p>
               </div>
             </Link>
@@ -250,27 +250,27 @@ export default async function ProjectPage({ params }: PageProps) {
             {/* Next */}
             <Link
               href={`/projects/${next.slug}`}
-              className="group flex flex-col hover:bg-off-white transition-colors text-right items-end overflow-hidden"
+              className="group flex items-center justify-end gap-4 p-6 md:p-8 hover:bg-off-white transition-colors overflow-hidden"
             >
+              <div className="flex flex-col gap-1 items-end min-w-0">
+                <div className="flex items-center gap-2 label-text text-stone">
+                  Next
+                  <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform shrink-0" />
+                </div>
+                <p className="font-serif text-base md:text-lg text-bark leading-tight text-right line-clamp-2">{next.title}</p>
+                <p className="label-text text-sand">{next.category}</p>
+              </div>
               {next.images[0] && (
-                <div className="relative w-full aspect-[16/7] overflow-hidden bg-cream">
+                <div className="relative w-20 h-16 md:w-28 md:h-20 shrink-0 overflow-hidden rounded-sm bg-linen">
                   <Image
                     src={next.images[0]}
                     alt={next.title}
                     fill
-                    className="object-contain group-hover:scale-[1.02] transition-transform duration-500"
-                    sizes="50vw"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    sizes="112px"
                   />
                 </div>
               )}
-              <div className="flex flex-col gap-2 p-6 md:p-8 items-end">
-                <div className="flex items-center gap-2 label-text text-stone">
-                  Next
-                  <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
-                </div>
-                <p className="font-serif text-lg md:text-xl text-bark leading-tight">{next.title}</p>
-                <p className="label-text text-sand">{next.category}</p>
-              </div>
             </Link>
           </div>
         </div>

@@ -38,7 +38,7 @@ export default function Navigation() {
           : "bg-off-white/95 backdrop-blur-md border-b border-linen"
       }`}
     >
-      <div className="container-wide flex items-center justify-between h-16 md:h-20">
+      <div className="container-wide flex items-center justify-between h-20 md:h-24">
         {/* Logo — white pill keeps the original black logo readable on any background */}
         <Link href="/" aria-label="ADA Design" className="flex items-center">
           <span className="bg-white px-3 rounded-sm block">
@@ -48,7 +48,7 @@ export default function Navigation() {
               width={160}
               height={80}
               priority
-              className="h-10 md:h-12 w-auto"
+              className="h-12 md:h-16 w-auto"
             />
           </span>
         </Link>
@@ -59,7 +59,7 @@ export default function Navigation() {
             <Link
               key={href}
               href={href}
-              className={`label-text transition-colors duration-300 relative
+              className={`text-[0.8rem] font-sans font-medium tracking-[0.18em] uppercase transition-colors duration-300 relative
                 after:absolute after:bottom-0 after:left-0 after:h-px after:transition-all after:duration-300
                 ${pathname === href
                   ? "text-terracotta after:w-full after:bg-terracotta"

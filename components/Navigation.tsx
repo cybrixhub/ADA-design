@@ -41,7 +41,7 @@ export default function Navigation() {
       <div className="container-wide flex items-center justify-between h-16 md:h-20">
         {/* Logo — white pill keeps the original black logo readable on any background */}
         <Link href="/" aria-label="ADA Design" className="flex items-center">
-          <span className="bg-white px-3 py-1.5 rounded-sm block">
+          <span className="bg-white px-3 rounded-sm block">
             <Image
               src="/ada-logo.jpg"
               alt="ADA Design"

@@ -47,10 +47,10 @@ export default function MaintenancePage() {
           Back shortly. Reach us in the meantime.
         </p>
         <a
-          href="mailto:hello@adadesign.com.au"
+          href="mailto:info@adadesign.com.au"
           className="text-sand/60 hover:text-sand transition-colors duration-300 text-sm font-sans tracking-wide"
         >
-          hello@adadesign.com.au
+          info@adadesign.com.au
         </a>
       </main>
 

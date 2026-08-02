@@ -48,7 +48,12 @@ export default function Footer() {
           <div className="md:pl-16">
             <p className="label-text text-white/30 mb-6">Contact</p>
             <ul className="space-y-4 text-sm text-white/60 font-light">
-              <li>hello@adadesign.com.au</li>
+              <li>
+                <a href="mailto:info@adadesign.com.au" className="hover:text-white transition-colors">info@adadesign.com.au</a>
+              </li>
+              <li>
+                <a href="tel:0431231255" className="hover:text-white transition-colors">0431 231 255</a>
+              </li>
               <li className="leading-relaxed">
                 Sydney, NSW<br />
                 Australia

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Send, MapPin, Mail } from "lucide-react";
+import { Send, MapPin, Mail, Phone } from "lucide-react";
 import { projects } from "@/lib/projects";
 
 // Set NEXT_PUBLIC_FORMSPREE_ENDPOINT in Vercel (formspree.io → New Form → copy endpoint URL)
@@ -39,7 +39,7 @@ export default function ContactPage() {
     setLoading(true);
     setError("");
     if (!FORMSPREE_ENDPOINT) {
-      setError("Contact form not configured. Email us directly at hello@adadesign.com.au");
+      setError("Contact form not configured. Email us directly at info@adadesign.com.au");
       setLoading(false);
       return;
     }
@@ -52,10 +52,10 @@ export default function ContactPage() {
       if (res.ok) {
         setSubmitted(true);
       } else {
-        setError("Something went wrong. Email us directly at hello@adadesign.com.au");
+        setError("Something went wrong. Email us directly at info@adadesign.com.au");
       }
     } catch {
-      setError("Something went wrong. Email us directly at hello@adadesign.com.au");
+      setError("Something went wrong. Email us directly at info@adadesign.com.au");
     } finally {
       setLoading(false);
     }
@@ -93,7 +93,11 @@ export default function ContactPage() {
               <div className="space-y-4">
                 <div className="flex items-center gap-3 text-stone font-light text-sm">
                   <Mail size={14} className="text-terracotta shrink-0" />
-                  <span>hello@adadesign.com.au</span>
+                  <a href="mailto:info@adadesign.com.au" className="hover:text-bark transition-colors">info@adadesign.com.au</a>
+                </div>
+                <div className="flex items-center gap-3 text-stone font-light text-sm">
+                  <Phone size={14} className="text-terracotta shrink-0" />
+                  <a href="tel:0431231255" className="hover:text-bark transition-colors">0431 231 255</a>
                 </div>
                 <div className="flex items-start gap-3 text-stone font-light text-sm">
                   <MapPin size={14} className="text-terracotta shrink-0 mt-0.5" />

@@ -75,10 +75,19 @@ function ProjectsContent({ projects }: { projects: Project[] }) {
       {/* ── HEADER ── */}
       <section className="pt-24 pb-8 md:pt-32 md:pb-10 bg-linen">
         <div className="container-wide">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-end">
             <div>
               <p className="label-text text-stone mb-6">What we build</p>
               <h1 className="font-serif text-display-lg text-bark">Projects</h1>
+            </div>
+            <div className="flex items-center justify-center md:pb-2">
+              <Image
+                src="/ada-stamp.jpg"
+                alt="NSW Registered Architect · Denis Nobel · Reg. No. 12432"
+                width={140}
+                height={140}
+                className="w-28 h-28 md:w-36 md:h-36 object-contain mix-blend-multiply opacity-75"
+              />
             </div>
             <p className="text-stone font-light text-lg max-w-md leading-relaxed pb-2">
               Across New South Wales — residential dwellings, medical facilities, and industrial developments, each designed for its site and use.

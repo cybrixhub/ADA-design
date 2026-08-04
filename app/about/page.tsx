@@ -52,7 +52,7 @@ export default function AboutPage() {
       {/* ── PAGE HEADER ── */}
       <section className="pt-24 pb-0 md:pt-32 bg-bark overflow-hidden">
         <div className="container-wide">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start pb-0">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-center pb-0">
             <div>
               <p className="label-text text-sand/40 mb-6">Who we are</p>
               <h1 className="font-serif text-display-lg text-off-white leading-none">
@@ -61,7 +61,16 @@ export default function AboutPage() {
                 in NSW.
               </h1>
             </div>
-            <div className="md:pt-10">
+            <div className="flex items-center justify-center">
+              <Image
+                src="/ada-stamp.jpg"
+                alt="NSW Registered Architect · Denis Nobel · Reg. No. 12432"
+                width={176}
+                height={176}
+                className="w-36 h-36 md:w-44 md:h-44 object-contain"
+              />
+            </div>
+            <div className="md:pt-4">
               <p className="text-white/50 text-lg font-light leading-relaxed max-w-sm">
                 ADA Design works across nine building types — from a single-storey home on a suburban lot to a medical clinic on a main road. Every project is drawn from its site, its brief, and the way a building actually gets built.
               </p>
@@ -116,16 +125,6 @@ export default function AboutPage() {
                 <p className="font-serif text-xl text-bark leading-relaxed font-light">
                   From engineering and town planning to BASIX and specialist consultants, we coordinate every discipline — providing one seamless point of contact from concept through approval.
                 </p>
-              </div>
-              <div className="flex items-center gap-4 pt-2 border-t border-sand/20">
-                <Image
-                  src="/ada-stamp.jpg"
-                  alt="NSW Registered Architect stamp"
-                  width={52}
-                  height={52}
-                  className="w-11 h-11 object-contain opacity-65 shrink-0"
-                />
-                <p className="label-text text-stone">NSW Registered Architect · Denis Nobel · Reg. No. 12432</p>
               </div>
             </div>
           </div>

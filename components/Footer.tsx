@@ -15,7 +15,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="md:col-span-1 md:pr-16">
             <Image
-              src="/ada-logo.jpg"
+              src="/ada-logo.png"
               alt="ADA Design"
               width={220}
               height={120}

@@ -41,12 +41,12 @@ export default function Navigation() {
       <div className="container-wide flex items-center justify-between h-20 md:h-24">
         <Link href="/" aria-label="ADA Design" className="flex items-center">
           <Image
-            src="/ada-logo.jpg"
+            src="/ada-logo.png"
             alt="ADA Design"
             width={160}
             height={80}
             priority
-            className={`h-12 md:h-16 w-auto transition-all duration-500 ${transparent ? "invert" : ""}`}
+            className="h-12 md:h-16 w-auto"
           />
         </Link>
 

@@ -79,13 +79,12 @@ export default async function HomePage() {
             <AnimatedFadeIn delay={1.9}>
               <div className="flex items-center gap-4 mb-8">
                 <div className="w-5 h-px bg-sand/30" />
-                <p className="label-text text-sand/60">Designed for Place – Built for Life</p>
+                <p className="label-text text-sand/60">ADA Design · NSW</p>
               </div>
             </AnimatedFadeIn>
             <AnimatedHeading as="h1" delay={2.0} className="font-serif text-display-xl text-off-white mb-10 [text-wrap:balance] drop-shadow-[0_2px_20px_rgba(0,0,0,0.55)]">
-              Purpose-built<br />
-              <em className="not-italic text-terracotta">for</em><br />
-              its site.
+              Designed for Place<br />
+              <em className="not-italic text-terracotta">–</em> Built for Life
             </AnimatedHeading>
             <AnimatedFadeIn delay={2.3}>
               <p className="text-white/85 text-lg font-light leading-relaxed max-w-sm mb-12 drop-shadow-[0_1px_12px_rgba(0,0,0,0.7)]">

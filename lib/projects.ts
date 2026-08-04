@@ -1,4 +1,4 @@
-export type Project = {
+﻿export type Project = {
   slug: string;
   title: string;
   address: string;
@@ -8,14 +8,6 @@ export type Project = {
 };
 
 export const projects: Project[] = [
-  {
-    "slug": "1-bandon-road-vineyard-nsw",
-    "title": "THE VINEYARD HEALTH CLINIC",
-    "address": "1 Bandon Road Vineyard NSW",
-    "category": "Medical Centre",
-    "description": "The Vineyard Health Clinic has been carefully designed to provide a comprehensive healthcare environment that balances operational efficiency with patient-focused design. Through the adaptive reuse of an existing building, the project introduces a refined medical facility featuring modern consulting suites, treatment rooms, diagnostic services, and welcoming reception spaces. The architectural approach enhances the building's street presence through contemporary materials, integrated branding, and thoughtfully designed landscaping, creating a professional identity that reflects the quality of care offered within. The result is a modern healthcare centre that supports a broad range of medical and dental services while contributing positively to the ongoing growth of the Vineyard community.\nBRIEFING\nSector: Healthcare\nScope: Adaptive reuse and architectural design.\nProject Specifications: Contemporary medical and dental health clinic with modern consulting, treatment, and patient care facilities.\nServices: Architectural design, interior planning, fa\u00e7ade enhancement, landscape design, and development application documentation.\nLocation: Vineyard, NSW",
-    "images": ["/projects/1-bandon-road-vineyard-nsw/01.jpg"]
-  },
   {
     "slug": "10-mccormack-street-arndell-park-nsw-2148",
     "title": "THE MCCORMACK INDUSTRIAL ESTATE",
@@ -343,6 +335,14 @@ export const projects: Project[] = [
     "category": "Single Storey Dwelling",
     "description": "A beautifully balanced modern family home meticulously planned for Lot 8, Wadanggari Street, satisfying rigorous local Complying Development Codes (CDC). Styled in a timeless neutral palette of smooth white render, organic stone masonry, and classic facebrick details, it offers a functional, low-maintenance lifestyle configuration. The floor plan features a highly practical architectural distribution: 4 Bedrooms: Balanced four-bedroom arrangement with built-in storage solutions and large glass windows for natural light entry. 2 Bathrooms: Full family asset configuration including a main multi-fixture bathroom plus a master bedroom shower ensuite. 1 Living & Dining Room: Deep open-concept family zone direct-connected to an efficient kitchen template and integrated walk-in pantry area. 1 Laundry Space: Dedicated utility room with direct side-path access to outdoor folding clothesline areas. 1 Double Garage: Secure dual-car parking facility boasting direct internal access to the main hallway corridor.\nBRIEFING\nSector: Residential\nScope: New single-storey residential dwelling.\nProject Specifications: Contemporary four-bedroom family home with open-plan living, double garage, and practical family-focused layout.\nServices: Architectural design, complying development documentation (CDC), and consultant coordination.\nLocation: Austral, NSW",
     "images": ["/projects/lot-8-fifteenth-avenue-austral-nsw-2179/01.jpg", "/projects/lot-8-fifteenth-avenue-austral-nsw-2179/02.jpg", "/projects/lot-8-fifteenth-avenue-austral-nsw-2179/03.jpg", "/projects/lot-8-fifteenth-avenue-austral-nsw-2179/04.jpg"]
+  },
+  {
+    "slug": "1-bandon-road-vineyard-nsw",
+    "title": "THE VINEYARD HEALTH CLINIC",
+    "address": "1 Bandon Road Vineyard NSW",
+    "category": "Medical Centre",
+    "description": "The Vineyard Health Clinic has been carefully designed to provide a comprehensive healthcare environment that balances operational efficiency with patient-focused design. Through the adaptive reuse of an existing building, the project introduces a refined medical facility featuring modern consulting suites, treatment rooms, diagnostic services, and welcoming reception spaces. The architectural approach enhances the building's street presence through contemporary materials, integrated branding, and thoughtfully designed landscaping, creating a professional identity that reflects the quality of care offered within. The result is a modern healthcare centre that supports a broad range of medical and dental services while contributing positively to the ongoing growth of the Vineyard community.\nBRIEFING\nSector: Healthcare\nScope: Adaptive reuse and architectural design.\nProject Specifications: Contemporary medical and dental health clinic with modern consulting, treatment, and patient care facilities.\nServices: Architectural design, interior planning, fa\u00e7ade enhancement, landscape design, and development application documentation.\nLocation: Vineyard, NSW",
+    "images": ["/projects/1-bandon-road-vineyard-nsw/01.jpg"]
   },
 ];
 

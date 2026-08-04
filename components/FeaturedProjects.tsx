@@ -9,7 +9,7 @@ import { formatAddress } from "@/lib/format-address";
 const FEATURED_SLUGS = [
   "44-kidd-circuit-goulburn-nsw-2580",
   "12-dexter-road-lochinvar-nsw-2321",
-  "1-bandon-road-vineyard-nsw",
+  "10-mccormack-street-arndell-park-nsw-2148",
 ];
 
 const featured = FEATURED_SLUGS.map((slug) => projects.find((p) => p.slug === slug)).filter(

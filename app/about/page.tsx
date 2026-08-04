@@ -112,6 +112,21 @@ export default function AboutPage() {
               <p>
                 We handle design, 3D rendering, documentation, and council liaison in-house. That means one point of contact from the first sketch to the approved set — and no coordination gaps between the render and the drawings that get built.
               </p>
+              <div className="border-l-2 border-terracotta pl-5 py-1">
+                <p className="font-serif text-xl text-bark leading-relaxed font-light">
+                  From engineering and town planning to BASIX and specialist consultants, we coordinate every discipline — providing one seamless point of contact from concept through approval.
+                </p>
+              </div>
+              <div className="flex items-center gap-4 pt-2 border-t border-sand/20">
+                <Image
+                  src="/ada-stamp.jpg"
+                  alt="NSW Registered Architect stamp"
+                  width={52}
+                  height={52}
+                  className="w-11 h-11 object-contain opacity-65 shrink-0"
+                />
+                <p className="label-text text-stone">NSW Registered Architect · Denis Nobel · Reg. No. 12432</p>
+              </div>
             </div>
           </div>
         </div>

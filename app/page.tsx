@@ -79,7 +79,7 @@ export default async function HomePage() {
             <AnimatedFadeIn delay={1.9}>
               <div className="flex items-center gap-4 mb-8">
                 <div className="w-5 h-px bg-sand/30" />
-                <p className="label-text text-sand/60">Architectural Design · NSW</p>
+                <p className="label-text text-sand/60">Designed for Place – Built for Life</p>
               </div>
             </AnimatedFadeIn>
             <AnimatedHeading as="h1" delay={2.0} className="font-serif text-display-xl text-off-white mb-10 [text-wrap:balance] drop-shadow-[0_2px_20px_rgba(0,0,0,0.55)]">
@@ -101,11 +101,6 @@ export default async function HomePage() {
           </div>
         </div>
 
-        {/* Scroll hint */}
-        <div className="absolute bottom-8 right-8 md:right-20 hidden md:flex flex-col items-center gap-3 text-white/30">
-          <div className="h-12 w-px bg-gradient-to-b from-transparent to-white/30" />
-          <p className="label-text rotate-90 origin-center text-white/30">Scroll</p>
-        </div>
       </section>
 
       {/* ── PROJECT MARQUEE ── */}

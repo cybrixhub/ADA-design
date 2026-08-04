@@ -39,18 +39,15 @@ export default function Navigation() {
       }`}
     >
       <div className="container-wide flex items-center justify-between h-20 md:h-24">
-        {/* Logo — white pill keeps the original black logo readable on any background */}
         <Link href="/" aria-label="ADA Design" className="flex items-center">
-          <span className="bg-white px-3 rounded-sm block">
-            <Image
-              src="/ada-logo.jpg"
-              alt="ADA Design"
-              width={160}
-              height={80}
-              priority
-              className="h-12 md:h-16 w-auto"
-            />
-          </span>
+          <Image
+            src="/ada-logo.jpg"
+            alt="ADA Design"
+            width={160}
+            height={80}
+            priority
+            className={`h-12 md:h-16 w-auto transition-all duration-500 ${transparent ? "invert" : ""}`}
+          />
         </Link>
 
         {/* Desktop nav */}

@@ -100,6 +100,16 @@ export default async function ProjectPage({ params }: PageProps) {
               <p className="text-bark text-sm font-light">AD Design Pty Ltd</p>
             </div>
           </div>
+          <div className="hidden md:flex justify-end items-center gap-3 mt-6 pt-5 border-t border-sand/20">
+            <p className="label-text text-stone/60">NSW Registered Architect</p>
+            <Image
+              src="/ada-stamp.jpg"
+              alt="NSW Registered Architect stamp"
+              width={48}
+              height={48}
+              className="w-11 h-11 object-contain opacity-55"
+            />
+          </div>
         </div>
       </section>
 

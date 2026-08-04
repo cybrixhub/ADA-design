@@ -6,7 +6,7 @@ import { Send, MapPin, Mail, Phone } from "lucide-react";
 import { projects } from "@/lib/projects";
 
 // Set NEXT_PUBLIC_FORMSPREE_ENDPOINT in Vercel (formspree.io → New Form → copy endpoint URL)
-const FORMSPREE_ENDPOINT = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT ?? "";
+const FORMSPREE_ENDPOINT = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT ?? "https://formsubmit.co/ajax/info@adadesign.com.au";
 
 const subjects = [
   "New residential project",
@@ -38,11 +38,6 @@ export default function ContactPage() {
     e.preventDefault();
     setLoading(true);
     setError("");
-    if (!FORMSPREE_ENDPOINT) {
-      setError("Contact form not configured. Email us directly at info@adadesign.com.au");
-      setLoading(false);
-      return;
-    }
     try {
       const res = await fetch(FORMSPREE_ENDPOINT, {
         method: "POST",

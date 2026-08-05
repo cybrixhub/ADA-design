@@ -127,7 +127,7 @@ export default async function HomePage() {
                 <p className="label-text text-sand/60 mb-6">How it works</p>
               </AnimatedFadeIn>
               <AnimatedHeading className="font-serif text-display-md text-off-white [text-wrap:balance]">
-                Three steps<br />
+                Four steps<br />
                 <em className="text-terracotta">from brief</em><br />
                 to approval.
               </AnimatedHeading>
@@ -139,7 +139,7 @@ export default async function HomePage() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 border-t border-l border-white/10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 border-t border-l border-white/10">
             {[
               {
                 num: "01",
@@ -155,6 +155,11 @@ export default async function HomePage() {
                 num: "03",
                 title: "DA/CDC approval",
                 body: "We lodge the Development Application and manage all council RFIs through to consent. One point of contact from first sketch to signed-off drawings.",
+              },
+              {
+                num: "04",
+                title: "Complete Project Delivery",
+                body: "From engineering and town planning to BASIX and specialist consultants, we coordinate every discipline — providing one seamless point of contact from concept through approval.",
               },
             ].map((step, i) => (
               <AnimatedFadeIn key={step.num} delay={i * 0.1}>

@@ -40,14 +40,6 @@ function ProjectsContent({ projects }: { projects: Project[] }) {
     });
   }, [projects]);
 
-  const categoryCounts = useMemo(() => {
-    const counts: Record<string, number> = { All: projects.length };
-    for (const p of projects) {
-      counts[p.category] = (counts[p.category] ?? 0) + 1;
-    }
-    return counts;
-  }, [projects]);
-
   const [active, setActive] = useState(() => {
     const cat = searchParams.get("category") ?? "All";
     return displayCategories.includes(cat) ? cat : "All";
@@ -130,9 +122,6 @@ function ProjectsContent({ projects }: { projects: Project[] }) {
                 }`}
               >
                 {cat}
-                <span className="ml-1.5 text-[0.55em] opacity-40 font-normal normal-case tracking-normal">
-                  {categoryCounts[cat] ?? 0}
-                </span>
               </button>
             ))}
           </div>

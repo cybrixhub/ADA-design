@@ -2,7 +2,7 @@
 
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import type { Project } from "@/lib/projects";
 import { projectCoords } from "@/lib/project-coords";
 import { extraMapMarkers } from "@/lib/extra-map-markers";
@@ -57,43 +57,12 @@ export default function ProjectMap({ projects }: Props) {
 
       {pinIcon &&
         markers.map((p) => (
-          <Marker key={p.slug} position={p.coords} icon={pinIcon}>
-            <Popup minWidth={180} className="ada-popup">
-              <div style={{ fontFamily: "'EB Garamond', Georgia, serif", padding: "2px 0" }}>
-                <p style={{ fontSize: "10px", fontFamily: "sans-serif", textTransform: "uppercase", letterSpacing: "0.12em", color: "#C4704F", marginBottom: "4px" }}>
-                  {p.category}
-                </p>
-                <p style={{ fontSize: "14px", color: "#2F2018", lineHeight: 1.3, marginBottom: "8px", fontWeight: 500 }}>
-                  {p.title}
-                </p>
-                <p style={{ fontSize: "11px", color: "#8C8278", marginBottom: "10px", fontFamily: "sans-serif" }}>
-                  {p.address}
-                </p>
-                <a
-                  href={`/projects/${p.slug}`}
-                  style={{ fontSize: "10px", fontFamily: "sans-serif", textTransform: "uppercase", letterSpacing: "0.12em", color: "#2F2018", textDecoration: "none", borderBottom: "1px solid #C4704F", paddingBottom: "1px" }}
-                >
-                  View project →
-                </a>
-              </div>
-            </Popup>
-          </Marker>
+          <Marker key={p.slug} position={p.coords} icon={pinIcon} />
         ))}
 
       {extraPinIcon &&
         extraMapMarkers.map((m) => (
-          <Marker key={m.address} position={m.coords} icon={extraPinIcon}>
-            <Popup minWidth={160} className="ada-popup">
-              <div style={{ padding: "2px 0" }}>
-                <p style={{ fontSize: "10px", fontFamily: "sans-serif", textTransform: "uppercase", letterSpacing: "0.12em", color: "#C9B99A", marginBottom: "4px" }}>
-                  ADA Design
-                </p>
-                <p style={{ fontSize: "11px", color: "#8C8278", fontFamily: "sans-serif", lineHeight: 1.4 }}>
-                  {m.address}
-                </p>
-              </div>
-            </Popup>
-          </Marker>
+          <Marker key={m.address} position={m.coords} icon={extraPinIcon} />
         ))}
     </MapContainer>
   );

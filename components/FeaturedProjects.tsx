@@ -44,19 +44,13 @@ export default function FeaturedProjects() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 border-t border-l border-sand/25">
           {featured.map((item) => {
-            const extra = Math.max(0, (item.images?.length ?? 0) - 1);
             return (
               <Link
                 key={item.slug}
                 href={`/projects/${item.slug}`}
                 className="group cursor-pointer border-r border-b border-sand/25 p-6 md:p-8 flex flex-col bg-cream hover:bg-off-white/60 transition-colors duration-500"
               >
-                <div className="flex items-center justify-between mb-4">
-                  {extra > 0 ? (
-                    <span className="label-text text-sand text-[0.6rem]">+{extra} views</span>
-                  ) : (
-                    <span />
-                  )}
+                <div className="flex items-center justify-end mb-4">
                   <span className="label-text text-terracotta text-[0.65rem]">
                     · {item.category}
                   </span>

@@ -14,9 +14,9 @@ import { getProjects } from "@/lib/admin/kv";
 export const dynamic = "force-dynamic";
 
 const HERO_SLIDES: HeroSlide[] = [
-  { src: "/hero/01.jpg", alt: "ADA Design — Architecture NSW", label: "Architectural design · NSW" },
-  { src: "/hero/02.jpg", alt: "ADA Design — Architecture NSW", label: "Architectural design · NSW" },
   { src: "/hero/03.jpg", alt: "ADA Design — Architecture NSW", label: "Architectural design · NSW" },
+  { src: "/hero/02.jpg", alt: "ADA Design — Architecture NSW", label: "Architectural design · NSW" },
+  { src: "/hero/01.jpg", alt: "ADA Design — Architecture NSW", label: "Architectural design · NSW" },
   { src: "/hero/04.jpg", alt: "ADA Design — Architecture NSW", label: "Architectural design · NSW" },
 ];
 

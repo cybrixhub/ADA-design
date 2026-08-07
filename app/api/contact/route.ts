@@ -1,7 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const transporter = nodemailer.createTransport({
+  host: "smtp.zoho.com.au",
+  port: 465,
+  secure: true,
+  auth: {
+    user: process.env.ZOHO_EMAIL,
+    pass: process.env.ZOHO_PASSWORD,
+  },
+});
 
 export async function POST(req: NextRequest) {
   try {
@@ -11,25 +19,20 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
-    const { error } = await resend.emails.send({
-      from: "ADA Design Website <onboarding@resend.dev>",
-      to: ["info@adadesign.com.au"],
-      replyTo: email,
-      subject: `[Website Enquiry] ${subject ?? "New enquiry"}`,
+    await transporter.sendMail({
+      from: `"ADA Design Website" <${process.env.ZOHO_EMAIL}>`,
+      to: process.env.ZOHO_EMAIL,
+      replyTo: `"${name}" <${email}>`,
+      subject: `[Enquiry] ${subject ?? "New enquiry"}`,
       text: `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\n\n${message}`,
       html: `
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
         <p><strong>Subject:</strong> ${subject}</p>
-        <hr/>
-        <p>${message.replace(/\n/g, "<br/>")}</p>
+        <hr style="border:none;border-top:1px solid #eee;margin:16px 0"/>
+        <p style="white-space:pre-wrap">${message}</p>
       `,
     });
-
-    if (error) {
-      console.error("Resend error:", error);
-      return NextResponse.json({ error: "Failed to send" }, { status: 500 });
-    }
 
     return NextResponse.json({ ok: true });
   } catch (err) {

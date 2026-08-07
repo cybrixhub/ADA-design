@@ -9,8 +9,6 @@ import { extraMapMarkers } from "@/lib/extra-map-markers";
 
 const pinHtml = `<div style="filter:drop-shadow(0 3px 6px rgba(47,32,24,0.4))"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="32" viewBox="0 0 22 32"><path d="M11 0C4.925 0 0 4.925 0 11C0 19.25 11 32 11 32C11 32 22 19.25 22 11C22 4.925 17.075 0 11 0Z" fill="#C4704F"/><circle cx="11" cy="11" r="4.5" fill="#FDFCFA"/><circle cx="11" cy="11" r="2" fill="#C4704F"/></svg></div>`;
 
-const extraPinHtml = `<div style="filter:drop-shadow(0 2px 4px rgba(47,32,24,0.3))"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="23" viewBox="0 0 22 32"><path d="M11 0C4.925 0 0 4.925 0 11C0 19.25 11 32 11 32C11 32 22 19.25 22 11C22 4.925 17.075 0 11 0Z" fill="#C9B99A"/><circle cx="11" cy="11" r="4" fill="#FDFCFA"/></svg></div>`;
-
 const pinIcon =
   typeof window !== "undefined"
     ? L.divIcon({
@@ -19,17 +17,6 @@ const pinIcon =
         iconSize: [22, 32],
         iconAnchor: [11, 32],
         popupAnchor: [0, -34],
-      })
-    : undefined;
-
-const extraPinIcon =
-  typeof window !== "undefined"
-    ? L.divIcon({
-        className: "",
-        html: extraPinHtml,
-        iconSize: [16, 23],
-        iconAnchor: [8, 23],
-        popupAnchor: [0, -25],
       })
     : undefined;
 
@@ -60,9 +47,9 @@ export default function ProjectMap({ projects }: Props) {
           <Marker key={p.slug} position={p.coords} icon={pinIcon} />
         ))}
 
-      {extraPinIcon &&
+      {pinIcon &&
         extraMapMarkers.map((m) => (
-          <Marker key={m.address} position={m.coords} icon={extraPinIcon} />
+          <Marker key={m.address} position={m.coords} icon={pinIcon} />
         ))}
     </MapContainer>
   );

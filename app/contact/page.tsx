@@ -5,8 +5,7 @@ import Image from "next/image";
 import { Send, MapPin, Mail, Phone } from "lucide-react";
 import { projects } from "@/lib/projects";
 
-// Set NEXT_PUBLIC_FORMSPREE_ENDPOINT in Vercel (formspree.io → New Form → copy endpoint URL)
-const FORMSPREE_ENDPOINT = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT ?? "https://formsubmit.co/ajax/info@adadesign.com.au";
+const CONTACT_ENDPOINT = "/api/contact";
 
 const subjects = [
   "New residential project",
@@ -39,7 +38,7 @@ export default function ContactPage() {
     setLoading(true);
     setError("");
     try {
-      const res = await fetch(FORMSPREE_ENDPOINT, {
+      const res = await fetch(CONTACT_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify(form),

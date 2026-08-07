@@ -1,15 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 
-const transporter = nodemailer.createTransport({
-  host: "smtp.zoho.com.au",
-  port: 465,
-  secure: true,
-  auth: {
-    user: process.env.ZOHO_EMAIL,
-    pass: process.env.ZOHO_PASSWORD,
-  },
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+// Add multiple recipients in Vercel: CONTACT_EMAILS=one@gmail.com,two@gmail.com
+const recipients = (process.env.CONTACT_EMAILS ?? "info@adadesign.com.au")
+  .split(",")
+  .map((e) => e.trim())
+  .filter(Boolean);
 
 export async function POST(req: NextRequest) {
   try {
@@ -19,12 +17,11 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
-    await transporter.sendMail({
-      from: `"ADA Design Website" <${process.env.ZOHO_EMAIL}>`,
-      to: process.env.ZOHO_EMAIL,
-      replyTo: `"${name}" <${email}>`,
+    const { error } = await resend.emails.send({
+      from: "ADA Design <onboarding@resend.dev>",
+      to: recipients,
+      replyTo: `${name} <${email}>`,
       subject: `[Enquiry] ${subject ?? "New enquiry"}`,
-      text: `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\n\n${message}`,
       html: `
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
@@ -33,6 +30,11 @@ export async function POST(req: NextRequest) {
         <p style="white-space:pre-wrap">${message}</p>
       `,
     });
+
+    if (error) {
+      console.error("Resend error:", error);
+      return NextResponse.json({ error: "Failed to send" }, { status: 500 });
+    }
 
     return NextResponse.json({ ok: true });
   } catch (err) {

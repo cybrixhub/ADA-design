@@ -59,4 +59,5 @@ export const extraMapMarkers: ExtraMarker[] = [
   { address: "324 Cabramatta Road West Cabramatta NSW 2166",  coords: [-33.8950, 150.9217] },
   { address: "339-341 Gosport Street Moree NSW 2400",         coords: [-29.4633, 149.8433] },
   { address: "352 Old Northern Road Castle Hill NSW",         coords: [-33.7333, 151.0033] },
+  { address: "2280 Glen Davis Road Glen Davis NSW 2846",      coords: [-33.1217, 150.2550] },
 ];

@@ -45,7 +45,7 @@ export default async function HomePage() {
   return (
     <>
       {/* ── HERO ── */}
-      <section className="relative bg-bark overflow-hidden">
+      <section className="relative bg-bark overflow-hidden pt-20 md:pt-0">
 
         {/* Image area — 4:3 on mobile, full-screen on desktop */}
         <div className="relative w-full aspect-[4/3] md:aspect-auto md:min-h-screen md:flex md:flex-col md:justify-end">

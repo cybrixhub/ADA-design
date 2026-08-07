@@ -7,7 +7,7 @@ import { projects } from "@/lib/projects";
 const SLUGS = [
   "44-kidd-circuit-goulburn-nsw-2580",
   "12-dexter-road-lochinvar-nsw-2321",
-  "1-bandon-road-vineyard-nsw",
+  "6-brumby-sreet-seven-hills",
   "10-mccormack-street-arndell-park-nsw-2148",
 ];
 

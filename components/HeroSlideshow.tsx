@@ -37,7 +37,7 @@ export default function HeroSlideshow({
             priority={i === 0}
             sizes="100vw"
             quality={90}
-            className="object-cover object-center"
+            className="object-contain md:object-cover object-center"
           />
         </div>
       ))}

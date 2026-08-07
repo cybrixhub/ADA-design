@@ -45,59 +45,77 @@ export default async function HomePage() {
   return (
     <>
       {/* ── HERO ── */}
-      <section className="relative min-h-screen bg-bark flex flex-col justify-end overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute bottom-0 left-0 w-64 h-64 md:w-96 md:h-96 bg-terracotta opacity-20 blur-3xl" />
-        </div>
+      <section className="relative bg-bark overflow-hidden">
 
-        {/* Falling leaves */}
-        <FloatingLeaves count={10} className="z-[2]" />
+        {/* Image area — 4:3 on mobile, full-screen on desktop */}
+        <div className="relative w-full aspect-[4/3] md:aspect-auto md:min-h-screen md:flex md:flex-col md:justify-end">
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute bottom-0 left-0 w-64 h-64 md:w-96 md:h-96 bg-terracotta opacity-20 blur-3xl" />
+          </div>
 
-        {/* Slideshow — full bleed, no dedicated tree column */}
-        <div className="absolute inset-0 overflow-hidden">
-          <HeroSlideshow slides={heroSlides} interval={5000} />
-          {/* Corner blob — covers the tree + copy area so text stays readable */}
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              background:
-                "radial-gradient(ellipse 110% 100% at 0% 100%, rgba(47,32,24,0.95) 0%, rgba(47,32,24,0.75) 25%, rgba(47,32,24,0.4) 50%, rgba(47,32,24,0.1) 70%, transparent 85%)",
-            }}
+          {/* Falling leaves — desktop only */}
+          <FloatingLeaves count={10} className="z-[2] hidden md:block" />
+
+          {/* Slideshow */}
+          <div className="absolute inset-0 overflow-hidden">
+            <HeroSlideshow slides={heroSlides} interval={5000} />
+            {/* Gradient overlay — desktop only so text stays readable */}
+            <div
+              className="hidden md:block absolute inset-0 pointer-events-none"
+              style={{
+                background:
+                  "radial-gradient(ellipse 110% 100% at 0% 100%, rgba(47,32,24,0.95) 0%, rgba(47,32,24,0.75) 25%, rgba(47,32,24,0.4) 50%, rgba(47,32,24,0.1) 70%, transparent 85%)",
+              }}
+            />
+          </div>
+
+          {/* Tree — desktop only */}
+          <AnimatedTree
+            className="hidden md:block absolute bottom-0 -left-6 w-[380px] h-[760px] z-[2]"
+            color="text-[#C9B99A]"
+            opacity={0.45}
           />
-        </div>
 
-        {/* Tree — overlays slideshow, no background block */}
-        <AnimatedTree
-          className="absolute bottom-0 -left-10 md:-left-6 w-[280px] md:w-[380px] h-[520px] md:h-[760px] z-[2]"
-          color="text-[#C9B99A]"
-          opacity={0.45}
-        />
-
-        {/* Hero content */}
-        <div className="relative container-wide pb-20 md:pb-28 pt-32 md:pt-0 z-10">
-          <div className="max-w-2xl">
-            <AnimatedFadeIn delay={1.9}>
-              <div className="flex items-center gap-4 mb-8">
-                <div className="w-5 h-px bg-sand/30" />
-                <p className="label-text text-sand/60">ADA Design · NSW</p>
-              </div>
-            </AnimatedFadeIn>
-            <AnimatedHeading as="h1" delay={2.0} className="font-serif text-display-xl text-off-white mb-10 [text-wrap:balance] drop-shadow-[0_2px_20px_rgba(0,0,0,0.55)]">
-              Designed for Place<br />
-              <em className="not-italic text-terracotta">–</em> Built for Life
-            </AnimatedHeading>
-            <AnimatedFadeIn delay={2.3}>
-              <p className="text-white/85 text-lg font-light leading-relaxed max-w-sm mb-12 drop-shadow-[0_1px_12px_rgba(0,0,0,0.7)]">
-                Residential dwellings, medical facilities, and industrial developments across NSW. Each one designed for its land, its use, and the people it holds.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+          {/* Desktop hero content — overlaid on image */}
+          <div className="hidden md:block relative container-wide pb-28 z-10">
+            <div className="max-w-2xl">
+              <AnimatedFadeIn delay={1.9}>
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="w-5 h-px bg-sand/30" />
+                  <p className="label-text text-sand/60">ADA Design · NSW</p>
+                </div>
+              </AnimatedFadeIn>
+              <AnimatedHeading as="h1" delay={2.0} className="font-serif text-display-xl text-off-white mb-10 [text-wrap:balance] drop-shadow-[0_2px_20px_rgba(0,0,0,0.55)]">
+                Designed for Place<br />
+                <em className="not-italic text-terracotta">–</em> Built for Life
+              </AnimatedHeading>
+              <AnimatedFadeIn delay={2.3}>
+                <p className="text-white/85 text-lg font-light leading-relaxed max-w-sm mb-12 drop-shadow-[0_1px_12px_rgba(0,0,0,0.7)]">
+                  Residential dwellings, medical facilities, and industrial developments across NSW. Each one designed for its land, its use, and the people it holds.
+                </p>
                 <Link href="/projects" className="btn-primary group">
                   View projects
                   <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                 </Link>
-              </div>
-            </AnimatedFadeIn>
+              </AnimatedFadeIn>
+            </div>
           </div>
+        </div>
+
+        {/* Mobile hero content — below the image */}
+        <div className="md:hidden px-6 py-10">
+          <p className="label-text text-sand/60 mb-4">ADA Design · NSW</p>
+          <h1 className="font-serif text-[2.25rem] leading-[1.1] text-off-white mb-5 [text-wrap:balance]">
+            Designed for Place<br />
+            <em className="not-italic text-terracotta">–</em> Built for Life
+          </h1>
+          <p className="text-white/75 text-base font-light leading-relaxed mb-8">
+            Residential dwellings, medical facilities, and industrial developments across NSW. Each one designed for its land, its use, and the people it holds.
+          </p>
+          <Link href="/projects" className="btn-primary group">
+            View projects
+            <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+          </Link>
         </div>
 
       </section>

@@ -1,15 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
-// Add multiple recipients in Vercel: CONTACT_EMAILS=one@gmail.com,two@gmail.com
 const recipients = (process.env.CONTACT_EMAILS ?? "info@adadesign.com.au")
   .split(",")
   .map((e) => e.trim())
   .filter(Boolean);
 
 export async function POST(req: NextRequest) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
+
   try {
     const { name, email, subject, message } = await req.json();
 

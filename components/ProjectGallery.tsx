@@ -41,7 +41,7 @@ export default function ProjectGallery({ images, title }: ProjectGalleryProps) {
             <div className="flex items-center gap-4 mb-12">
               <div className="w-5 h-px bg-stone/40" />
               <p className="label-text text-stone">
-                {rest.length === 1 ? "Alternate view" : `${rest.length} more views`}
+                Additional views
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">

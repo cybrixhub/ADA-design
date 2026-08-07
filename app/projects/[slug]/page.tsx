@@ -110,7 +110,7 @@ export default async function ProjectPage({ params }: PageProps) {
             <div className="flex items-center gap-4 mb-8">
               <div className="w-5 h-px bg-stone/40" />
               <p className="label-text text-stone">
-                {moreImages.length === 1 ? "Alternate view" : `${moreImages.length} more views`}
+                Additional views
               </p>
             </div>
             <ProjectLightbox images={project.images} startIndex={1}>

@@ -15,10 +15,10 @@ export async function generateMetadata({ params }: PageProps) {
   const project = await getProjectBySlug(slug);
   if (!project) return {};
   return {
-    title: `${project.title} — AD Design`,
+    title: `${project.title} — ADA Design`,
     description: project.description.slice(0, 160),
     openGraph: {
-      title: `${project.title} — AD Design`,
+      title: `${project.title} — ADA Design`,
       description: project.description.slice(0, 160),
       ...(project.images[0] && {
         images: [{ url: project.images[0], width: 1200, height: 630, alt: project.title }],
@@ -97,7 +97,7 @@ export default async function ProjectPage({ params }: PageProps) {
             </div>
             <div className="pl-6 md:pl-8">
               <p className="label-text text-stone mb-2">Architects</p>
-              <p className="text-bark text-sm font-light">AD Design Pty Ltd</p>
+              <p className="text-bark text-sm font-light">ADA Design Pty Ltd</p>
             </div>
           </div>
         </div>

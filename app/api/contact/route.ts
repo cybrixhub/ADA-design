@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 
 export async function POST(req: NextRequest) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
+
   try {
     const { name, email, subject, message } = await req.json();
 
@@ -9,19 +11,9 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
-    const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
-      port: 465,
-      secure: true,
-      auth: {
-        user: process.env.ZOHO_USER,
-        pass: process.env.ZOHO_PASS,
-      },
-    });
-
-    await transporter.sendMail({
-      from: `"ADA Design" <${process.env.ZOHO_USER}>`,
-      to: process.env.ZOHO_USER,
+    const { error } = await resend.emails.send({
+      from: "ADA Design <onboarding@resend.dev>",
+      to: ["ada.designassociates@gmail.com"],
       replyTo: `${name} <${email}>`,
       subject: `[Enquiry] ${subject ?? "New enquiry"}`,
       html: `
@@ -32,6 +24,11 @@ export async function POST(req: NextRequest) {
         <p style="white-space:pre-wrap">${message}</p>
       `,
     });
+
+    if (error) {
+      console.error("Resend error:", error);
+      return NextResponse.json({ error: "Failed to send" }, { status: 500 });
+    }
 
     return NextResponse.json({ ok: true });
   } catch (err) {

@@ -1,6 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
+// Where enquiries are delivered. Override per deployment, comma-separated:
+//   CONTACT_EMAILS=one@example.com,two@example.com
+const DEFAULT_RECIPIENTS = "ada.designassociates@gmail.com";
+
+// onboarding@resend.dev is Resend's shared testing sender: it only delivers to the
+// Resend account owner's own address. Production needs a sender on a domain verified
+// in Resend — set CONTACT_FROM once that domain is verified.
+const DEFAULT_FROM = "ADA Design <onboarding@resend.dev>";
+
 export async function POST(req: NextRequest) {
   const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -11,9 +20,19 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
+    const recipients = (process.env.CONTACT_EMAILS ?? DEFAULT_RECIPIENTS)
+      .split(",")
+      .map((e) => e.trim())
+      .filter(Boolean);
+
+    if (recipients.length === 0) {
+      console.error("Contact route: CONTACT_EMAILS is set but contains no addresses");
+      return NextResponse.json({ error: "Server error" }, { status: 500 });
+    }
+
     const { error } = await resend.emails.send({
-      from: "ADA Design <onboarding@resend.dev>",
-      to: ["ada.designassociates@gmail.com"],
+      from: process.env.CONTACT_FROM ?? DEFAULT_FROM,
+      to: recipients,
       replyTo: `${name} <${email}>`,
       subject: `[Enquiry] ${subject ?? "New enquiry"}`,
       html: `

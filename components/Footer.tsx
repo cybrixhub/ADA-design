@@ -21,7 +21,7 @@ export default function Footer() {
               height={120}
               className="h-12 md:h-14 w-auto mb-6 invert mix-blend-screen"
             />
-            <p className="text-[0.65rem] font-sans font-semibold tracking-[0.15em] uppercase text-white/40 mb-4">
+            <p className="text-[0.65rem] font-sans font-bold tracking-[0.15em] uppercase text-white mb-4">
               ABN:&nbsp;&nbsp;87&nbsp;694&nbsp;958&nbsp;837
             </p>
             <p className="text-sm text-white/50 leading-relaxed max-w-xs font-light">

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Poppins, Montserrat } from "next/font/google";
 import "./globals.css";
 import PageLoader from "@/components/PageLoader";
-import CornerMarkers from "@/components/CornerMarkers";
 import AppShell from "@/components/AppShell";
 
 const poppins = Poppins({
@@ -51,7 +50,7 @@ export default function RootLayout({
       <body
         className={`${poppins.variable} ${montserrat.variable} bg-off-white text-bark antialiased`}
       >
-        <AppShell pageLoader={<PageLoader />} cornerMarkers={<CornerMarkers />}>
+        <AppShell pageLoader={<PageLoader />}>
           {children}
         </AppShell>
       </body>

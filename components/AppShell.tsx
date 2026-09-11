@@ -9,10 +9,9 @@ import ScrollToTop from "./ScrollToTop";
 interface Props {
   children: React.ReactNode;
   pageLoader: React.ReactNode;
-  cornerMarkers: React.ReactNode;
 }
 
-export default function AppShell({ children, pageLoader, cornerMarkers }: Props) {
+export default function AppShell({ children, pageLoader }: Props) {
   const pathname = usePathname();
 
   if (pathname?.startsWith("/admin")) return <>{children}</>;
@@ -20,7 +19,6 @@ export default function AppShell({ children, pageLoader, cornerMarkers }: Props)
   return (
     <>
       {pageLoader}
-      {cornerMarkers}
       <SmoothScroll>
         <Navigation />
         <main>{children}</main>

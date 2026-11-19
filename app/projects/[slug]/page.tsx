@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { getProjects, getProjectBySlug } from "@/lib/admin/kv";
 import { formatAddress } from "@/lib/format-address";
 import ProjectLightbox from "@/components/ProjectLightbox";
+import { absoluteUrl } from "@/lib/site";
 
 export const dynamic = "force-dynamic";
 
@@ -17,6 +18,7 @@ export async function generateMetadata({ params }: PageProps) {
   return {
     title: `${project.title} — ADA Design`,
     description: project.description.slice(0, 160),
+    alternates: { canonical: absoluteUrl(`/projects/${project.slug}`) },
     openGraph: {
       title: `${project.title} — ADA Design`,
       description: project.description.slice(0, 160),

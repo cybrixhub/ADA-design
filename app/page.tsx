@@ -10,6 +10,12 @@ import HeroSlideshow, { type HeroSlide } from "@/components/HeroSlideshow";
 import FeaturedProjects from "@/components/FeaturedProjects";
 import Testimonials from "@/components/Testimonials";
 import { getProjects } from "@/lib/admin/kv";
+import { absoluteUrl } from "@/lib/site";
+
+// Title/description are inherited from app/layout.tsx; only the canonical is set here.
+export const metadata = {
+  alternates: { canonical: absoluteUrl("/") },
+};
 
 export const dynamic = "force-dynamic";
 

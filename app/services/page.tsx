@@ -1,34 +1,56 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { absoluteUrl } from "@/lib/site";
 
 export const metadata = {
   title: "Services — ADA Design",
   description: "Comprehensive architectural design and complete project delivery across NSW — residential, medical, and industrial.",
+  alternates: { canonical: absoluteUrl("/services") },
 };
+
+const designServices = [
+  {
+    code: "Design",
+    title: "Architectural Design & Documentation",
+    body: "Site-led concept design, floor plans and elevations, carried through to DA, CC and construction documentation drawn to build cleanly.",
+    href: "/services/architectural-design",
+  },
+  {
+    code: "3D",
+    title: "3D Architectural Rendering",
+    body: "Photorealistic exterior and interior renders for approvals and marketing, produced in-house alongside the design.",
+    href: "/services/3d-rendering",
+  },
+];
 
 const approvals = [
   {
     code: "DA",
+    href: "/services/development-applications",
     title: "Development Applications",
     body: "We prepare and manage comprehensive DA submissions, working closely with local councils to secure consent for your unique architectural projects.",
   },
   {
     code: "CDC",
+    href: "/services/complying-development-certificates",
     title: "Complying Development Certificates",
     body: "When your project fits within specific state development standards, we streamline the process to secure fast-tracked approvals through private certifiers.",
   },
   {
     code: "S4.55",
+    href: "/services/section-4-55-modifications",
     title: "Section 4.55 Modifications",
     body: "If you need to make changes to an already approved DA, we handle the Sec 4.55 application to modify your existing development consent smoothly and legally.",
   },
   {
     code: "BIC",
+    href: "/services/building-information-certificates",
     title: "Building Information Certificates",
     body: "Whether buying, selling, or regularising unauthorised building works, we guide you through the BIC process to ensure your property achieves compliance and peace of mind.",
   },
   {
     code: "BASIX",
+    href: "/services/basix-certificates",
     title: "BASIX Certificates",
     body: "We seamlessly integrate sustainability into our designs, ensuring your project meets all NSW statutory requirements for water efficiency, energy efficiency, and thermal comfort.",
   },
@@ -82,6 +104,29 @@ export default function ServicesPage() {
         </div>
       </section>
 
+      {/* ── DESIGN & VISUALISATION ── */}
+      <section className="section-pad bg-off-white !pb-0">
+        <div className="container-wide">
+          <p className="label-text text-stone mb-6">Design &amp; visualisation</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 border-t border-l border-sand/25">
+            {designServices.map((d) => (
+              <Link
+                key={d.href}
+                href={d.href}
+                className="group border-r border-b border-sand/25 p-8 flex flex-col gap-4 hover:bg-cream/60 transition-colors duration-300"
+              >
+                <span className="label-text text-terracotta text-[0.6rem]">{d.code}</span>
+                <h3 className="font-serif text-xl text-bark">{d.title}</h3>
+                <p className="text-stone font-light text-sm leading-relaxed flex-1">{d.body}</p>
+                <span className="inline-flex items-center gap-2 label-text text-stone group-hover:text-terracotta transition-colors">
+                  Learn more <ArrowRight size={12} />
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── APPROVALS ── */}
       <section className="section-pad bg-off-white">
         <div className="container-wide">
@@ -104,6 +149,13 @@ export default function ServicesPage() {
                 <span className="label-text text-terracotta text-[0.6rem]">{a.code}</span>
                 <h3 className="font-serif text-xl text-bark">{a.title}</h3>
                 <p className="text-stone font-light text-sm leading-relaxed flex-1">{a.body}</p>
+                <Link
+                  href={a.href}
+                  className="inline-flex items-center gap-2 label-text text-stone hover:text-terracotta transition-colors"
+                  aria-label={`Learn more about ${a.title}`}
+                >
+                  Learn more <ArrowRight size={12} />
+                </Link>
               </div>
             ))}
           </div>
@@ -124,6 +176,12 @@ export default function ServicesPage() {
               <p className="text-white/60 font-light leading-relaxed">
                 A successful build requires an entire ecosystem of experts working in harmony. You don't need to stress about finding and managing multiple contractors — ADA does it for you.
               </p>
+              <Link
+                href="/services/consultant-coordination"
+                className="inline-flex items-center gap-2 label-text text-off-white/60 hover:text-off-white transition-colors mt-8"
+              >
+                How we coordinate consultants <ArrowRight size={12} />
+              </Link>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-white/10">
               {consultants.map((c) => (

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { services, getService } from "@/lib/services";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, pageOpenGraph, DEFAULT_OG_IMAGE } from "@/lib/site";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -24,16 +24,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title,
     description: service.metaDescription,
     alternates: { canonical: url },
-    openGraph: {
-      title,
-      description: service.metaDescription,
-      url,
-      type: "website",
-    },
+    openGraph: pageOpenGraph(`/services/${service.slug}`, title, service.metaDescription),
     twitter: {
       card: "summary_large_image",
       title,
       description: service.metaDescription,
+      images: [DEFAULT_OG_IMAGE.url],
     },
   };
 }

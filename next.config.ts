@@ -35,6 +35,21 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "*.public.blob.vercel-storage.com" },
     ],
   },
+  async redirects() {
+    // www → non-www, permanent 301. Path and query string are preserved
+    // (Next.js forwards the query automatically). Only the exact www host
+    // matches, so the apex domain, *.vercel.app and localhost are untouched.
+    // NOTE: the apex domain must NOT redirect to www in Vercel → Domains,
+    // or this rule would create a redirect loop.
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.adadesign.com.au" }],
+        destination: "https://adadesign.com.au/:path*",
+        statusCode: 301,
+      },
+    ];
+  },
   async headers() {
     // Security headers production-only — CSP's connect-src blocks webpack
     // HMR ws:// connections in dev, preventing React hydration

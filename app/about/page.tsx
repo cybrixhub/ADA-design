@@ -2,10 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { projects } from "@/lib/projects";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, pageOpenGraph } from "@/lib/site";
 
 export const metadata = {
   alternates: { canonical: absoluteUrl("/about") },
+  openGraph: pageOpenGraph("/about"),
 };
 
 const services = [

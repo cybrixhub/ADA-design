@@ -3,6 +3,7 @@ import { Poppins, Montserrat } from "next/font/google";
 import "./globals.css";
 import PageLoader from "@/components/PageLoader";
 import AppShell from "@/components/AppShell";
+import { SITE_URL, DEFAULT_TITLE, DEFAULT_DESCRIPTION } from "@/lib/site";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -21,22 +22,19 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://adadesign.com.au"),
-  title: "ADA Design — Architecture across New South Wales",
-  description:
-    "Residential, industrial, and medical architecture across NSW. Every project purpose-built for its site.",
+  metadataBase: new URL(SITE_URL),
+  title: DEFAULT_TITLE,
+  description: DEFAULT_DESCRIPTION,
   openGraph: {
-    title: "ADA Design — Architecture across New South Wales",
-    description:
-      "Residential, industrial, and medical architecture across NSW. Every project purpose-built for its site.",
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
     type: "website",
-    url: "https://adadesign.com.au",
+    url: SITE_URL,
   },
   twitter: {
     card: "summary_large_image",
-    title: "ADA Design — Architecture across New South Wales",
-    description:
-      "Residential, industrial, and medical architecture across NSW. Every project purpose-built for its site.",
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
   },
 };
 

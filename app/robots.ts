@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { SITE_URL, absoluteUrl } from "@/lib/site";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -7,6 +8,7 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/maintenance"],
     },
-    sitemap: "https://adadesign.com.au/sitemap.xml",
+    sitemap: absoluteUrl("/sitemap.xml"),
+    host: SITE_URL,
   };
 }

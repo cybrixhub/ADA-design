@@ -20,6 +20,8 @@ export async function generateMetadata({ params }: PageProps) {
     description: project.description.slice(0, 160),
     alternates: { canonical: absoluteUrl(`/projects/${project.slug}`) },
     openGraph: {
+      url: absoluteUrl(`/projects/${project.slug}`),
+      type: "website" as const,
       title: `${project.title} — ADA Design`,
       description: project.description.slice(0, 160),
       ...(project.images[0] && {

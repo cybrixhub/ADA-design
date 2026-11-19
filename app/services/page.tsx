@@ -1,11 +1,15 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, pageOpenGraph } from "@/lib/site";
+
+const title = "Services — ADA Design";
+const description = "Comprehensive architectural design and complete project delivery across NSW — residential, medical, and industrial.";
 
 export const metadata = {
-  title: "Services — ADA Design",
-  description: "Comprehensive architectural design and complete project delivery across NSW — residential, medical, and industrial.",
+  title,
+  description,
   alternates: { canonical: absoluteUrl("/services") },
+  openGraph: pageOpenGraph("/services", title, description),
 };
 
 const designServices = [
